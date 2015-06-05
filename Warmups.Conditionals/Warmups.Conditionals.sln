@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmups.Conditionals.BLL", "Warmups.Conditionals.BLL\Warmups.Conditionals.BLL.csproj", "{649DA2AF-CB9E-45A7-B722-57D6A6AE5D26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmups.Conditionals.Tests", "Warmups.Conditionals.Tests\Warmups.Conditionals.Tests.csproj", "{0BFC3186-6F12-4C69-B0B1-963749E3E725}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{649DA2AF-CB9E-45A7-B722-57D6A6AE5D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{649DA2AF-CB9E-45A7-B722-57D6A6AE5D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{649DA2AF-CB9E-45A7-B722-57D6A6AE5D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{649DA2AF-CB9E-45A7-B722-57D6A6AE5D26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BFC3186-6F12-4C69-B0B1-963749E3E725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BFC3186-6F12-4C69-B0B1-963749E3E725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BFC3186-6F12-4C69-B0B1-963749E3E725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BFC3186-6F12-4C69-B0B1-963749E3E725}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
