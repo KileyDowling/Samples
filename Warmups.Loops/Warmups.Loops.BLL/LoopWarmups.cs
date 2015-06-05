@@ -25,21 +25,24 @@ namespace Warmups.Loops.BLL
         public string FrontTimes(string str, int n)
         {
             string result = "";
-            char[] tempArray = new char[n*3];
-            char[] strToArray = str.ToCharArray();
-            int counter = 0;
 
-            //add logic for if string is less than 3 chars
-
-            while (counter < n*3)
+            if (str.Length > 2)
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < n; i++)
                 {
-                    tempArray[counter + i] = strToArray[i];
+                    result += str.Substring(0, 3);
                 }
-                counter += 3;
             }
-            result = new string(tempArray);
+
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    result += str;
+
+                }
+            }
+
             return result;
 
         }
@@ -78,9 +81,9 @@ namespace Warmups.Loops.BLL
             char[] strToArray = str.ToCharArray();
             int counter = 1;
             int x = 1;
-            if (str.Length%2 == 0)
+            if (str.Length % 2 == 0)
                 x = 0;
-            char[] tempArray = new char[str.Length/2 + x];
+            char[] tempArray = new char[str.Length / 2 + x];
 
             tempArray[0] = strToArray[0];
 
@@ -248,37 +251,56 @@ namespace Warmups.Loops.BLL
             string result = "";
             for (int i = 0; i < str.Length; i++)
             {
-                if(i==0 || i==1 || i==4|| i==5||i==8||i==9)
-                result += str[i];
+                if (i == 0 || i == 1 || i == 4 || i == 5 || i == 8 || i == 9)
+                    result += str[i];
             }
 
             return result;
         }
 
-        /*public string DoNotYak(string str)
+        public string DoNotYak(string str)
         {
             /*Suppose the string "yak" is unlucky. Given a string, return a version where all the "yak" are removed, 
              * but the "a" can be any char. The "yak" strings will not overlap. 
                 DoNotYak("yakpak") -> "pak"
                 DoNotYak("pakyak") -> "pak"
-                DoNotYak("yak123ya") -> "123ya" 
+                DoNotYak("yak123ya") -> "123ya"  */
 
-        } */
-    
+            string result = "";
+
+            for (int i = 0; i < str.Length - 3; i++)
+            {
+                if (str.Contains("yak"))
+                {
+                    if (str[i] == 'y' && str[i + 1] == 'a' && str[i + 2] == 'k')
+                    {
+                        result = str.Remove(i, (i + 3));
+                        break;
+                    }
+                    else
+                    {
+                        result += str[i];
+                    }
+                }
+            }
+            return result;
+
+        }
+
         public int Array667(int[] numbers)
         {
-         /*Given an array of ints, return the number of times that two 6's are next to each other in the array. 
-                  * Also count instances where the second "6" is actually a 7. 
-                Array667({6, 6, 2}) -> 1
-                Array667({6, 6, 2, 6}) -> 1
-                Array667({6, 7, 2, 6}) -> 1 */
+            /*Given an array of ints, return the number of times that two 6's are next to each other in the array. 
+                     * Also count instances where the second "6" is actually a 7. 
+                   Array667({6, 6, 2}) -> 1
+                   Array667({6, 6, 2, 6}) -> 1
+                   Array667({6, 7, 2, 6}) -> 1 */
 
-            int result=0;
+            int result = 0;
             int count6 = 0;
             int length = numbers.Length;
 
             //check if 6 is followed by a 6 or 7
-            for (int i = 0; i < length-1; i++)
+            for (int i = 0; i < length - 1; i++)
             {
                 if (numbers[i] == 6 && numbers[i + 1] == 6 || numbers[i] == 6 && numbers[i + 1] == 7)
                     count6 += 1;

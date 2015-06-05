@@ -28,7 +28,7 @@ namespace Warmups.Loops.Tests
         [TestCase("Chocolate", 2, "ChoCho")]
         [TestCase("Chocolate", 3, "ChoChoCho")]
         [TestCase("Abc", 3, "AbcAbcAbc")]
-//[TestCase("Ab", 3, "AbAbAb")] 
+        [TestCase("Ab", 3, "AbAbAb")] 
         public void FrontTimesTest(string str, int n, string expectedResult)
         {
             LoopWarmups loop2 = new LoopWarmups();
@@ -152,7 +152,7 @@ namespace Warmups.Loops.Tests
             Assert.AreEqual(expectedResult,actualResult);
         }
 
-    /*    [TestCase("yakpak", "pak")]
+       [TestCase("yakpak", "pak")]
         [TestCase("pakyak", "pak")]
         [TestCase("yak123ya", "123ya")]
         public void DoNotYakeTest(string str, string expectedResult)
@@ -160,7 +160,7 @@ namespace Warmups.Loops.Tests
             LoopWarmups loop14 = new LoopWarmups();
             string actualResult = loop14.DoNotYak(str);
             Assert.AreEqual(expectedResult,actualResult);
-        } */
+        } 
 
         [TestCase(new int[] { 6, 6, 2 }, 1)]
         [TestCase(new int[] { 6, 6, 2,6 }, 1)]
