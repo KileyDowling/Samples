@@ -123,6 +123,140 @@ namespace Warmups.Strings.Tests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
+        [TestCase("string", "ri")]
+        [TestCase("code","od")]
+        [TestCase("Practice", "ct")]
+        public void MiddleTwoTest(string str, string expectedResult)
+        {
+            StringWarmups string12 = new StringWarmups();
+            string actualResult = string12.MiddleTwo(str);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+
+        [TestCase("oddly", true)]
+        [TestCase("y", false)]
+        [TestCase("oddy", false)]
+        public void EndsWithLyTest(string str, bool expectedResult)
+        {
+            StringWarmups string13 = new StringWarmups();
+            bool actualResult = string13.EndsWithLy(str);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+        [TestCase("Hello", 2, "Helo")]
+        [TestCase("Chocolate", 3, "Choate")]
+        [TestCase("Chocolate", 1, "Ce")]
+        public void FrontAndBackTest(string str, int n, string expectedResult)
+        {
+            StringWarmups string14 = new StringWarmups();
+            string actualResult = string14.FrontAndBack(str, n);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+        [TestCase("java", 0, "ja")]
+        [TestCase("java", 2, "va")]
+        [TestCase("java", 3, "ja")]
+        public void TakeTwoFromPositionTest(string str, int n, string expectedResult)
+        {
+            StringWarmups string15 = new StringWarmups();
+            string actualResult = string15.TakeTwoFromPosition(str, n);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+        [TestCase("badxx", true)]
+        [TestCase("xbadxx", true)]
+        [TestCase("xxbadxx", false)]
+        public void HasBadTest(string str, bool expectedResult)
+        {
+            StringWarmups string16 = new StringWarmups();
+            bool actualResult = string16.HasBad(str);
+            Assert.AreEqual(expectedResult, actualResult);
+            
+        }
+
+        [TestCase("hello", "he")]
+        [TestCase("hi", "hi")]
+        [TestCase("h", "h@")]
+        public void AtFirstTest(string str, string expectedResult)
+        {
+            StringWarmups string17 = new StringWarmups();
+            string actualResult = string17.AtFirst(str);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+        [TestCase("last", "chars", "ls")]
+        [TestCase("yo", "mama", "ya")]
+        [TestCase("hi", "", "h@")]
+        public void LastCharsTest(string str, string str2, string expectedResult)
+        {
+            StringWarmups string18 = new StringWarmups();
+            string actualResult = string18.LastChars(str,str2);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+        [TestCase("abc", "cat", "abcat")]
+        [TestCase("dog", "cat", "dogcat")]
+        [TestCase("abc", "", "abc")]
+        public void ConCatTest(string a, string b, string expectedResult)
+        {
+            StringWarmups string19 = new StringWarmups();
+            string actualResult = string19.ConCat(a, b);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+        [TestCase("coding", "codign")]
+        [TestCase("cat", "cta")]
+        [TestCase("ab","ba")]
+        public void SwapLastTest(string str, string expectedResult)
+        {
+            StringWarmups string20 = new StringWarmups();
+            string actualResult = string20.SwapLast(str);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+
+        [TestCase("edited", true)]
+        [TestCase("edit", false)]
+        [TestCase("ed", true)]
+        public void FrontAgainTest(string str, bool expectedResult)
+        {
+            StringWarmups string21 = new StringWarmups();
+            bool actualResult = string21.FrontAgain(str);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+        [TestCase("Hello", "Hi", "loHi")]
+        [TestCase("Hello", "java", "ellojava")]
+        [TestCase("java", "Hello", "javaello")]
+        public void MinCatTest(string a, string b, string expectedResult)
+        {
+            StringWarmups string22 = new StringWarmups();
+            string actualResult = string22.MinCat(a, b);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+        [TestCase("Hello", "llo")]
+        [TestCase("away", "aay")]
+        [TestCase("abed", "abed")]
+        public void TweakFrontTest(string str, string expectedResult)
+        {
+            StringWarmups string23 = new StringWarmups();
+            string actualResult = string23.TweakFront(str);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
+
+
+        [TestCase("xHix", "Hi")]
+        [TestCase("xHi", "Hi")]
+        [TestCase("Hxix", "Hxi")]
+        public void StripXTest(string str, string expectedResult)
+        {
+            StringWarmups string24 = new StringWarmups();
+            string actualResult = string24.StripX(str);
+            Assert.AreEqual(expectedResult,actualResult);
+        }
     }
+
 
 }
