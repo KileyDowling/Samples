@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmups.Logic.BLL", "Warmups.Logic.BLL\Warmups.Logic.BLL.csproj", "{E3B60CA8-5196-451D-B05C-F35D52035C62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warmups.Logic.Tests", "Warmups.Logic.Tests\Warmups.Logic.Tests.csproj", "{D21C8E82-22F4-4175-8583-8B2657925571}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3B60CA8-5196-451D-B05C-F35D52035C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B60CA8-5196-451D-B05C-F35D52035C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B60CA8-5196-451D-B05C-F35D52035C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B60CA8-5196-451D-B05C-F35D52035C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D21C8E82-22F4-4175-8583-8B2657925571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D21C8E82-22F4-4175-8583-8B2657925571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D21C8E82-22F4-4175-8583-8B2657925571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D21C8E82-22F4-4175-8583-8B2657925571}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
