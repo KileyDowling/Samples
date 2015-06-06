@@ -13,22 +13,19 @@ namespace TicTacToe.UI
         private static void Main(string[] args)
         {
             bool gameOver = false;
+            int playersTurn=1;
             GamePlay game = new GamePlay();
-            //game.GetUserInfo();
+            game.GetUserInfo();
             game.DisplayGameBoard();
             while (!gameOver)
             {
                 string userInput = game.RequestPlayerMove();
-                game.UpdateGameBoard(userInput);
-                gameOver=game.WonOrTie();
+                game.UpdateGameBoard(userInput,playersTurn);
+                gameOver=game.WonOrTie(playersTurn);
+                playersTurn= game.GetPlayersTurn(playersTurn);
             }
 
-
-
             Console.ReadLine();
-
-
         }
-
     }
 }

@@ -11,6 +11,7 @@ namespace GameLogic
         public string UserOne { get; set; }
         public string UserTwo { get; set; }
 
+        public int LastPlayersTurn { get; set; }
 
     }
 }

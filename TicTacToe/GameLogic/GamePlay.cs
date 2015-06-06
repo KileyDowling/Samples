@@ -10,15 +10,21 @@ namespace GameLogic
     {
         private string[,] _gameBoard = new string[3, 3] { { "1", "2", "3", }, { "4", "5", "6" }, { "7", "8", "9" } };
 
-        public void UpdateGameBoard(string userSelection)
+        public void UpdateGameBoard(string userSelection, int playersTurn)
         {
+            string playersMarker = "";
+            if(playersTurn==1)
+                playersMarker = "X";
+            else
+                   playersMarker = "O";
+                
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
                     if (_gameBoard[i, j] == userSelection)
                     {
-                        _gameBoard[i, j] = "X";
+                        _gameBoard[i, j] = playersMarker;
                     }
                 }
             }
@@ -83,22 +89,35 @@ namespace GameLogic
 
         }
 
-        public bool WonOrTie()
+        public bool WonOrTie(int playersTurn)
         {
             bool result = false;
-            int num = 0;
-            result = IsItATie();
+            bool wonOrTie=false;
 
+            wonOrTie = IsItATie();
+            if (!wonOrTie)
+            {
+                wonOrTie = WonAcrossOrDiagonal(playersTurn);
+                result = wonOrTie;
+            }
+            else
+            {
+                wonOrTie = IsItATie();
+                result = wonOrTie;
+            }
             return result;
-
-
         }
 
-        public bool WonAcrossOrDiagonal()
+        public bool WonAcrossOrDiagonal(int playersTurn)
         {
             bool result = false;
             int num = 0;
             int counter = 0;
+            string playersMarker = "";
+            if (playersTurn == 1)
+                playersMarker = "X";
+            else
+                playersMarker = "O";
 
 
             while (counter < 3)
@@ -107,13 +126,13 @@ namespace GameLogic
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        if (_gameBoard[i, j] == "X")
+                        if (_gameBoard[i, j] == playersMarker)
                         {
                             num += 1;
                             if (num > 2)
                             {
                                 result = true;
-                                Console.WriteLine("Congrats you won across!");
+                                Console.WriteLine("Congrats Player {0} won across!", playersTurn);
                             }
                         }
                     }
@@ -131,13 +150,13 @@ namespace GameLogic
                 {
                     for (int j = counter; j < counter + 1; j++)
                     {
-                        if (_gameBoard[i, j] == "X")
+                        if (_gameBoard[i, j] == playersMarker)
                         {
                             num += 1;
                             if (num > 2)
                             {
                                 result = true;
-                                Console.WriteLine("Congrats you won up & down");
+                                Console.WriteLine("Congrats Player {0} you won up & down", playersTurn);
                             }
                         }
                     }
@@ -153,18 +172,18 @@ namespace GameLogic
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (_gameBoard[i, j] == "X" && i == j)
+                    if (_gameBoard[i, j] ==playersMarker && i == j)
                     {
                         num += 1;
 
                         if (num == 3)
                         {
                             result = true;
-                            Console.WriteLine("Congrats you won diagonal");
+                            Console.WriteLine("Congrats Player {0} you won diagonal", playersTurn);
                         }
                     }
 
-                    else if (_gameBoard[i, j] == "X")
+                    else if (_gameBoard[i, j] == playersMarker)
                     {
                         if (i == 2 && j == 0)
                             num += 1;
@@ -174,7 +193,7 @@ namespace GameLogic
                         if (num == 3)
                         {
                             result = true;
-                            Console.WriteLine("Congrats you won diagonal");
+                            Console.WriteLine("Congrats Player {0} won diagonal", playersTurn);
                         }
                     }
                 }
@@ -204,6 +223,18 @@ namespace GameLogic
                 }
             }
             return result;
+        }
+
+        public int GetPlayersTurn(int lastPlayersTurn)
+        {
+            int result;
+            if (lastPlayersTurn == 1)
+                result = 2;
+            else
+                result = 1;
+
+            return result;
+            
         }
     }
 }
