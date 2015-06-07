@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.UI", "TicTacToe.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "GameLogic\GameLogic.csproj", "{7E645F0A-BB08-43A8-BE3B-01545091A06A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Tests", "TicTacToe.Tests\TicTacToe.Tests.csproj", "{9E182A6E-6E23-4946-BA3D-D680F8BC86EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7E645F0A-BB08-43A8-BE3B-01545091A06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E645F0A-BB08-43A8-BE3B-01545091A06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E645F0A-BB08-43A8-BE3B-01545091A06A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E182A6E-6E23-4946-BA3D-D680F8BC86EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E182A6E-6E23-4946-BA3D-D680F8BC86EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E182A6E-6E23-4946-BA3D-D680F8BC86EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E182A6E-6E23-4946-BA3D-D680F8BC86EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

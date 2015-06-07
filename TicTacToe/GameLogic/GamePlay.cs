@@ -32,12 +32,17 @@ namespace GameLogic
 
         }
 
-        public string RequestPlayerMove()
+        public string RequestPlayerMove(int playersTurn,string playerUsername)
         {
             string userInput = "";
+            int validNum = -1;
 
-            Console.WriteLine("Please enter the space you would like to select");
-            userInput = Console.ReadLine();
+            while (validNum < 0 || validNum > 10)
+            {
+                Console.WriteLine("{0}, please enter the space you would like to select", playerUsername);
+                userInput = Console.ReadLine();
+                validNum = int.Parse(userInput);
+            }
 
             return userInput;
         }
@@ -73,23 +78,16 @@ namespace GameLogic
 
         }
 
-        public void GetUserInfo()
+        public string GetUserInfo(int playersTurn)
         {
-            string playerOne = "";
-            string playerTwo = "";
+            string userName = "";
 
-            Console.Write("Please enter the name for player one: ");
-            playerOne = Console.ReadLine();
-
-
-            Console.Write("Please enter the name for player two: ");
-            playerTwo = Console.ReadLine();
-
-            Console.WriteLine("Welcome {0} and {1}! Let's play!", playerOne, playerTwo);
-
+            Console.Write("Please enter the name for player {0}: ", playersTurn);
+            userName = Console.ReadLine();
+            return userName;
         }
 
-        public bool WonOrTie(int playersTurn)
+        public bool WonOrTie(int playersTurn, string playersUsername)
         {
             bool result = false;
             bool wonOrTie=false;
@@ -97,29 +95,21 @@ namespace GameLogic
             wonOrTie = IsItATie();
             if (!wonOrTie)
             {
-                wonOrTie = WonAcrossOrDiagonal(playersTurn);
-                result = wonOrTie;
-            }
-            else
-            {
-                wonOrTie = IsItATie();
-                result = wonOrTie;
+                result = WonDiagonal(playersTurn, playersUsername);
+                if (!result)
+                {
+                    result = WonAcross(playersTurn, playersUsername);
+                }
             }
             return result;
         }
 
-        public bool WonAcrossOrDiagonal(int playersTurn)
+        public bool WonAcross(int playersTurn,string playersUsername)
         {
             bool result = false;
             int num = 0;
             int counter = 0;
-            string playersMarker = "";
-            if (playersTurn == 1)
-                playersMarker = "X";
-            else
-                playersMarker = "O";
-
-
+            string playersMarker = GetPlayersMarker(playersTurn);
             while (counter < 3)
             {
                 for (int i = counter; i < counter + 1; i++)
@@ -132,7 +122,7 @@ namespace GameLogic
                             if (num > 2)
                             {
                                 result = true;
-                                Console.WriteLine("Congrats Player {0} won across!", playersTurn);
+                                Console.WriteLine("Congrats {0}! You won across!", playersUsername);
                             }
                         }
                     }
@@ -156,7 +146,7 @@ namespace GameLogic
                             if (num > 2)
                             {
                                 result = true;
-                                Console.WriteLine("Congrats Player {0} you won up & down", playersTurn);
+                                Console.WriteLine("Congrats {0}! You won up & down", playersUsername);
                             }
                         }
                     }
@@ -168,40 +158,70 @@ namespace GameLogic
 
 
 
+
+
+
+            return result;
+        }
+
+        public bool WonDiagonal(int playersTurn, string playersUsername)
+        {
+            bool result = false;
+            int num = 0;
+            string playersMarker = GetPlayersMarker(playersTurn);
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (_gameBoard[i, j] ==playersMarker && i == j)
+                    if (_gameBoard[i, j] == playersMarker && i == j)
                     {
                         num += 1;
 
                         if (num == 3)
                         {
                             result = true;
-                            Console.WriteLine("Congrats Player {0} you won diagonal", playersTurn);
+                            Console.WriteLine("Congrats {0}! You won diagonally", playersUsername);
                         }
                     }
 
-                    else if (_gameBoard[i, j] == playersMarker)
+                }
+            }
+            if(!result)
+            { 
+            for (int k = 0; k < 3; k++)
+            {
+                for (int l = 0; l < 3; l++)
+                {
+
+                    if (_gameBoard[k, l] == playersMarker)
                     {
-                        if (i == 2 && j == 0)
-                            num += 1;
-                        if (i == 0 && j == 2)
-                            num += 1;
+                        if (k == 2 && l == 0)
+                            if (k == 0 && l == 2)
+                                num += 1;
 
                         if (num == 3)
                         {
                             result = true;
-                            Console.WriteLine("Congrats Player {0} won diagonal", playersTurn);
+                            Console.WriteLine("Congrats {0}! You won diagonally", playersUsername);
                         }
                     }
                 }
+               }
             }
-
-
-
             return result;
+        }
+
+        public string GetPlayersMarker(int playersTurn)
+        {
+            string playersMarker = "";
+            if (playersTurn == 1)
+                playersMarker = "X";
+            else
+                playersMarker = "O";
+
+            return playersMarker;
+
         }
 
         public bool IsItATie()
@@ -225,7 +245,7 @@ namespace GameLogic
             return result;
         }
 
-        public int GetPlayersTurn(int lastPlayersTurn)
+        public int NextPlayersTurn(int lastPlayersTurn)
         {
             int result;
             if (lastPlayersTurn == 1)
@@ -236,5 +256,6 @@ namespace GameLogic
             return result;
             
         }
+
     }
 }
