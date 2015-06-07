@@ -10,13 +10,15 @@ namespace GameLogic
     {
         private string[,] _gameBoard = new string[3, 3] { { "1", "2", "3", }, { "4", "5", "6" }, { "7", "8", "9" } };
 
-        public void UpdateGameBoard(string userSelection, int playersTurn)
+        public bool UpdateGameBoard(string userSelection, int playersTurn)
         {
             string playersMarker = "";
             if(playersTurn==1)
                 playersMarker = "X";
             else
                    playersMarker = "O";
+
+            bool foundChoice=false;
                 
             for (int i = 0; i < 3; i++)
             {
@@ -25,10 +27,17 @@ namespace GameLogic
                     if (_gameBoard[i, j] == userSelection)
                     {
                         _gameBoard[i, j] = playersMarker;
+                        foundChoice = true;
                     }
                 }
-            }
+            }    
             DisplayGameBoard();
+            if(!foundChoice)
+                Console.WriteLine("Invalid choice, please try again. ");
+
+
+            return foundChoice;
+            
 
         }
 
@@ -188,7 +197,8 @@ namespace GameLogic
                 }
             }
             if(!result)
-            { 
+            {
+                num = 0;
             for (int k = 0; k < 3; k++)
             {
                 for (int l = 0; l < 3; l++)
@@ -196,15 +206,17 @@ namespace GameLogic
 
                     if (_gameBoard[k, l] == playersMarker)
                     {
+                        if (k == 0 && l == 2)
+                            num += 1;
                         if (k == 2 && l == 0)
-                            if (k == 0 && l == 2)
-                                num += 1;
+                                num += 2;
 
                         if (num == 3)
-                        {
+                            { 
                             result = true;
                             Console.WriteLine("Congrats {0}! You won diagonally", playersUsername);
-                        }
+                            }
+                       
                     }
                 }
                }

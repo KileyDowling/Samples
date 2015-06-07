@@ -13,6 +13,7 @@ namespace TicTacToe.UI
         private static void Main(string[] args)
         {
             bool gameOver = false;
+            bool validChoice = false;
             int playersTurn=1;
             GamePlay game = new GamePlay();
             string playersUsername = "";
@@ -26,10 +27,9 @@ namespace TicTacToe.UI
                 else
                     playersUsername = playerTwo;
                 string userInput = game.RequestPlayerMove(playersTurn,playersUsername);
-                game.UpdateGameBoard(userInput,playersTurn);
-                
+               validChoice = game.UpdateGameBoard(userInput,playersTurn);
                 gameOver=game.WonOrTie(playersTurn,playersUsername);
-                if (!gameOver)
+                if (!gameOver && validChoice)
                     playersTurn = game.NextPlayersTurn(playersTurn);
             }
 
