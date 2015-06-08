@@ -10,11 +10,14 @@ namespace DieExercise
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Roll the dice! Press enter to continue");
+            Console.ReadLine();
+
             Random rng1 = new Random();
             int[] result = new int[100];
             for (int i = 0; i < 100; i++)
             {
-                result[i] = rng1.Next(1, 13);
+                result[i] = rng1.Next(2, 13);
             }
 
             int foundNum = 0;
