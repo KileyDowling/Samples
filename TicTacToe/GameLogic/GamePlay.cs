@@ -13,13 +13,13 @@ namespace GameLogic
         public bool UpdateGameBoard(string userSelection, int playersTurn)
         {
             string playersMarker = "";
-            if(playersTurn==1)
+            if (playersTurn == 1)
                 playersMarker = "X";
             else
-                   playersMarker = "O";
+                playersMarker = "O";
 
-            bool foundChoice=false;
-                
+            bool foundChoice = false;
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -30,18 +30,18 @@ namespace GameLogic
                         foundChoice = true;
                     }
                 }
-            }    
+            }
             DisplayGameBoard();
-            if(!foundChoice)
+            if (!foundChoice)
                 Console.WriteLine("Invalid choice, please try again. ");
 
 
             return foundChoice;
-            
+
 
         }
 
-        public string RequestPlayerMove(int playersTurn,string playerUsername)
+        public string RequestPlayerMove(int playersTurn, string playerUsername)
         {
             string userInput = "";
             int validNum = -1;
@@ -99,21 +99,20 @@ namespace GameLogic
         public bool WonOrTie(int playersTurn, string playersUsername)
         {
             bool result = false;
-            bool wonOrTie=false;
 
-            wonOrTie = IsItATie();
-            if (!wonOrTie)
+            result = WonAcross(playersTurn,playersUsername);
+            if (!result)
             {
                 result = WonDiagonal(playersTurn, playersUsername);
                 if (!result)
                 {
-                    result = WonAcross(playersTurn, playersUsername);
+                    result = IsItATie();
                 }
             }
             return result;
         }
 
-        public bool WonAcross(int playersTurn,string playersUsername)
+        public bool WonAcross(int playersTurn, string playersUsername)
         {
             bool result = false;
             int num = 0;
@@ -165,11 +164,6 @@ namespace GameLogic
                 num = 0;
             }
 
-
-
-
-
-
             return result;
         }
 
@@ -179,47 +173,18 @@ namespace GameLogic
             int num = 0;
             string playersMarker = GetPlayersMarker(playersTurn);
 
-            for (int i = 0; i < 3; i++)
+
+            if (_gameBoard[0, 2] == playersMarker && _gameBoard[2, 0] == playersMarker && _gameBoard[1, 1] == playersMarker)
+                num += 3;
+
+            else if (_gameBoard[0,0] == playersMarker && _gameBoard[2, 2] == playersMarker && _gameBoard[1, 1] == playersMarker)
+                num += 3;
+
+
+            if (num == 3)
             {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (_gameBoard[i, j] == playersMarker && i == j)
-                    {
-                        num += 1;
-
-                        if (num == 3)
-                        {
-                            result = true;
-                            Console.WriteLine("Congrats {0}! You won diagonally", playersUsername);
-                        }
-                    }
-
-                }
-            }
-            if(!result)
-            {
-                num = 0;
-            for (int k = 0; k < 3; k++)
-            {
-                for (int l = 0; l < 3; l++)
-                {
-
-                    if (_gameBoard[k, l] == playersMarker)
-                    {
-                        if (k == 0 && l == 2)
-                            num += 1;
-                        if (k == 2 && l == 0)
-                                num += 2;
-
-                        if (num == 3)
-                            { 
-                            result = true;
-                            Console.WriteLine("Congrats {0}! You won diagonally", playersUsername);
-                            }
-                       
-                    }
-                }
-               }
+                result = true;
+                Console.WriteLine("Congrats {0}! You won diagonally", playersUsername);
             }
             return result;
         }
@@ -266,7 +231,7 @@ namespace GameLogic
                 result = 1;
 
             return result;
-            
+
         }
 
     }
