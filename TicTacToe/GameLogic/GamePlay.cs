@@ -3,98 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLogic.Models;
 
 namespace GameLogic
 {
     public class GamePlay
     {
-        private string[,] _gameBoard = new string[3, 3] { { "1", "2", "3", }, { "4", "5", "6" }, { "7", "8", "9" } };
-
-        public bool UpdateGameBoard(string userSelection, int playersTurn)
-        {
-            string playersMarker = "";
-            if (playersTurn == 1)
-                playersMarker = "X";
-            else
-                playersMarker = "O";
-
-            bool foundChoice = false;
-
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    if (_gameBoard[i, j] == userSelection)
-                    {
-                        _gameBoard[i, j] = playersMarker;
-                        foundChoice = true;
-                    }
-                }
-            }
-            DisplayGameBoard();
-            if (!foundChoice)
-                Console.WriteLine("Invalid choice, please try again. ");
-
-
-            return foundChoice;
-
-
-        }
-
-        public string RequestPlayerMove(int playersTurn, string playerUsername)
-        {
-            string userInput = "";
-            int validNum = -1;
-
-            while (validNum < 0 || validNum > 10)
-            {
-                Console.WriteLine("{0}, please enter the space you would like to select", playerUsername);
-                userInput = Console.ReadLine();
-                validNum = int.Parse(userInput);
-            }
-
-            return userInput;
-        }
-
-        public void DisplayGameBoard()
-        {
-            int num = 0;
-            Console.WriteLine("\n");
-            while (num < 3)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    if (_gameBoard[num, i] == "3" || _gameBoard[num, i] == "6" || _gameBoard[num, i] == "9")
-                    {
-                        Console.Write("{0}", _gameBoard[num, i]);
-                    }
-                    else
-                    {
-                        Console.Write("{0}  |  ", _gameBoard[num, i]);
-                    }
-
-                }
-                if (num != 2)
-                {
-                    Console.WriteLine("\n--------------\n   |     |");
-                }
-                else
-                {
-                    Console.WriteLine("\n\n");
-                }
-                num += 1;
-            }
-
-        }
-
-        public string GetUserInfo(int playersTurn)
-        {
-            string userName = "";
-
-            Console.Write("Please enter the name for player {0}: ", playersTurn);
-            userName = Console.ReadLine();
-            return userName;
-        }
 
         public bool WonOrTie(int playersTurn, string playersUsername)
         {
@@ -117,14 +31,14 @@ namespace GameLogic
             bool result = false;
             int num = 0;
             int counter = 0;
-            string playersMarker = GetPlayersMarker(playersTurn);
+            string playersMarker = playersTurn.ToString();
             while (counter < 3)
             {
                 for (int i = counter; i < counter + 1; i++)
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        if (_gameBoard[i, j] == playersMarker)
+                        if (GameBoard.gameBoard[i, j] == playersMarker)
                         {
                             num += 1;
                             if (num > 2)
@@ -148,7 +62,7 @@ namespace GameLogic
                 {
                     for (int j = counter; j < counter + 1; j++)
                     {
-                        if (_gameBoard[i, j] == playersMarker)
+                        if (GameBoard.gameBoard[i, j] == playersMarker)
                         {
                             num += 1;
                             if (num > 2)
@@ -171,13 +85,13 @@ namespace GameLogic
         {
             bool result = false;
             int num = 0;
-            string playersMarker = GetPlayersMarker(playersTurn);
+            string playersMarker = playersTurn.ToString();
 
 
-            if (_gameBoard[0, 2] == playersMarker && _gameBoard[2, 0] == playersMarker && _gameBoard[1, 1] == playersMarker)
+            if (GameBoard.gameBoard[0, 2] == playersMarker && GameBoard.gameBoard[2, 0] == playersMarker && GameBoard.gameBoard[1, 1] == playersMarker)
                 num += 3;
 
-            else if (_gameBoard[0,0] == playersMarker && _gameBoard[2, 2] == playersMarker && _gameBoard[1, 1] == playersMarker)
+            else if (GameBoard.gameBoard[0,0] == playersMarker && GameBoard.gameBoard[2, 2] == playersMarker && GameBoard.gameBoard[1, 1] == playersMarker)
                 num += 3;
 
 
@@ -189,18 +103,6 @@ namespace GameLogic
             return result;
         }
 
-        public string GetPlayersMarker(int playersTurn)
-        {
-            string playersMarker = "";
-            if (playersTurn == 1)
-                playersMarker = "X";
-            else
-                playersMarker = "O";
-
-            return playersMarker;
-
-        }
-
         public bool IsItATie()
         {
             bool result = false;
@@ -210,7 +112,7 @@ namespace GameLogic
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (_gameBoard[i, j] == "X" || _gameBoard[i, j] == "O")
+                    if (GameBoard.gameBoard[i, j] == "X" || GameBoard.gameBoard[i, j] == "O")
                         num += 1;
                 }
                 if (num > 8)

@@ -5,38 +5,38 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using GameLogic;
+using TicTacToe.UI.Workflow;
 
 namespace TicTacToe.UI
 {
-    class Program
-    {
-        private static void Main(string[] args)
-        {
-            bool gameOver = false;
-            bool validChoice = false;
-            int playersTurn = 1;
-            GamePlay game = new GamePlay();
-            string playersUsername = "";
-            string playerOne = game.GetUserInfo(playersTurn);
-            string playerTwo = game.GetUserInfo(game.NextPlayersTurn(playersTurn));
-            game.DisplayGameBoard();
-            while (!gameOver)
-            {
-                if (playersTurn == 1)
-                    playersUsername = playerOne;
-                else
-                    playersUsername = playerTwo;
-                string userInput = game.RequestPlayerMove(playersTurn, playersUsername);
-                validChoice = game.UpdateGameBoard(userInput, playersTurn);
-                gameOver = game.WonOrTie(playersTurn, playersUsername);
-                if (!gameOver && validChoice)
-                    playersTurn = game.NextPlayersTurn(playersTurn);
-            }
+	class Program
+	{
+		private static void Main(string[] args)
+		{
+			bool gameOver = false;
+			bool validChoice = false;
+			int playersTurn = 1;
+			GamePlay game = new GamePlay();
+			string playersUsername = "";
+		    string playerOne = GetUserInfo.RequestUser(playersTurn);
+		    string playerTwo=PlayerMoves.GetPlayersMarker(game.NextPlayersTurn(playersTurn));
+			DisplayBoard.DisplayGameBoard();
+			while (!gameOver)
+			{
+				if (playersTurn == 1)
+					playersUsername = playerOne;
+				else
+					playersUsername = playerTwo;
+				string userInput = PlayerMoves.RequestPlayerMove(playersTurn, playersUsername);
+				validChoice = DisplayBoard.UpdateGameBoard(userInput, playersTurn);
+				gameOver = game.WonOrTie(playersTurn, playersUsername);
+				if (!gameOver && validChoice)
+					playersTurn = game.NextPlayersTurn(playersTurn);            }
 
-            Console.ReadLine();
-        }
+			Console.ReadLine();
+		}
 
-        /****** Tic-Tac-Toe *****
+		/****** Tic-Tac-Toe *****
 
 Create a Tic-Tac-Toe game that the user can play in the console.
 The game should be turn based so that two players can compete against one another.
@@ -46,17 +46,17 @@ Requirements
 	- The user will then be prompted to enter the name of player two.
 	- The game board will then be displayed to the players and look something like the following:
 	
-	      |     |
+		  |     |
 		  |     |
 	   1  |  2  |  3
-    -------------------
-          |     |
+	-------------------
+		  |     |
 	   4  |  5  |  6	 
-	      |     |  
+		  |     |  
 	-------------------	 
-	      |     |
-	    7 |  8  |  9
-	      |     |
+		  |     |
+		7 |  8  |  9
+		  |     |
 		  
 	
 	- Player 1 will be prompted by name to select a location to place their mark.
@@ -68,5 +68,5 @@ Requirements
 *This should be built with a Console project to serve as our UI, a Class Library to serve as the game logic,
 and a Class Library to serve as our unit tests for the game logic. */
 
-    }
+	}
 }

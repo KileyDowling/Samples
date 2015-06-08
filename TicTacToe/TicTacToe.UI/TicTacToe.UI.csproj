@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisplayBoard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Workflow\GetUserInfo.cs" />
+    <Compile Include="Workflow\PlayerMoves.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
