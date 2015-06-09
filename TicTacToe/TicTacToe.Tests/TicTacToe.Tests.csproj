@@ -49,9 +49,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameLogic\GameLogic.csproj">
+    <ProjectReference Include="..\GameLogic\GameLogic.BLL.csproj">
       <Project>{7e645f0a-bb08-43a8-be3b-01545091a06a}</Project>
-      <Name>GameLogic</Name>
+      <Name>GameLogic.BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\TicTacToe.UI\TicTacToe.UI.csproj">
       <Project>{4b2ec2fc-0f77-4def-be2d-79c0f6933989}</Project>

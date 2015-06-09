@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.UI", "TicTacToe.UI\TicTacToe.UI.csproj", "{4B2EC2FC-0F77-4DEF-BE2D-79C0F6933989}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "GameLogic\GameLogic.csproj", "{7E645F0A-BB08-43A8-BE3B-01545091A06A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic.BLL", "GameLogic\GameLogic.BLL.csproj", "{7E645F0A-BB08-43A8-BE3B-01545091A06A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Tests", "TicTacToe.Tests\TicTacToe.Tests.csproj", "{9E182A6E-6E23-4946-BA3D-D680F8BC86EF}"
 EndProject

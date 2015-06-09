@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TicTacToe.UI.Workflow
 {
-    public static class PlayerMoves
+    public class PlayerMoves
     {
 
-        public static string RequestPlayerMove(int playersTurn, string playerUsername)
+        public string RequestPlayerMove(int playersTurn, string playerUsername)
         {
             string userInput = "";
             int validNum = -1;
@@ -26,7 +26,7 @@ namespace TicTacToe.UI.Workflow
             return userInput;
         }
 
-        public static string GetPlayersMarker(int playersTurn)
+        public string GetPlayersMarker(int playersTurn)
         {
             string playersMarker = "";
             if (playersTurn == 1)

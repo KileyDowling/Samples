@@ -74,7 +74,7 @@ namespace TicTacToe.UI
 
         }
 
-       public static string InValidChoice()
+        public static string InValidChoice()
         {
             string result = "Invalid choice.Please try again";
             return result;
