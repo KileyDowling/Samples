@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BattleShip.BLL;
 using BattleShip.BLL.GameLogic;
 using BattleShip.BLL.Requests;
+using BattleShip.BLL.Ships;
 
 namespace BattleShip.UI.Workflow
 {
@@ -16,14 +17,16 @@ namespace BattleShip.UI.Workflow
         {
             //Setup Game logic
             ConvertX convertX = new ConvertX();
-            PlaceShipRequest placeShips = new PlaceShipRequest();
 
 
             int x = 0;
             int y = 0;
             string userCoordinatesX = "";
             string userCoordinatesY = "";
+            string shipDirectionRequest = "";
+            int shipDirAsNum = 0;
 
+            //get X & Y
             Console.WriteLine("Please enter your X (Ex: A)");
             userCoordinatesX = Console.ReadLine();
             x = convertX.Conversion(userCoordinatesX);
@@ -32,37 +35,89 @@ namespace BattleShip.UI.Workflow
             userCoordinatesY = Console.ReadLine();
             y = int.Parse(userCoordinatesY);
 
-            placeShips.Coordinate.XCoordinate = x;
-            placeShips.Coordinate.YCoordinate = y;
+            //get ship direction
+            Console.WriteLine("Please enter your ship direction (up=0,down=1,left=2,right=3)");
+            shipDirectionRequest = Console.ReadLine();
+            shipDirAsNum = int.Parse(shipDirectionRequest);
+            ShipDirection shipDirection = SetShipDirection(shipDirAsNum);
+
+            //get coordinate
+            Coordinate aCoordinate = new Coordinate(x,y);
+
+            //get ship type
+            Console.WriteLine("Please choose a ship type (Destroyer=0, Sumbmarine=1, Cruiser=2, Battleship=3, Carrier=4)");
+            string shipTypeRequest = Console.ReadLine();
+            int shiptTypeAsNum = int.Parse(shipTypeRequest);
+            ShipType shipType = SetShipType(shiptTypeAsNum);
+
+
+            //place ship
+            PlaceShipRequest placeShips = new PlaceShipRequest();
+            placeShips.Coordinate = aCoordinate;
+            placeShips.Direction = shipDirection;
+            placeShips.ShipType = shipType;
             
             //Next users turn setup
-
             NextTurn(UserTurn);
-
-
-
-
 
         }
 
+        public ShipDirection SetShipDirection(int usersChoice)
+        {
+            ShipDirection result;
+            switch (usersChoice)
+            {
+                case 0:
+                    result = ShipDirection.Up;
+                    break;
+                    
+                case 1:
+                    result = ShipDirection.Down;
+                    break;
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                case 2:
+                    result = ShipDirection.Left;
+                    break;
+               
+               default:
+                    result=ShipDirection.Right;
+                    break;
+            }
+
+            return result;
+        }
+
+
+        public ShipType SetShipType(int usersChoice)
+        {
+            ShipType result;
+            switch (usersChoice)
+            {
+                case 0:
+                    result = ShipType.Destroyer;
+                    break;
+
+                case 1:
+                    result = ShipType.Submarine;
+                    break;
+
+                case 2:
+                    result = ShipType.Cruiser;
+                    break;
+
+                case 3:
+                    result = ShipType.Battleship;
+                    break;
+
+                default:
+                    result = ShipType.Carrier;
+                    break;
+            }
+
+            return result;
+        }
+
+
         public int NextTurn(int UserTurn)
         {
             int result = 0;
@@ -79,8 +134,6 @@ namespace BattleShip.UI.Workflow
         }
 
 
-
-
-
+        public int shipDirAsNum { get; set; }
     }
 }

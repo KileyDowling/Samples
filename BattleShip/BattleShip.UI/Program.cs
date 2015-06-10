@@ -37,7 +37,11 @@ namespace BattleShip.UI
             player1.UserGameBoard.PrintGameBoard();
             player2.UserGameBoard.PrintGameBoard();
 
+           
 
+            ConvertX convertTest = new ConvertX();
+            convertTest.Conversion("C");
+            
             Console.ReadLine();
 
 
