@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace BattleShip.UI.Workflow
 {
-    class GameBoard
+    public class GameBoard
     {
         //generic gameboard:
         int[,] _gameBoard = new int[10, 10];
-
         string[] letterArray = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
         private int[] numArray = {1, 2, 3, 4, 5, 6, 7, 8, 9,10};
 
        
         //display gameboard
-        public void PrintGameBoard(string userName)
+        public void PrintGameBoard()
 
         {
-            Console.WriteLine(userName);
 
             for (int i = 0; i < 10; i++)
             {
@@ -52,6 +50,19 @@ namespace BattleShip.UI.Workflow
             Console.WriteLine("\n");
         }
 
+        public void SetUpBoard(int playersTurn)
+        {
+            GameBoard game = new GameBoard();
+            DisplayName(playersTurn);
+
+        }
+
+
+        public void DisplayName(int playerNumber)
+        {
+            Console.WriteLine("\nPlayer: " + playerNumber + "\n\n");
+
+        }
 
     }
 }

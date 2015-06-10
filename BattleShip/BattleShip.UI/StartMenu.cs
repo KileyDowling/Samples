@@ -10,24 +10,16 @@ namespace BattleShip.UI
     {
         //Create a start menu for the game, prompt for each player's name
 
-        public void Execute()
+        public string Execute(int userNum)
         {
             //display menu, accept user input, assign player1 & player2 names
-            string player1="";
-            string player2="";
+            string player="";
 
-            DisplayMenu(1);
-            player1 = Console.ReadLine();
-
-            DisplayMenu(2);
-            player2 = Console.ReadLine();
-
-
-            //players
-            Console.WriteLine("\n\n\nPlayer 1: {0}", player1);
-            Console.WriteLine("Player 2: {0}", player2);
+            DisplayMenu(userNum);
+            player = Console.ReadLine();
 
             Console.Clear();
+            return player;
         }
 
 
@@ -37,10 +29,10 @@ namespace BattleShip.UI
             Console.WriteLine("\n===================\n");
             Console.WriteLine("Please {0} enter your name", num );
 
-
-
         }
 
+       
 
+     
     }
 }
