@@ -8,6 +8,17 @@ namespace TicTacToe.UI.Workflow
 {
     public class PlayerMoves
     {
+        public string GetPlayersUserName(int playersTurn, string playerOneUserName, string playerTwoUserName)
+        {
+            string playersUserName;
+            if (playersTurn == 1)
+                playersUserName = playerOneUserName;
+            else
+                playersUserName = playerTwoUserName;
+
+            return playersUserName;
+            
+        }
 
         public string RequestPlayerMove(int playersTurn, string playerUsername)
         {

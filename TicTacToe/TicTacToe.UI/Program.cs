@@ -15,18 +15,16 @@ namespace TicTacToe.UI
 		private static void Main(string[] args)
 		{
 			bool gameOver = false;
-			bool validChoice = false;
 			int playersTurn = 1;
-		    string notify = "";
 			
 			GamePlay game = new GamePlay();
 			PlayerMoves playerMoves = new PlayerMoves();
-            UserInfo userInfo = new UserInfo();
+		    UserInfo userInfo = new UserInfo
+		    {
+		        UserOne = GetUserInfo.RequestUser(1),
+                UserTwo = GetUserInfo.RequestUser(2)
+		    };
 
-			userInfo.UserOne = GetUserInfo.RequestUser(1);
-			userInfo.UserTwo = GetUserInfo.RequestUser(2);
-
-		    string playersUserName = "";
 		    string playerOneMarker = playerMoves.GetPlayersMarker(playersTurn);
 		    string playerTwoMarker = playerMoves.GetPlayersMarker(game.NextPlayersTurn(playersTurn));
 
@@ -35,10 +33,10 @@ namespace TicTacToe.UI
 			
             while (!gameOver)
             {
-                if (playersTurn == 1)
-                    playersUserName = userInfo.UserOne;
-                else   
-                    playersUserName = userInfo.UserTwo;
+                bool validChoice = false;
+                string playersUserName = "";
+
+                playersUserName= playerMoves.GetPlayersUserName(playersTurn, userInfo.UserOne, userInfo.UserTwo);
              
 				string userInput = playerMoves.RequestPlayerMove(playersTurn, playersUserName);
 
@@ -49,6 +47,7 @@ namespace TicTacToe.UI
                     playersTurn = game.NextPlayersTurn(playersTurn);
                 else
                 {
+                    string notify = "";
                     notify = NotifyWinOrTie.Notify(game.WonOrTie(playersTurn, playerOneMarker, playerTwoMarker),
                         playersUserName);
                     Console.WriteLine(notify);
@@ -91,5 +90,5 @@ Requirements
 *This should be built with a Console project to serve as our UI, a Class Library to serve as the game logic,
 and a Class Library to serve as our unit tests for the game logic. */
 
-	}
+    }
 }

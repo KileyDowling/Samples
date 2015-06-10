@@ -28,6 +28,7 @@ namespace GameLogic
             return result;
 
         }
+
         public bool KeepPlaying(int playersTurn, string marker1, string marker2)
         {
             bool result = false;
@@ -44,7 +45,7 @@ namespace GameLogic
                         result = IsItATie(marker1, marker2);
                     }
                 }
-               
+
             }
             return result;
         }
@@ -84,6 +85,7 @@ namespace GameLogic
 
             return result;
         }
+
         public bool WonUpAndDown(int playersTurn, string marker1, string marker2)
         {
             bool result = false;
@@ -176,6 +178,5 @@ namespace GameLogic
             return result;
 
         }
-
     }
 }
