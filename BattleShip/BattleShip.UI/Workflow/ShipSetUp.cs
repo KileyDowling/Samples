@@ -10,15 +10,15 @@ using BattleShip.BLL.Ships;
 
 namespace BattleShip.UI.Workflow
 {
-    public class GamePlay
+    public class ShipSetUp
     {
 
-        public void SetupGame(int UserTurn)
+        public PlaceShipRequest SetUpShip()
         {
-            //Setup Game logic
+            //create new ConvertX object
             ConvertX convertX = new ConvertX();
 
-
+            //
             int x = 0;
             int y = 0;
             string userCoordinatesX = "";
@@ -56,9 +56,9 @@ namespace BattleShip.UI.Workflow
             placeShips.Coordinate = aCoordinate;
             placeShips.Direction = shipDirection;
             placeShips.ShipType = shipType;
+
             
-            //Next users turn setup
-            NextTurn(UserTurn);
+            return placeShips;
 
         }
 
@@ -118,11 +118,11 @@ namespace BattleShip.UI.Workflow
         }
 
 
-        public int NextTurn(int UserTurn)
+        public int NextTurn(int userTurn)
         {
             int result = 0;
 
-            if (UserTurn == 1)
+            if (userTurn == 1)
             {
                 result = 2;
             }
@@ -134,6 +134,5 @@ namespace BattleShip.UI.Workflow
         }
 
 
-        public int shipDirAsNum { get; set; }
     }
 }
