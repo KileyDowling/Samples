@@ -11,10 +11,11 @@ namespace BattleShip.UI.Workflow
 {
     public class GameBoard
     {
-        public GameBoard(PlayerInfo myPlayerInfo)
+        public Dictionary<string, Coordinate> BoardDictionary;
+
+        public GameBoard()
         {
-            myPlayerInfo.MyBoard = new Board();
-            Dictionary<string, Coordinate> boardDictionary = SetupBoardDictionary();
+            BoardDictionary = SetupBoardDictionary();
         }
 
         public Dictionary<string,Coordinate> SetupBoardDictionary()
@@ -133,12 +134,17 @@ namespace BattleShip.UI.Workflow
             BoardDictionary.Add("I1", new Coordinate(9, 10));
             BoardDictionary.Add("J1", new Coordinate(10, 10));
 
+            //end of method
+            return BoardDictionary;
+        }
 
 
+        public void PrintGameBoard()
+        {
             foreach (var key in BoardDictionary.Keys)
             {
                 if (key.Length > 2)
-                   Console.Write("{0} ", key);
+                    Console.Write("{0} ", key);
                 else
                 {
                     Console.Write(" {0} ", key);
@@ -151,103 +157,15 @@ namespace BattleShip.UI.Workflow
                 }
 
             }
-
-            //end of method
-            return BoardDictionary;
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        //    for (int i = 1; i < 11; i++)
-        //    {
-
-        //        for (int j = 1; j < 11; j++)
-        //        {
-        //            //if (j == 0 && i < 10)
-        //            //{
-        //            //    //labeling numbers on Y axis
-        //            //    if(i==0)
-        //            //        Console.Write(numArray[9 - i] + " | ");
-        //            //    else
-        //            //        Console.Write(" " +numArray[9-i] + " | ");
-        //            //}                   
-        //            Console.Write(_gameBoard[i,j] + " ");
-
-        //        }
-        //        Console.WriteLine();
-        //    }
-
-        //}
-
-        //public Board SetUpBoard(int playersTurn)
-        //{
-        //    DisplayName(playersTurn);
-        //    Board board = new Board();
-
-        //    return board;
-        //}
-
-        ////display gameboard
-        //public void PrintGameBoard()
-
-        //{
-        //    foreach (var item in SetupBoardDictionary())
-        //    {
-        //        Console.WriteLine();
-        //    }
-
-
-
-
-        //    for (int i = 0; i < 10; i++)
-        //    {
-
-        //        for (int j = 0; j < 10; j++)
-        //        {
-        //            if (j == 0 && i < 10)
-        //            {
-        //                //labeling numbers on Y axis
-        //                if(i==0)
-        //                    Console.Write(numArray[9 - i] + " | ");
-        //                else
-        //                    Console.Write(" " +numArray[9-i] + " | ");
-        //            }                   
-        //            Console.Write(_gameBoard[i,j] + " ");
-
-        //        }
-        //        Console.WriteLine();
-        //    }
-
-        //    for (int k = 0; k < 10; k++)
-        //    {
-        //        //labeling letters on X axis
-        //        if(letterArray[k]=="A")
-        //            Console.Write("     " + letterArray[k]);
-        //        else
-        //        Console.Write(" " +letterArray[k]);
-
-        //    }
-        //    Console.WriteLine("\n");
-
-
-
-
-        public void DisplayName(int playerNumber)
+        public void DisplayName(PlayerInfo playerInfo)
         {
-            Console.WriteLine("\nPlayer: " + playerNumber + "\n\n");
+            Console.WriteLine("\nPlayer: " + playerInfo.UserName + "\n\n");
 
         }
+
 
     }
 }

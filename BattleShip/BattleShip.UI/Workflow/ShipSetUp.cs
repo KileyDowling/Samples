@@ -7,58 +7,53 @@ using BattleShip.BLL;
 using BattleShip.BLL.GameLogic;
 using BattleShip.BLL.Requests;
 using BattleShip.BLL.Ships;
+using BattleShip.UI.Models;
 
 namespace BattleShip.UI.Workflow
 {
     public class ShipSetUp
     {
 
-        public PlaceShipRequest SetUpShip()
+        public PlaceShipRequest SetUpShip(Dictionary<string, Coordinate> userDictionary)
         {
-            //create new ConvertX object
-            ConvertX convertX = new ConvertX();
-
-            //
-            int x = 0;
-            int y = 0;
-            string userCoordinatesX = "";
-            string userCoordinatesY = "";
-            string shipDirectionRequest = "";
-            int shipDirAsNum = 0;
-
-            //get X & Y
-            Console.WriteLine("Please enter your X (Ex: A)");
-            userCoordinatesX = Console.ReadLine();
-            x = convertX.Conversion(userCoordinatesX);
-
-            Console.WriteLine("Please enter your Y coordinates (Ex: 1)");
-            userCoordinatesY = Console.ReadLine();
-            y = int.Parse(userCoordinatesY);
-
-            //get ship direction
-            Console.WriteLine("Please enter your ship direction (up=0,down=1,left=2,right=3)");
-            shipDirectionRequest = Console.ReadLine();
-            shipDirAsNum = int.Parse(shipDirectionRequest);
-            ShipDirection shipDirection = SetShipDirection(shipDirAsNum);
-
-            //get coordinate
-            Coordinate aCoordinate = new Coordinate(x,y);
-
-            //get ship type
-            Console.WriteLine("Please choose a ship type (Destroyer=0, Sumbmarine=1, Cruiser=2, Battleship=3, Carrier=4)");
-            string shipTypeRequest = Console.ReadLine();
-            int shiptTypeAsNum = int.Parse(shipTypeRequest);
-            ShipType shipType = SetShipType(shiptTypeAsNum);
-
-
-            //place ship
-            PlaceShipRequest placeShips = new PlaceShipRequest();
-            placeShips.Coordinate = aCoordinate;
-            placeShips.Direction = shipDirection;
-            placeShips.ShipType = shipType;
-
             
-            return placeShips;
+                string coordinateRequested = "";
+                string shipDirectionRequest = "";
+                int shipDirAsNum = 0;
+
+                //get X & Y
+                Console.WriteLine("Please enter your X & Y coordinate(Ex: A1)");
+                coordinateRequested = Console.ReadLine();
+
+                //get ship direction
+                Console.WriteLine("Please enter your ship direction (up=0,down=1,left=2,right=3)");
+                shipDirectionRequest = Console.ReadLine();
+                shipDirAsNum = int.Parse(shipDirectionRequest);
+                ShipDirection shipDirection = SetShipDirection(shipDirAsNum);
+
+                //get coordinate
+                ConvertX convertX = new ConvertX();
+                ;
+                Coordinate aCoordinate = convertX.Conversion(userDictionary, coordinateRequested);
+
+
+                //get ship type
+                Console.WriteLine(
+                    "Please choose a ship type (Destroyer=0, Sumbmarine=1, Cruiser=2, Battleship=3, Carrier=4)");
+                string shipTypeRequest = Console.ReadLine();
+                int shiptTypeAsNum = int.Parse(shipTypeRequest);
+                ShipType shipType = SetShipType(shiptTypeAsNum);
+
+
+                //place ship
+            PlaceShipRequest placeShips = new PlaceShipRequest
+            {
+                Coordinate = aCoordinate,
+                Direction = shipDirection,
+                ShipType = shipType
+            };
+                
+                return placeShips;
 
         }
 

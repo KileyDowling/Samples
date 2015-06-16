@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,32 +28,23 @@ namespace BattleShip.UI
 
             //assign userName
             player1.UserName = menu.Execute(player1.UserTurn);
-            player2.UserName = menu.Execute(player2.UserTurn); 
-
-            GameBoard player1GameBoard = new GameBoard(player1);
+            player2.UserName = menu.Execute(player2.UserTurn);
 
 
-           
-            //UI of game board
-            ShipSetUp userOnesGamePlay = new ShipSetUp();
 
             //places ship
             int counter = 0;
-            while (counter < 6)
+            while (counter < 5)
             {
-                            player1.MyBoard.PlaceShip(userOnesGamePlay.SetUpShip());
-               
-
+                ShipSetUp setUpYourShip = new ShipSetUp();
+                PlaceShipRequest shipRequest = new PlaceShipRequest();
+                shipRequest = setUpYourShip.SetUpShip(player1.GameBoard.BoardDictionary);
+                player1.MyBoard.PlaceShip(shipRequest);
+                counter++;
             }
 
-            Console.WriteLine("Player one: {0}", player1.UserName);
-            //Console.WriteLine("Player two: {0}", player2.UserName);
 
-            //player1.UserGameBoard.PrintGameBoard();
-            //player2.UserGameBoard.PrintGameBoard();
 
-           
-            
             Console.ReadLine();
 
 
