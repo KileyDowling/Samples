@@ -43,6 +43,8 @@ namespace LINQ
             //8. Create a new sequence of products with ProductName, Category, and rename UnitPrice to Price.
             //Exercise8();
 
+            //SKIPPED -  Exercise9();
+
             //10. Select CustomerID, OrderID, and Total where the order total is less than 500.00.
            // Exercise10();
 
@@ -54,6 +56,44 @@ namespace LINQ
 
             //13. Skip the first 3 elements of NumbersA.
            // Exercise13();
+
+            //14. Get all except the first two orders from customers in Washington.
+           // Exercise14();
+
+            //15. Get all the elements in NumbersC from the beginning until an element is greater or equal to 6.
+            //SKIPPED - Exercise15();
+
+            //16. Return elements starting from the beginning of NumbersC until a number is hit that is less than its position in the array.
+            //SKIPPED - Exercise16();
+
+
+            //17. Return elements from NumbersC starting from the first element divisible by 3.
+            //Exercise17();
+
+            //18. Order products alphabetically by name.
+            Exercise18();
+
+            //19. Order products by UnitsInStock descending.
+           // Exercise19();
+
+            //20. Sort the list of products, first by category, and then by unit price, from highest to lowest.
+            //Exercise20();
+
+            //21. Reverse NumbersC.
+//            Exercise21();
+
+            //23. Display products by Category.
+           // Exercise23();
+
+
+
+            //32. Determine if NumbersB contains only numbers less than 9.
+            //Exercise32();
+
+           // 34. Count the number of odds in NumbersA.
+          //  Exercise34();
+
+
 
             Console.ReadLine();
         }
@@ -252,6 +292,134 @@ namespace LINQ
             {
                 Console.WriteLine(item);
             }
+
+        }
+
+        private static void Exercise14()
+        {
+            //14. Get all except the first two orders from customers in Washington.
+            var customers = DataLoader.LoadCustomers();
+            var allWAOrders = from c in customers
+                from orders in c.Orders
+                where c.Region == "WA"
+                select new
+                {
+                    orderNum = orders.OrderID,
+                    cust = c.CustomerID,
+                    region = c.Region
+
+                };
+
+            var result = allWAOrders.Skip(2);
+
+            foreach (var item in result)
+            {
+                Console.WriteLine("{0}, {1}, {2}", item.orderNum, item.cust, item.region);
+            }
+        }
+
+        private static void Exercise15()
+        {
+            //15. Get all the elements in NumbersC from the beginning until an element is greater or equal to 6.
+            var numC = DataLoader.NumbersC;
+            var results = from nums in numC
+                select nums;
+        }
+
+        private static void Exercise16()
+        {
+            //16. Return elements starting from the beginning of NumbersC until a number is hit that is less than its position in the array.
+        }
+
+        private static void Exercise17()
+        {
+            //17. Return elements from NumbersC starting from the first element divisible by 3.
+            var numC = DataLoader.NumbersC;
+            var result = from num in numC
+                where num % 3 == 0 && num !=0
+                select num;
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+
+        }
+
+        private static void Exercise18()
+        {
+            //18. Order products alphabetically by name.
+            var products = DataLoader.LoadProducts();
+            var results = products.OrderBy(p => p.ProductName);
+            foreach (var result in results)
+            {
+                Console.WriteLine(result.ProductName);
+            }
+
+        }
+
+        private static void Exercise19()
+        {
+            //19. Order products by UnitsInStock descending.
+            var products = DataLoader.LoadProducts();
+            var results = products.OrderByDescending(p => p.UnitsInStock);
+            foreach (var result in results)
+            {
+                Console.WriteLine("UnitsInStock: {0}, Name: {1}", result.UnitsInStock, result.ProductName);
+            }
+
+        }
+
+        private static void Exercise20()
+        {
+            //20. Sort the list of products, first by category, and then by unit price, from highest to lowest.
+            var products = DataLoader.LoadProducts();
+            var results2 = products.OrderByDescending(p => p.UnitPrice);
+            var results = results2.OrderBy(p => p.Category);
+
+            foreach (var item in results)
+            {
+             Console.WriteLine("Category: {0}, Unit Price: {1}", item.Category, item.UnitPrice);   
+            }
+        }
+
+        private static void Exercise21()
+        {
+            //21. Reverse NumbersC.
+            var numC = DataLoader.NumbersC;
+            var result = numC.Reverse();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+
+        }
+
+        private static void Exercise23()
+        {
+            //23. Display products by Category.
+            var products = DataLoader.LoadProducts();
+            var results = products.OrderBy(p => p.Category);
+            foreach (var result in results)
+            {
+                Console.WriteLine("Category: {0}, Product Name: {1}", result.Category, result.ProductName);
+            }
+        }
+
+        private static void Exercise32()
+        {
+            //32. Determine if NumbersB contains only numbers less than 9.
+            var numB = DataLoader.NumbersB;
+            var result = numB.Count(i => i >= 9);
+                Console.WriteLine(result==0);
+        }
+
+        private static void Exercise34()
+        {
+            //34. Count the number of odds in NumbersA.
+            var numA = DataLoader.NumbersA;
+            var result = numA.Count(i => i%2 == 1);
+            Console.WriteLine(result);
 
         }
     }

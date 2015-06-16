@@ -7,7 +7,7 @@ namespace LINQ
 {
     public class DataLoader
     {
-        private static List<Product> _productList;
+        private static List<Product> _productList;  
         private static List<Customer> _customerList; 
 
         public static List<Product> LoadProducts()
