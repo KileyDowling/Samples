@@ -34,12 +34,12 @@ namespace BattleShip.UI
             GameBoard player1GameBoard = new GameBoard();
             GameBoard player2GameBoard = new GameBoard();
 
-            //allow users to place ships
-            //player1
+            //allow users to place ships -- player1
             player1GameBoard.PrintGameBoard();
             ShipSetUp setUpShips = new ShipSetUp();
             setUpShips.AllowUserToPlace5Ships(player1GameBoard,player1);
-            //player2
+
+            //allow users to place ships -- player2
             player2GameBoard.PrintGameBoard();
             setUpShips.AllowUserToPlace5Ships(player2GameBoard,player2);
             Console.ReadLine();

@@ -16,46 +16,54 @@ namespace BattleShip.UI.Workflow
 
         public PlaceShipRequest SetUpShip(Dictionary<string, Coordinate> userDictionary)
         {
-            
-                string coordinateRequested = "";
-                string shipDirectionRequest = "";
-                int shipDirAsNum = 0;
 
-                //get X & Y
-                Console.Write("(1) Please enter your X & Y coordinate(Ex: A1):  ");
-                coordinateRequested = Console.ReadLine();
+            string coordinateRequested = "";
+            string shipDirectionRequest = "";
+            int shipDirAsNum = 0;
 
-                //get ship direction
-                Console.Write("(2) Please enter your ship direction (up=0,down=1,left=2,right=3):  ");
+            //get X & Y
+            Console.Write("(1) Please enter your X & Y coordinate(Ex: A1): ");
+            coordinateRequested = Console.ReadLine();
+
+            //get ship direction
+            while (!int.TryParse(shipDirectionRequest, out shipDirAsNum))
+            {
+                Console.Write("(2) Please enter your ship direction (up=0,down=1,left=2,right=3): ");
                 shipDirectionRequest = Console.ReadLine();
-                shipDirAsNum = int.Parse(shipDirectionRequest);
-                ShipDirection shipDirection = SetShipDirection(shipDirAsNum);
-
-                //get coordinate
-                ConvertX convertX = new ConvertX();
-                ;
-                Coordinate aCoordinate = convertX.Conversion(userDictionary, coordinateRequested);
+            }
+            shipDirAsNum = int.Parse(shipDirectionRequest);
+            ShipDirection shipDirection = SetShipDirection(shipDirAsNum);
 
 
-                //get ship type
-                Console.Write("(3) Please choose a ship type (Destroyer=0, Sumbmarine=1, Cruiser=2, Battleship=3, Carrier=4):  ");
-                string shipTypeRequest = Console.ReadLine();
-                int shiptTypeAsNum = int.Parse(shipTypeRequest);
-                ShipType shipType = SetShipType(shiptTypeAsNum);
+            //get coordinate
+            ConvertX convertX = new ConvertX();
+            Coordinate aCoordinate = convertX.Conversion(userDictionary, coordinateRequested);
 
-                //place ship
+            //get ship type
+            string shipTypeRequest = "";
+            int shiptTypeAsNum = 0;
+            while (!int.TryParse(shipTypeRequest, out shiptTypeAsNum))
+            {
+                Console.Write("(3) Please choose a ship type (Destroyer=0, Sumbmarine=1, Cruiser=2, Battleship=3, Carrier=4): ");
+                shipTypeRequest = Console.ReadLine();
+            }
+            shiptTypeAsNum = int.Parse(shipTypeRequest);
+            ShipType shipType = SetShipType(shiptTypeAsNum);
+
+            //place ship
             PlaceShipRequest placeShips = new PlaceShipRequest
             {
                 Coordinate = aCoordinate,
                 Direction = shipDirection,
                 ShipType = shipType
             };
-            
+
             Console.WriteLine("You placed a {0}!\n", shipType);
 
             return placeShips;
+
         }
-    
+
         public void AllowUserToPlace5Ships(GameBoard gameBoard, PlayerInfo playerInfo)
         {
             Console.WriteLine("Hello, {0}! Let's place your ships \n\n", playerInfo.UserName);
@@ -67,7 +75,7 @@ namespace BattleShip.UI.Workflow
                 if (counter == 5)
                     Console.WriteLine("-- Place Your Final Ship! -- ");
                 else
-                     Console.WriteLine("-- Place Ship #{0} --", counter);
+                    Console.WriteLine("-- Place Ship #{0} --", counter);
 
                 ShipSetUp setUpYourShip = new ShipSetUp(); // acces UI Ship Placement
                 PlaceShipRequest shipRequest = new PlaceShipRequest(); // initiates placeship request business logic
@@ -93,7 +101,7 @@ namespace BattleShip.UI.Workflow
                 case 0:
                     result = ShipDirection.Up;
                     break;
-                    
+
                 case 1:
                     result = ShipDirection.Down;
                     break;
@@ -101,9 +109,9 @@ namespace BattleShip.UI.Workflow
                 case 2:
                     result = ShipDirection.Left;
                     break;
-               
-               default:
-                    result=ShipDirection.Right;
+
+                default:
+                    result = ShipDirection.Right;
                     break;
             }
 
