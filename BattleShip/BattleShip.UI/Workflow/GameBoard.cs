@@ -157,6 +157,7 @@ namespace BattleShip.UI.Workflow
                 }
 
             }
+            Console.WriteLine();
         }
 
 

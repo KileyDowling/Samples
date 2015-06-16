@@ -30,25 +30,24 @@ namespace BattleShip.UI
             player1.UserName = menu.Execute(player1.UserTurn);
             player2.UserName = menu.Execute(player2.UserTurn);
 
+            //create gameboard
+            GameBoard player1GameBoard = new GameBoard();
+            GameBoard player2GameBoard = new GameBoard();
 
-
-            //places ship
-            int counter = 0;
-            while (counter < 5)
-            {
-                ShipSetUp setUpYourShip = new ShipSetUp();
-                PlaceShipRequest shipRequest = new PlaceShipRequest();
-                shipRequest = setUpYourShip.SetUpShip(player1.GameBoard.BoardDictionary);
-                player1.MyBoard.PlaceShip(shipRequest);
-                counter++;
-            }
-
-
-
+            //allow users to place ships
+            //player1
+            player1GameBoard.PrintGameBoard();
+            ShipSetUp setUpShips = new ShipSetUp();
+            setUpShips.AllowUserToPlace5Ships(player1GameBoard,player1);
+            //player2
+            player2GameBoard.PrintGameBoard();
+            setUpShips.AllowUserToPlace5Ships(player2GameBoard,player2);
             Console.ReadLine();
 
 
 
         }
+
+    
     }
 }

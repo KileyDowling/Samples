@@ -14,6 +14,5 @@ namespace BattleShip.UI.Models
         public string UserName { get; set; }
         public int UserTurn { get; set; }
         public Board MyBoard = new Board();
-        public GameBoard GameBoard = new GameBoard();
     }
 }

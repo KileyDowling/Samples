@@ -22,11 +22,11 @@ namespace BattleShip.UI.Workflow
                 int shipDirAsNum = 0;
 
                 //get X & Y
-                Console.WriteLine("Please enter your X & Y coordinate(Ex: A1)");
+                Console.Write("(1) Please enter your X & Y coordinate(Ex: A1):  ");
                 coordinateRequested = Console.ReadLine();
 
                 //get ship direction
-                Console.WriteLine("Please enter your ship direction (up=0,down=1,left=2,right=3)");
+                Console.Write("(2) Please enter your ship direction (up=0,down=1,left=2,right=3):  ");
                 shipDirectionRequest = Console.ReadLine();
                 shipDirAsNum = int.Parse(shipDirectionRequest);
                 ShipDirection shipDirection = SetShipDirection(shipDirAsNum);
@@ -38,12 +38,10 @@ namespace BattleShip.UI.Workflow
 
 
                 //get ship type
-                Console.WriteLine(
-                    "Please choose a ship type (Destroyer=0, Sumbmarine=1, Cruiser=2, Battleship=3, Carrier=4)");
+                Console.Write("(3) Please choose a ship type (Destroyer=0, Sumbmarine=1, Cruiser=2, Battleship=3, Carrier=4):  ");
                 string shipTypeRequest = Console.ReadLine();
                 int shiptTypeAsNum = int.Parse(shipTypeRequest);
                 ShipType shipType = SetShipType(shiptTypeAsNum);
-
 
                 //place ship
             PlaceShipRequest placeShips = new PlaceShipRequest
@@ -52,9 +50,39 @@ namespace BattleShip.UI.Workflow
                 Direction = shipDirection,
                 ShipType = shipType
             };
-                
-                return placeShips;
+            
+            Console.WriteLine("You placed a {0}!\n", shipType);
 
+            return placeShips;
+        }
+    
+        public void AllowUserToPlace5Ships(GameBoard gameBoard, PlayerInfo playerInfo)
+        {
+            Console.WriteLine("Hello, {0}! Let's place your ships \n\n", playerInfo.UserName);
+            //places ship
+            int counter = 1;
+            //iterates through for all 5 placements
+            while (counter < 6)
+            {
+                if (counter == 5)
+                    Console.WriteLine("-- Place Your Final Ship! -- ");
+                else
+                     Console.WriteLine("-- Place Ship #{0} --", counter);
+
+                ShipSetUp setUpYourShip = new ShipSetUp(); // acces UI Ship Placement
+                PlaceShipRequest shipRequest = new PlaceShipRequest(); // initiates placeship request business logic
+
+                //assigns user entered ship placeemnt biz logic request using the associated board dictionary
+                shipRequest = setUpYourShip.SetUpShip(gameBoard.BoardDictionary);
+
+                //assigns ship request to player1's board
+                playerInfo.MyBoard.PlaceShip(shipRequest);
+                counter++;
+            }
+
+            Console.WriteLine("Thank you for your input {0}! Press enter to clear the console so the other player cannot cheat!", playerInfo.UserName);
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public ShipDirection SetShipDirection(int usersChoice)
