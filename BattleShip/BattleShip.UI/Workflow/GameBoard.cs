@@ -138,7 +138,6 @@ namespace BattleShip.UI.Workflow
             return BoardDictionary;
         }
 
-
         public void PrintGameBoard()
         {
             foreach (var key in BoardDictionary.Keys)
@@ -161,11 +160,6 @@ namespace BattleShip.UI.Workflow
         }
 
 
-        public void DisplayName(PlayerInfo playerInfo)
-        {
-            Console.WriteLine("\nPlayer: " + playerInfo.UserName + "\n\n");
-
-        }
 
 
     }

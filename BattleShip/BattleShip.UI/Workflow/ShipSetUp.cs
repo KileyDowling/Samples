@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BattleShip.BLL;
 using BattleShip.BLL.GameLogic;
 using BattleShip.BLL.Requests;
+using BattleShip.BLL.Responses;
 using BattleShip.BLL.Ships;
 using BattleShip.UI.Models;
 
@@ -14,21 +15,25 @@ namespace BattleShip.UI.Workflow
     public class ShipSetUp
     {
 
-        public PlaceShipRequest SetUpShip(Dictionary<string, Coordinate> userDictionary)
+        public PlaceShipRequest SetUpShip(Dictionary<string, Coordinate> userDictionary, int shipTypeAsNum)
         {
 
             string coordinateRequested = "";
             string shipDirectionRequest = "";
             int shipDirAsNum = 0;
 
+            //get ship type
+            ShipType shipType = SetShipType(shipTypeAsNum);
+            Console.WriteLine("You are placing a {0}....", shipType);
+
             //get X & Y
-            Console.Write("(1) Please enter your X & Y coordinate(Ex: A1): ");
+            Console.Write("\t(1) Please enter your X & Y coordinate(Ex: A1): ");
             coordinateRequested = Console.ReadLine();
 
             //get ship direction
             while (!int.TryParse(shipDirectionRequest, out shipDirAsNum))
             {
-                Console.Write("(2) Please enter your ship direction (up=0,down=1,left=2,right=3): ");
+                Console.Write("\t(2) Please enter your ship direction (up=0,down=1,left=2,right=3): ");
                 shipDirectionRequest = Console.ReadLine();
             }
             shipDirAsNum = int.Parse(shipDirectionRequest);
@@ -39,16 +44,8 @@ namespace BattleShip.UI.Workflow
             ConvertX convertX = new ConvertX();
             Coordinate aCoordinate = convertX.Conversion(userDictionary, coordinateRequested);
 
-            //get ship type
-            string shipTypeRequest = "";
-            int shiptTypeAsNum = 0;
-            while (!int.TryParse(shipTypeRequest, out shiptTypeAsNum))
-            {
-                Console.Write("(3) Please choose a ship type (Destroyer=0, Sumbmarine=1, Cruiser=2, Battleship=3, Carrier=4): ");
-                shipTypeRequest = Console.ReadLine();
-            }
-            shiptTypeAsNum = int.Parse(shipTypeRequest);
-            ShipType shipType = SetShipType(shiptTypeAsNum);
+            
+           
 
             //place ship
             PlaceShipRequest placeShips = new PlaceShipRequest
@@ -58,33 +55,38 @@ namespace BattleShip.UI.Workflow
                 ShipType = shipType
             };
 
-            Console.WriteLine("You placed a {0}!\n", shipType);
-
             return placeShips;
 
         }
 
         public void AllowUserToPlace5Ships(GameBoard gameBoard, PlayerInfo playerInfo)
         {
-            Console.WriteLine("Hello, {0}! Let's place your ships \n\n", playerInfo.UserName);
+            Console.WriteLine("Hello, {0}! Let's place your ships \n", playerInfo.UserName);
             //places ship
-            int counter = 1;
+            int counter = 0;
             //iterates through for all 5 placements
-            while (counter < 6)
+            while (counter < 5)
             {
                 if (counter == 5)
                     Console.WriteLine("-- Place Your Final Ship! -- ");
                 else
-                    Console.WriteLine("-- Place Ship #{0} --", counter);
+                    Console.WriteLine("-- Place Ship #{0} --", counter+1);
 
                 ShipSetUp setUpYourShip = new ShipSetUp(); // acces UI Ship Placement
                 PlaceShipRequest shipRequest = new PlaceShipRequest(); // initiates placeship request business logic
 
                 //assigns user entered ship placeemnt biz logic request using the associated board dictionary
-                shipRequest = setUpYourShip.SetUpShip(gameBoard.BoardDictionary);
+                shipRequest = setUpYourShip.SetUpShip(gameBoard.BoardDictionary,counter);
 
-                //assigns ship request to player1's board
-                playerInfo.MyBoard.PlaceShip(shipRequest);
+                //assigns ship request to player1's board                
+                
+                //PlaceShip method on the Board(biz logic) checks if the PlaceShip is valid
+                if (playerInfo.MyBoard.PlaceShip(shipRequest) != ShipPlacement.Ok )
+                {
+                    Console.WriteLine("\n\t\t****ERROR -- INVALID SHIP PLACEMENT****\n");
+                    counter--;
+                }
+                ;
                 counter++;
             }
 
