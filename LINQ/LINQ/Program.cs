@@ -61,17 +61,17 @@ namespace LINQ
            // Exercise14();
 
             //15. Get all the elements in NumbersC from the beginning until an element is greater or equal to 6.
-            //SKIPPED - Exercise15();
+           //Exercise15();
 
             //16. Return elements starting from the beginning of NumbersC until a number is hit that is less than its position in the array.
-            //SKIPPED - Exercise16();
+            //Exercise16();
 
 
             //17. Return elements from NumbersC starting from the first element divisible by 3.
             //Exercise17();
 
             //18. Order products alphabetically by name.
-            Exercise18();
+            //Exercise18();
 
             //19. Order products by UnitsInStock descending.
            // Exercise19();
@@ -81,6 +81,9 @@ namespace LINQ
 
             //21. Reverse NumbersC.
 //            Exercise21();
+
+            //22. Display the elements of NumbersC grouped by their remainder when divided by 5.
+            //Exercise22();
 
             //23. Display products by Category.
            // Exercise23();
@@ -322,13 +325,31 @@ namespace LINQ
         {
             //15. Get all the elements in NumbersC from the beginning until an element is greater or equal to 6.
             var numC = DataLoader.NumbersC;
-            var results = from nums in numC
-                select nums;
+            var results = numC.TakeWhile(num => num < 6);
+            foreach (var item in results)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         private static void Exercise16()
         {
-            //16. Return elements starting from the beginning of NumbersC until a number is hit that is less than its position in the array.
+            //16. Return elements starting from the beginning of NumbersC 
+            //until a number is hit that is less than its position in the array.
+
+            var numC = DataLoader.NumbersC;
+            var results = numC.TakeWhile((num, index) => num >= index);
+
+            foreach (var item in results)
+            {
+                Console.WriteLine(item);
+            }
+
+/*           var result = numC.Select((index, number) => number < index);
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            } */
         }
 
         private static void Exercise17()
@@ -391,6 +412,25 @@ namespace LINQ
             foreach (var item in result)
             {
                 Console.WriteLine(item);
+            }
+
+        }
+
+        private static void Exercise22()
+        {
+            //22. Display the elements of NumbersC grouped by their remainder when divided by 5.
+            var numC = DataLoader.NumbersC;
+            var results = from num in numC
+                group num by num%5;
+
+            foreach (var item in results)
+            {
+                Console.WriteLine(item.Key);
+
+                foreach (var num in item)
+                {
+                    Console.WriteLine("\t{0}",num);
+                }
             }
 
         }
