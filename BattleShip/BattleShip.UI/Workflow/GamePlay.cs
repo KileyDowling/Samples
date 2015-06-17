@@ -104,7 +104,7 @@ namespace BattleShip.UI.Workflow
             switch (response.ShotStatus)
             {
                 case ShotStatus.Victory:
-                    Console.WriteLine("Victory!");
+                    Console.WriteLine("You win!");
                     break;
 
                 case ShotStatus.HitAndSunk:
@@ -115,10 +115,11 @@ namespace BattleShip.UI.Workflow
                     Console.WriteLine("{0} Hit, Congrats", response.ShipImpacted);
                     break;
                 case ShotStatus.Duplicate:
-                    Console.WriteLine("Duplicate shot, sux2bu");
+                    Console.WriteLine("Duplicate shot try again");
+
                     break;
                 case ShotStatus.Invalid:
-                    Console.WriteLine("Invalid shot, sux2bu");
+                    Console.WriteLine("Invalid shot, try again");
                     break;
                 default:
                     Console.WriteLine("Miss shot, sux2bu");

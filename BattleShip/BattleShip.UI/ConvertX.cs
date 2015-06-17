@@ -26,8 +26,9 @@ namespace BattleShip.UI
 
         public Coordinate Conversion(Dictionary<string, Coordinate> userDictionary, string userInput)
         {
-            
-            Coordinate coordinate = userDictionary[userInput.ToUpper()];
+            string upperCaseFirst = userInput.Substring(0, 1).ToUpper();
+            userInput = upperCaseFirst + userInput.Remove(0, 1);
+            Coordinate coordinate = userDictionary[userInput];
            
             return coordinate;
         }

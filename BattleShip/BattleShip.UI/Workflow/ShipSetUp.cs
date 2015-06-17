@@ -78,7 +78,9 @@ namespace BattleShip.UI.Workflow
                 //assigns ship request to player1's board                
                 
                 //PlaceShip method on the Board(biz logic) checks if the PlaceShip is valid
-                if (playerInfo.MyBoard.PlaceShip(shipRequest) != ShipPlacement.Ok )
+                ShipPlacement placeShipResult = playerInfo.MyBoard.PlaceShip(shipRequest);
+
+                if (placeShipResult != ShipPlacement.Ok )
                 {
                     Console.WriteLine("\n\t\t****ERROR -- INVALID SHIP PLACEMENT****\n");
                     counter--;
