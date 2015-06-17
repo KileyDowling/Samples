@@ -26,15 +26,19 @@ namespace BattleShip.UI.Workflow
                 {
                     var thisCoordinate = new Coordinate(x, y);
                     if (playerInfo.MyBoard.ShotHistory.ContainsKey(thisCoordinate))
-                    { 
+                    {
                         var state = playerInfo.MyBoard.ShotHistory[thisCoordinate];
                         switch (state)
                         {
                             case ShotHistory.Hit:
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write("H ");
+                                Console.ResetColor();
                                 break;
                             case ShotHistory.Miss:
+                                Console.ForegroundColor = ConsoleColor.DarkYellow;
                                 Console.Write("M ");
+                                Console.ResetColor();
                                 break;
                             default:
                                 Console.Write("U ");
@@ -44,41 +48,84 @@ namespace BattleShip.UI.Workflow
                     }
                     else
                     {
-                        Console.Write(" U ");
+                        Console.Write("U ");
                     }
-                    
+
                 }
                 Console.Write("\n");
             }
         }
 
-        public void PlayTheGame(PlayerInfo playerInfo, GameBoard gameBoard)
+        public void PlayTheGame(PlayerInfo player1, PlayerInfo player2, GameBoard gameBoard)
         {
-            Console.WriteLine("\n\t--- PLAYER {0}'s TURN ---", NextTurn(playerInfo.UserTurn));
 
-            //get X & Y
-            Console.WriteLine("\n**Currently Displaying Player {0}'s Board**\n", playerInfo.UserTurn);
-            DisplayBoardDuringGamePlay(playerInfo);
+            FireShotResponse response = new FireShotResponse();
+            int userTurn = 1;
 
-            Console.Write("\nPlayer {0}, Please enter the X & Y coordinate you would like to hit(Ex: A1): ", NextTurn(playerInfo.UserTurn));
-            FireShotResponse response = playerInfo.MyBoard.FireShot(ConvertX.AcceptUserCoordinate(playerInfo, gameBoard));
+            //sets to player2 to start
+            PlayerInfo opponentsTurn = NextPlayersTurn(player1, player2, userTurn);
+            PlayerInfo currentTurn = NextPlayersTurn(player1, player2, opponentsTurn.UserTurn);
 
-            if (response.ShotStatus != ShotStatus.Hit || response.ShotStatus != ShotStatus.HitAndSunk)
+            while (response.ShotStatus != ShotStatus.Victory)
             {
-                Console.WriteLine("Sorry, you did not hit anything");
+                //assigns currentTurn to player1
+                Console.WriteLine("\n\t--- {0}'s TURN ---", currentTurn.UserName.ToUpper());
+
+                //get X & Y
+                Console.WriteLine("\n**Currently Displaying {0}'s Board**\n", opponentsTurn.UserName);
+
+                DisplayBoardDuringGamePlay(opponentsTurn);
+
+                Console.Write("\nPlayer {0}, Please enter the X & Y coordinate you would like to hit(Ex: A1): ",
+                   currentTurn.UserName);
+
+                response = opponentsTurn.MyBoard.FireShot(ConvertX.AcceptUserCoordinate(opponentsTurn, gameBoard));
+                Responses(response);
+
+                opponentsTurn = NextPlayersTurn(player1, player2, opponentsTurn.UserTurn);
+                currentTurn = NextPlayersTurn(player1, player2, currentTurn.UserTurn);
+                Console.WriteLine("It's now {0}'s turn. Press enter to continue", currentTurn.UserName);
+                Console.ReadLine();
+                Console.Clear();
             }
-            
         }
 
-        public int NextTurn(int playersTurn)
+        public PlayerInfo NextPlayersTurn(PlayerInfo player1, PlayerInfo player2, int userTurn)
         {
-            int result = 0;
-
-            if (playersTurn == 1)
-                 result = 2;
+            if (userTurn == 1)
+                return player2;
             else
-                 result = 1;
-            return result;
+                return player1;
+        }
+
+
+        public void Responses(FireShotResponse response)
+        {
+            switch (response.ShotStatus)
+            {
+                case ShotStatus.Victory:
+                    Console.WriteLine("Victory!");
+                    break;
+
+                case ShotStatus.HitAndSunk:
+                    Console.WriteLine("{0} Hit & Sunk, Congrats", response.ShipImpacted);
+                    break;
+
+                case ShotStatus.Hit:
+                    Console.WriteLine("{0} Hit, Congrats", response.ShipImpacted);
+                    break;
+                case ShotStatus.Duplicate:
+                    Console.WriteLine("Duplicate shot, sux2bu");
+                    break;
+                case ShotStatus.Invalid:
+                    Console.WriteLine("Invalid shot, sux2bu");
+                    break;
+                default:
+                    Console.WriteLine("Miss shot, sux2bu");
+                    break;
+            }
+
+
         }
 
     }

@@ -67,10 +67,7 @@ namespace BattleShip.UI.Workflow
             //iterates through for all 5 placements
             while (counter < 5)
             {
-                if (counter == 5)
-                    Console.WriteLine("-- Place Your Final Ship! -- ");
-                else
-                    Console.WriteLine("-- Place Ship #{0} --", counter+1);
+                    Console.WriteLine("\n-- Place Ship #{0}", counter+1);
 
                 ShipSetUp setUpYourShip = new ShipSetUp(); // acces UI Ship Placement
                 PlaceShipRequest shipRequest = new PlaceShipRequest(); // initiates placeship request business logic
