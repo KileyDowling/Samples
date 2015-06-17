@@ -151,21 +151,7 @@ namespace BattleShip.UI.Workflow
         }
 
 
-        public int NextTurn(int userTurn)
-        {
-            int result = 0;
-
-            if (userTurn == 1)
-            {
-                result = 2;
-            }
-            else
-            {
-                result = 1;
-            }
-            return result;
-        }
-
+       
 
     }
 }

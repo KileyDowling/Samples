@@ -26,7 +26,7 @@ namespace BattleShip.UI
             player1.UserTurn = 1;
             player2.UserTurn = 2;
 
-            //assign userName
+          //assign userName
             player1.UserName = menu.Execute(player1.UserTurn);
             player2.UserName = menu.Execute(player2.UserTurn);
 
@@ -34,7 +34,7 @@ namespace BattleShip.UI
             GameBoard player1GameBoard = new GameBoard();
             GameBoard player2GameBoard = new GameBoard();
 
-            //allow users to place ships -- player1
+         //allow users to place ships -- player1
             player1GameBoard.PrintGameBoard();
             ShipSetUp setUpShips = new ShipSetUp();
             setUpShips.AllowUserToPlace5Ships(player1GameBoard,player1);
@@ -42,6 +42,10 @@ namespace BattleShip.UI
             //allow users to place ships -- player2
             player2GameBoard.PrintGameBoard();
             setUpShips.AllowUserToPlace5Ships(player2GameBoard,player2);
+        
+ 
+            GamePlay playGame = new GamePlay();
+            playGame.PlayTheGame(player1, player1GameBoard);
             Console.ReadLine();
 
 
