@@ -26,7 +26,7 @@ namespace LINQ
             // Exercise2();
 
             //3. Find all customers in Washington, print their name then their orders. (Region == "WA")
-            //Exercise3();
+           // Exercise3();
 
             //4. Create a new sequence with just the names of the products.
            // Exercise4();
@@ -86,9 +86,28 @@ namespace LINQ
             //Exercise22();
 
             //23. Display products by Category.
-           // Exercise23();
+           //Exercise23();
 
+            //24. Group customer orders by year, then by month.
+           // SKIPPED -- Exercise24();
 
+            
+            //25. Create a list of unique product category names.
+            //Exercise25();
+            
+
+            //26. Get a list of unique values from NumbersA and NumbersB.
+            //Exercise26();
+
+            //27. Get a list of the shared values from NumbersA and NumbersB.
+
+            //28. Get a list of values in NumbersA that are not also in NumbersB.
+
+            //29. Select only the first product with ProductID = 12 (not a list).
+
+            //30. Write code to check if ProductID 789 exists.
+
+            //31. Get a list of categories that have at least one product out of stock.
 
             //32. Determine if NumbersB contains only numbers less than 9.
             //Exercise32();
@@ -136,7 +155,11 @@ namespace LINQ
 
             foreach (var cust in results)
             {
-                Console.WriteLine("ID: {0} \t Region: {1}", cust.CustomerID, cust.Region);
+                Console.WriteLine("ID: {0} \t Region: {1}", cust.CompanyName, cust.Region);
+                foreach (var order in cust.Orders)
+                {
+                    Console.WriteLine("{0}", order.OrderID);
+                }
             }
         }
 
@@ -446,6 +469,86 @@ namespace LINQ
             }
         }
 
+        //private static void Exercise24()
+        //{
+        //    var customers = DataLoader.LoadCustomers();
+        //    var results = from cust in customers
+        //        from orders in cust.Orders
+        //        group orders by orders.OrderDate.Year
+        //        into orderMonth from ;
+
+        //    foreach (var order in results)
+        //    {
+        //            Console.WriteLine(order.Key);
+        //        foreach (var month in order)
+        //        {
+        //            Console.WriteLine("M: {0}",month.OrderDate.Month);
+        //        }
+               
+                
+              
+        //    }
+
+
+        //} 
+
+        public static void Exercise25()
+        {
+            //25. Create a list of unique product category names.   
+            var products = DataLoader.LoadProducts();
+            var results = from product in products
+                group product by product.Category;
+            var toList = results.ToList();
+            foreach (var item in toList)
+            {
+                Console.WriteLine(item.Key);
+            }
+
+        }
+
+        public static void Exercise26()
+        {
+            //26. Get a list of unique values from NumbersA and NumbersB.
+            //public static int[] NumbersA = { 0, 2, 4, 5, 6, 8, 9 };
+            //public static int[] NumbersB = { 1, 3, 5, 7, 8 };
+            var numA = DataLoader.NumbersA;
+            var numB = DataLoader.NumbersB;
+            var result = numA.Concat(numB).ToArray();
+            var checkDistinct = result.Select(x => x).Except(numA);
+            var checkDistinct2 = result.Select(x => x).Except(numB);
+            var joinDistrinct = checkDistinct2.Concat(checkDistinct).ToArray();
+            foreach (var item in joinDistrinct)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        public static void Exercise27()
+        {
+            //27. Get a list of the shared values from NumbersA and NumbersB.
+        }
+
+
+        public static void Exercise28()
+        {
+            //28. Get a list of values in NumbersA that are not also in NumbersB.
+        }
+
+        public static void Exercise29()
+        {
+            //29. Select only the first product with ProductID = 12 (not a list).
+        }
+
+        public static void Exercise30()
+        {
+            //30. Write code to check if ProductID 789 exists.
+        }
+
+        public static void Exercise31()
+        {
+            //31. Get a list of categories that have at least one product out of stock.
+        }
+
         private static void Exercise32()
         {
             //32. Determine if NumbersB contains only numbers less than 9.
@@ -454,6 +557,11 @@ namespace LINQ
                 Console.WriteLine(result==0);
         }
 
+        public static void Exercise33()
+        {
+            //33. Get a grouped a list of products only for categories that have all of their products in stock.
+
+        }
         private static void Exercise34()
         {
             //34. Count the number of odds in NumbersA.
@@ -462,5 +570,7 @@ namespace LINQ
             Console.WriteLine(result);
 
         }
+
+       
     }
 }
