@@ -116,8 +116,8 @@ namespace BattleShip.UI.Workflow
                     break;
                 case ShotStatus.Duplicate:
                     Console.WriteLine("Duplicate shot try again");
-
                     break;
+
                 case ShotStatus.Invalid:
                     Console.WriteLine("Invalid shot, try again");
                     break;

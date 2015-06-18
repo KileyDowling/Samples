@@ -19,41 +19,41 @@ namespace TicTacToe.UI
 			
 			GamePlay game = new GamePlay();
 			PlayerMoves playerMoves = new PlayerMoves();
-		    UserInfo userInfo = new UserInfo
-		    {
-		        UserOne = GetUserInfo.RequestUser(1),
-                UserTwo = GetUserInfo.RequestUser(2)
-		    };
+			UserNames userName = new UserNames
+			{
+				UserOne = GetUserInfo.RequestUser(1),
+				UserTwo = GetUserInfo.RequestUser(2)
+			};
 
-		    string playerOneMarker = playerMoves.GetPlayersMarker(playersTurn);
-		    string playerTwoMarker = playerMoves.GetPlayersMarker(game.NextPlayersTurn(playersTurn));
+			string playerOneMarker = playerMoves.GetPlayersMarker(playersTurn);
+			string playerTwoMarker = playerMoves.GetPlayersMarker(game.NextPlayersTurn(playersTurn));
 
 
 			DisplayBoard.DisplayGameBoard();
 			
-            while (!gameOver)
-            {
-                bool validChoice = false;
-                string playersUserName = "";
+			while (!gameOver)
+			{
+				bool validChoice = false;
+				string playersUserName = "";
 
-                playersUserName= playerMoves.GetPlayersUserName(playersTurn, userInfo.UserOne, userInfo.UserTwo);
-             
+				playersUserName= playerMoves.GetPlayersUserName(playersTurn, userName.UserOne, userName.UserTwo);
+			 
 				string userInput = playerMoves.RequestPlayerMove(playersTurn, playersUserName);
 
 				validChoice = DisplayBoard.UpdateGameBoard(userInput, playersTurn);
 				gameOver = game.KeepPlaying(playersTurn, playerOneMarker,playerTwoMarker);
 
-                if (!gameOver && validChoice)
-                    playersTurn = game.NextPlayersTurn(playersTurn);
-                else
-                {
-                    string notify = "";
-                    notify = NotifyWinOrTie.Notify(game.WonOrTie(playersTurn, playerOneMarker, playerTwoMarker),
-                        playersUserName);
-                    Console.WriteLine(notify);
-                }
+				if (!gameOver && validChoice)
+					playersTurn = game.NextPlayersTurn(playersTurn);
+				else
+				{
+					string notify = "";
+					notify = NotifyWinOrTie.Notify(game.WonOrTie(playersTurn, playerOneMarker, playerTwoMarker),
+						playersUserName);
+					Console.WriteLine(notify);
+				}
 
-            }
+			}
 
 			Console.ReadLine();
 		}
@@ -90,5 +90,5 @@ Requirements
 *This should be built with a Console project to serve as our UI, a Class Library to serve as the game logic,
 and a Class Library to serve as our unit tests for the game logic. */
 
-    }
+	}
 }
