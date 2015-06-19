@@ -107,6 +107,20 @@ namespace SGBank.BLL
             return response;
         }
 
+        public Response<Account> CreateAccount(CreateAccountRequest request)
+        {
+            var response = new Response<Account>();
+            var newAccount = request.Account;
+
+            var repo = new AccountRepository();         
+            repo.CreateAccount(newAccount);
+            response.Success = true;
+            response.Data = newAccount;
+
+            return response;
+
+        } 
+
        
 
     }

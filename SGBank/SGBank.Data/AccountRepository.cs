@@ -74,5 +74,43 @@ namespace SGBank.Data
                 }
             }
         }
+
+        public void CreateAccount(Account accountToAdd)
+        {
+            var allAccounts = GetAllAcounts();
+
+            accountToAdd.AccountNumber = CreateNewAccountNumber();
+            accountToAdd.Balance = accountToAdd.Balance;
+            accountToAdd.FirstName = accountToAdd.FirstName;
+            accountToAdd.LastName = accountToAdd.LastName;
+
+            allAccounts.Add(accountToAdd);
+
+            OverwriteFile(allAccounts);
+
+        }
+
+        private string CreateNewAccountNumber()
+        {
+            var reader = File.ReadAllLines(FilePath);
+            string newAccountNumber;
+            int accountNum;
+            int numberofaccounts = 0;
+
+            for (int i = 1; i < reader.Length; i++)
+            {
+                var columns = reader[i].Split(',');
+                //access the first column [0], account number
+                //find the last row in columns, add one to that number
+
+                numberofaccounts += 1;
+            }
+
+            accountNum = numberofaccounts + 1;
+            newAccountNumber = accountNum.ToString();
+            return newAccountNumber;
+        }
+
+
     }
 }

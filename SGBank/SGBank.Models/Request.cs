@@ -24,4 +24,10 @@ namespace SGBank.Models
         public decimal TransferAmount { get; set; }
         public Account AccountFrom { get; set; }
     }
+
+    public class CreateAccountRequest
+    {
+        public Account Account { get; set; } 
+
+    }
 }
