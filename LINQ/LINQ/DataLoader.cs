@@ -17,7 +17,7 @@ namespace LINQ
                 _productList =
                     new List<Product>
                     {
-#region "Lots of instantiation"
+#region "Lots of instantiation"un
                         new Product
                         {
                             ProductID = 1,
