@@ -119,35 +119,6 @@ namespace SGBank.BLL
 
             return response;
 
-        }
-
-        public Response<Account> DeleteAccount(DeleteAccountRequest request)
-        {
-            var response = new Response<Account>();
-            var accountToDelete = request.Account;
-
-            try
-            {
-                
-                if (accountToDelete == null)
-                {
-                    response.Success = false;
-                    response.Message = "Account Not Found!";
-                }
-                else
-                {
-                    var repo = new AccountRepository();
-                    repo.DeleteAccount(accountToDelete);
-                    response.Success = true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = ex.Message;
-            }
-            return response;
         } 
 
        

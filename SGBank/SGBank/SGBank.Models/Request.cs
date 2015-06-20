@@ -30,9 +30,4 @@ namespace SGBank.Models
         public Account Account { get; set; } 
 
     }
-
-    public class DeleteAccountRequest
-    {
-        public Account Account { get; set; }
-    }
 }

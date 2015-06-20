@@ -40,8 +40,7 @@ namespace SGBank.UI.Workflows
                     createMenu.Execute();
                     break;
                 case "2":
-                    var deleteMenu = new DeleteAccount();
-                    deleteMenu.Execute();
+                    // Delete Account
                     break;
                 case "3":
                     var lookupMenu = new LookupMenu();

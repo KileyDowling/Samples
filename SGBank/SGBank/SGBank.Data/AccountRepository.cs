@@ -111,18 +111,6 @@ namespace SGBank.Data
             return newAccountNumber;
         }
 
-        public void DeleteAccount(Account accountToDelete)
-        {
-            List<Account> allAccounts = GetAllAcounts();
-
-            
-            var account = allAccounts.First(a => a.AccountNumber == accountToDelete.AccountNumber);
-            allAccounts.Remove(account);
-
-            OverwriteFile(allAccounts);
-
-        }
-
 
     }
 }
