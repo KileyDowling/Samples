@@ -57,6 +57,12 @@ namespace SGFlooringCorp.UI.Workflows
                 PrintOrderDetails(response);
                 UserInteractions.PressKeyToContinue();
             }
+
+            else
+            {
+                Console.WriteLine(response.Message);
+                UserInteractions.PressKeyToContinue();
+            }
         }
 
         //public void DisplayOrderInformation(string Date)

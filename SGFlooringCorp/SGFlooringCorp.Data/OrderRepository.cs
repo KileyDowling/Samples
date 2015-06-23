@@ -11,8 +11,6 @@ namespace SGFlooringCorp.Data
 {
     public class OrderRepository
     {
-        private string _filePath="";
-        //need to assign filepath variable string returned from GetFile();
 
        public string CreateFilePath(string orderDate)
        {

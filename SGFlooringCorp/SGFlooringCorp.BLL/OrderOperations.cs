@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SGFlooringCorp.Data;
 using SGFlooringCorp.Models;
+using System.IO;
 
 
 namespace SGFlooringCorp.BLL
@@ -53,7 +54,7 @@ namespace SGFlooringCorp.BLL
             try
             {
                 var orderFilePath = repo.CreateFilePath(filePathWithDate);
-                if (orderFilePath == null)
+                if (!File.Exists(orderFilePath))
                 {
                     response.Success = false;
                     response.Message = "Order date not found";
