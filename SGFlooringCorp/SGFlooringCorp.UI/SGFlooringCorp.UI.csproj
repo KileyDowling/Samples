@@ -68,9 +68,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataFiles\Orders_01132015.txt" />
-    <Content Include="DataFiles\Orders_02242015.txt" />
-    <Content Include="DataFiles\Orders_06012015.txt" />
+    <Content Include="DataFiles\Orders_01132015.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataFiles\Orders_02242015.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DataFiles\Orders_06012015.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="DataFiles\Products.txt" />
     <Content Include="DataFiles\Taxes.txt" />
   </ItemGroup>

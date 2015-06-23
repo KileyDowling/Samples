@@ -12,15 +12,67 @@ namespace SGFlooringCorp.BLL
 {
     public class OrderOperations
     {
-        public Response<Order> GetOrder(string Date, string OrderNumber)
+        public Response<List<Order>> GetAllOrders(string orderDate)
         {
-            var repo = new OrderRepository();
+            var response = new Response<List<Order>>();
+            var validFile = GetFile(orderDate);
 
             try
             {
+                if (validFile.Success)
+                {
+                    string filePath = validFile.Data;
+                    var repo = new OrderRepository();
+                    response.Data = repo.GetAllOrders(filePath);
+                    response.Success = true;
 
-                //var order = repo.GetOrderRepository();
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = "Order date not found";
+                }
+
             }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public Response<string> GetFile(string filePathWithDate)
+        {
+            var repo = new OrderRepository();
+
+            //not 100% sure what type of response is needed
+            var response = new Response<string>();
+
+            try
+            {
+                var orderFilePath = repo.CreateFilePath(filePathWithDate);
+                if (orderFilePath == null)
+                {
+                    response.Success = false;
+                    response.Message = "Order date not found";
+                }
+                else
+                {
+                    response.Success = true;
+                    response.Data = orderFilePath;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
         }
     }
+
+
 }

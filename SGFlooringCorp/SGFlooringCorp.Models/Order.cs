@@ -8,7 +8,7 @@ namespace SGFlooringCorp.Models
 {
     public class Order
     {
-        public string OrderDate { get; set; }
+        //public string OrderDate { get; set; }
         public string OrderNumber { get; set; }
         public string CustomerName { get; set; }
         public string State { get; set; }
@@ -24,4 +24,6 @@ namespace SGFlooringCorp.Models
         public decimal TotalTax { get; set; }
         public decimal Total  { get; set; }
     }
+
+    
 }

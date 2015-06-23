@@ -11,36 +11,24 @@ namespace SGFlooringCorp.Data
 {
     public class OrderRepository
     {
-        private string _filePath = "";
+        private string _filePath="";
         //need to assign filepath variable string returned from GetFile();
 
-       public string GetFile(string orderDate)
+       public string CreateFilePath(string orderDate)
        {
-           DateTime dateOfFile = DateTime.Parse(orderDate);
-           string fileWithDateName = "Orders_";
-           fileWithDateName+= dateOfFile.ToString("MMDDYYYY");
+           string fileWithDateName = @"DataFiles\Orders_";
+           fileWithDateName+= orderDate;
            fileWithDateName += ".txt";
 
            return fileWithDateName;
-           
+          
        }
 
-        public Order GetOrder(string date, string orderNumber)
-        {
-            List<Order> allOrders = GetAllOrders();
-            foreach (var order in allOrders)
-            {
-                if (order.OrderNumber == orderNumber)
-                    return order;
-            }
-            return null;
-        }
-
-        private List<Order> GetAllOrders()
+        public List<Order> GetAllOrders(string fileName)
         {
             List<Order> orders = new List<Order>();
 
-            var reader = File.ReadAllLines(_filePath);
+            var reader = File.ReadAllLines(fileName);
 
             for (int i = 1; i < reader.Length; i++)
             {
