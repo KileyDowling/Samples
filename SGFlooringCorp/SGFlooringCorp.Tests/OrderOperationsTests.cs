@@ -11,22 +11,41 @@ namespace SGFlooringCorp.Tests
 {
     [TestFixture]
    public class OrderOperationsTests
-    {
+   {
+       [Test]
+       public void FoundFileSuccess()
+       {
+           var ops = new OrderOperations();
+           var response = ops.GetFile("01132015");
+           Assert.IsTrue(response.Success);
+       }
+
+
+       [Test]
+       public void FoundFileFailure()
+       {
+           var ops = new OrderOperations();
+           var response = ops.GetFile("02020202");
+           Assert.IsFalse(response.Success);
+
+       }
+
         [Test]
-        public void FoundFileSuccess()
+       public void GetAllOrdersSuccess()
+       {
+           var ops = new OrderOperations();
+           var response = ops.GetAllOrders("01132015");
+           Assert.IsTrue(response.Success);
+
+       }
+
+        [Test]
+        public void GetAllOrdersFailure()
         {
             var ops = new OrderOperations();
-            var response = ops.GetFile("01132015");
-            Assert.IsTrue(response.Success);
+            var response = ops.GetAllOrders("02020202");
+            Assert.IsFalse(response.Success);
 
         }
-
-        [Test]
-        public void GetAllOrdersSuccess()
-        {
-            var ops = new OrderOperations();
-            var response = ops.GetAllOrders("01132015");
-            Assert.IsTrue(response.Success);
-        }
-    }
+   }
 }
