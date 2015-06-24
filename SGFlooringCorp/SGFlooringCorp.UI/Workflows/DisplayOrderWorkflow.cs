@@ -57,7 +57,6 @@ namespace SGFlooringCorp.UI.Workflows
                 PrintOrderDetails(response);
                 UserInteractions.PressKeyToContinue();
             }
-
             else
             {
                 Console.WriteLine(response.Message);

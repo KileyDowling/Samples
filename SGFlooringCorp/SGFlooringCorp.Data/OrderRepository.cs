@@ -11,7 +11,6 @@ namespace SGFlooringCorp.Data
 {
     public class OrderRepository
     {
-
        public string CreateFilePath(string orderDate)
        {
            string fileWithDateName = @"DataFiles\Orders_";
@@ -19,7 +18,6 @@ namespace SGFlooringCorp.Data
            fileWithDateName += ".txt";
 
            return fileWithDateName;
-          
        }
 
         public List<Order> GetAllOrders(string fileName)
@@ -52,6 +50,27 @@ namespace SGFlooringCorp.Data
                 orders.Add(order);
         }
             return orders;
+        }
+
+        public List<Order> RemoveOrder(OrderRequest orderToDeleteRequest)
+        {
+            string orderDate = orderToDeleteRequest.OrderDate.ToString("mmddyyyy");
+            var orders = GetAllOrders(orderDate);
+
+            if (orders != null)
+            {
+                var orderToReplace = orders.FirstOrDefault(x => x.OrderNumber == orderToDeleteRequest.Order.OrderNumber);
+                orders.Remove(orderToReplace);
+                //TODO: delete the file if there are no more orders
+            }
+
+            OverWriteFile(orders, orderDate);
+            return orders;
+        }
+
+        private void OverWriteFile(List<Order> orders, string orderDate)
+        {
+            throw new NotImplementedException();
         }
 
 

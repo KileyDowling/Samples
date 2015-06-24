@@ -73,6 +73,76 @@ namespace SGFlooringCorp.BLL
 
             return response;
         }
+
+        //not if this returns something, since it creates a new file in the DataFiles folder
+
+        public void CreateFile(string dateToday)
+        {
+            var repo = new OrderRepository();
+            //var response = new Response<string>();
+
+            //try
+            //{
+            var orderFilePath = repo.CreateFilePath(dateToday);
+            //FileStream fs = File.Create(orderFilePath);
+
+            if (!File.Exists(orderFilePath))
+            {
+                /*Do what we need to do to create a new file*/
+                using (StreamWriter sw = File.CreateText(orderFilePath))
+                {
+                    sw.WriteLine("OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LborCostPerSquareFoot,MaterialCost,TotalTax,Total");
+                    sw.Close();
+                }
+
+
+            }
+
+            //using (var writer = File.CreateText(orderFilePath))
+            //{
+            //    writer.WriteLine("OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LborCostPerSquareFoot,MaterialCost,TotalTax,Total");
+
+            //}
+
+
+            //}
+            //    else
+            //    {
+            //        /*we open that file and write a new order onto that*/
+            //    }
+            //catch (Exception )
+            //    {
+
+            //    }
+            //}
+        }
+
+        public Response<Order> DeleteOrder(OrderRequest request)
+        {
+            var response = new Response<Order>();
+            var orderRepo = new OrderRepository();
+
+            try
+            {
+                var orders = orderRepo.RemoveOrder(request);
+                if (orders != null)
+                {
+                    response.Success = true;
+                    response.Message = "Order successfully deleted!";
+
+                }
+            }
+
+
+
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
     }
 
 
