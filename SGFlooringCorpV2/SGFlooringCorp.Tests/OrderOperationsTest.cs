@@ -29,7 +29,7 @@ namespace SGFlooringCorp.Tests
         public void CanCreateFilePath()
         {
             var repo = new OrderRepository();
-            var fileName = repo.CreateFilePath(new DateTime(2015, 24, 02));
+            var fileName = repo.GenerateFilePathString(new DateTime(2015, 24, 02));
             Assert.AreEqual(@"DataFiles\Orders_01012015.txt", fileName);
         }
 

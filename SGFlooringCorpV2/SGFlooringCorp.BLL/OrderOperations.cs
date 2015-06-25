@@ -51,7 +51,7 @@ namespace SGFlooringCorp.BLL
 
             try
             {
-                var orderFilePath = repo.CreateFilePath(orderDate);
+                var orderFilePath = repo.GenerateFilePathString(orderDate);
                 if (!File.Exists(orderFilePath))
                 {
                     response.Success = false;
@@ -73,11 +73,28 @@ namespace SGFlooringCorp.BLL
         }
 
 
-        public void CreateFile(string dateToday)
+        public Response<List<Order>> CreateFile(OrderRequest orderToAddRequest)
         {
+            var response = new Response<List<Order>>();
+            var repo = new OrderRepository();
+            response.Data = repo.AddOrder(orderToAddRequest);
 
 
+            try
+            {
+                if (response.Data != null)
+                {
+                    response.Success = true;
+                    response.Message = "Order added";
+                }
 
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
         }
 
         public Response<Order> DeleteOrder(OrderRequest request)

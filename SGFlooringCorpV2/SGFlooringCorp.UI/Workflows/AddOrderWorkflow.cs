@@ -14,12 +14,21 @@ namespace SGFlooringCorp.UI.Workflows
         public void Execute()
         {
             var request = new OrderRequest();
-            GenerateOrderInformation(request);
+            request = GenerateOrderInformation(request);
+            SaveOrderInformation(request);
+
+
             UserInteractions.PressKeyToContinue();
 
         }
 
-        public void GenerateOrderInformation(OrderRequest request)
+        public void SaveOrderInformation(OrderRequest request)
+        {
+            var ops = new OrderOperations();
+            ops.CreateFile(request);
+        }
+
+        public OrderRequest GenerateOrderInformation(OrderRequest request)
         {
             request.OrderDate = DateTime.Today;
             Console.WriteLine("Order Date: {0}",request.OrderDate.ToString("D"));
@@ -38,10 +47,8 @@ namespace SGFlooringCorp.UI.Workflows
             Console.WriteLine("Please enter the area");
             request.Order.Area =decimal.Parse(Console.ReadLine());
 
-            return;
-
-
-
+            return request;
+            
         }
     }
 }

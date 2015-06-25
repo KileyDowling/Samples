@@ -11,7 +11,7 @@ namespace SGFlooringCorp.Data
 {
 	public class OrderRepository
 	{
-	   public string CreateFilePath(DateTime orderDate)
+	   public string GenerateFilePathString(DateTime orderDate)
 	   {
 		   string fileWithDateName = @"DataFiles\Orders_";
 		   fileWithDateName+= orderDate.ToString("mmddyyyy");
@@ -24,39 +24,44 @@ namespace SGFlooringCorp.Data
 		{
 			List<Order> orders = new List<Order>();
 
-		    string orderFilePath = CreateFilePath(orderDate);
+			string orderFilePath = GenerateFilePathString(orderDate);
 
-			var reader = File.ReadAllLines(orderFilePath);
-
-			for (int i = 1; i < reader.Length; i++)
+			if (File.Exists(orderFilePath))
 			{
-				var columns = reader[i].Split(',');
+				var reader = File.ReadAllLines(orderFilePath);
 
-				var order = new Order();
-				//OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,
-				//MaterialCost,TotalLaborCost,TotalTax,Total
-				
-				order.OrderNumber = columns[0];
-				order.CustomerName = columns[1];
-				order.State = columns[2];
-				order.TaxRate = decimal.Parse(columns[3]);
-				order.ProductType = columns[4];
-				order.Area = decimal.Parse(columns[5]);
-				order.CostPerSquareFoot = decimal.Parse(columns[6]);
-				order.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
-				order.MaterialCost = decimal.Parse(columns[8]);
-				order.TotalLaborCost = decimal.Parse(columns[9]);
-				order.TotalTax = decimal.Parse(columns[10]);
-				order.Total = decimal.Parse(columns[11]);            
-				
-				orders.Add(order);
-		}
-			return orders;
+				for (int i = 1; i < reader.Length; i++)
+				{
+					var columns = reader[i].Split(',');
+
+					var order = new Order();
+					//OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,
+					//MaterialCost,TotalLaborCost,TotalTax,Total
+
+					order.OrderNumber = columns[0];
+					order.CustomerName = columns[1];
+					order.State = columns[2];
+					order.TaxRate = decimal.Parse(columns[3]);
+					order.ProductType = columns[4];
+					order.Area = decimal.Parse(columns[5]);
+					order.CostPerSquareFoot = decimal.Parse(columns[6]);
+					order.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
+					order.MaterialCost = decimal.Parse(columns[8]);
+					order.TotalLaborCost = decimal.Parse(columns[9]);
+					order.TotalTax = decimal.Parse(columns[10]);
+					order.Total = decimal.Parse(columns[11]);
+
+					orders.Add(order);
+				}		    
+				return orders;
+
+			}
+			return null;
 		}
 
 		public List<Order> AddOrder(OrderRequest orderToAddRequest)
 		{
-			var orderDateString = orderToAddRequest.OrderDate.ToString("mmddyyyy");
+			
 			var orders = GetAllOrders(orderToAddRequest.OrderDate);
 
 			if (orders == null)
@@ -88,7 +93,7 @@ namespace SGFlooringCorp.Data
 
 		private void OverWriteFile(List<Order> orders, DateTime orderDate)
 		{
-			var filePath = CreateFilePath(orderDate);
+			var filePath = GenerateFilePathString(orderDate);
 
 			if (File.Exists(filePath))
 			{
