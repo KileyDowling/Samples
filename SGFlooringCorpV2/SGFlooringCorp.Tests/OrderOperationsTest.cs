@@ -15,7 +15,7 @@ namespace SGFlooringCorp.Tests
         public void CanLoadOrders()
         {
             var repo = new OrderRepository();
-            var orders = repo.GetAllOrders(@"DataFiles\Orders_01132015.txt");
+            var orders = repo.GetAllOrders(new DateTime(2015, 24, 02));
             var customerName = orders.Where(x => x.OrderNumber == "3").Select(y => y.CustomerName);
             var orderNumber = orders.Where(x => x.OrderNumber == "3").Select(y => y.OrderNumber);
 
@@ -29,7 +29,7 @@ namespace SGFlooringCorp.Tests
         public void CanCreateFilePath()
         {
             var repo = new OrderRepository();
-            var fileName = repo.CreateFilePath("01012015");
+            var fileName = repo.CreateFilePath(new DateTime(2015, 24, 02));
             Assert.AreEqual(@"DataFiles\Orders_01012015.txt", fileName);
         }
 

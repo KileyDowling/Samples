@@ -11,20 +11,22 @@ namespace SGFlooringCorp.Data
 {
 	public class OrderRepository
 	{
-	   public string CreateFilePath(string orderDate)
+	   public string CreateFilePath(DateTime orderDate)
 	   {
 		   string fileWithDateName = @"DataFiles\Orders_";
-		   fileWithDateName+= orderDate;
+		   fileWithDateName+= orderDate.ToString("mmddyyyy");
 		   fileWithDateName += ".txt";
 
 		   return fileWithDateName;
 	   }
 
-		public List<Order> GetAllOrders(string fileName)
+		public List<Order> GetAllOrders(DateTime orderDate)
 		{
 			List<Order> orders = new List<Order>();
 
-			var reader = File.ReadAllLines(fileName);
+		    string orderFilePath = CreateFilePath(orderDate);
+
+			var reader = File.ReadAllLines(orderFilePath);
 
 			for (int i = 1; i < reader.Length; i++)
 			{
@@ -55,7 +57,7 @@ namespace SGFlooringCorp.Data
 		public List<Order> AddOrder(OrderRequest orderToAddRequest)
 		{
 			var orderDateString = orderToAddRequest.OrderDate.ToString("mmddyyyy");
-			var orders = GetAllOrders(orderDateString);
+			var orders = GetAllOrders(orderToAddRequest.OrderDate);
 
 			if (orders == null)
 			{
@@ -63,7 +65,7 @@ namespace SGFlooringCorp.Data
 			}
 
 			orders.Add(orderToAddRequest.Order);
-			OverWriteFile(orders,orderDateString);
+			OverWriteFile(orders,orderToAddRequest.OrderDate);
 
 			return orders;
 		}
@@ -71,7 +73,7 @@ namespace SGFlooringCorp.Data
 		public List<Order> RemoveOrder(OrderRequest orderToDeleteRequest)
 		{
 			string orderDate = orderToDeleteRequest.OrderDate.ToString("mmddyyyy");
-			var orders = GetAllOrders(orderDate);
+			var orders = GetAllOrders(orderToDeleteRequest.OrderDate);
 
 			if (orders != null)
 			{
@@ -80,11 +82,11 @@ namespace SGFlooringCorp.Data
 				//TODO: delete the file if there are no more orders
 			}
 
-			OverWriteFile(orders, orderDate);
+			OverWriteFile(orders, orderToDeleteRequest.OrderDate);
 			return orders;
 		}
 
-		private void OverWriteFile(List<Order> orders, string orderDate)
+		private void OverWriteFile(List<Order> orders, DateTime orderDate)
 		{
 			var filePath = CreateFilePath(orderDate);
 

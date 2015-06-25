@@ -16,7 +16,7 @@ namespace SGFlooringCorp.Tests
         public void FoundFileSuccess()
         {
             var ops = new OrderOperations();
-            var response = ops.GetFile("01132015");
+            var response = ops.GetFile(new DateTime(2015, 24, 02));
             Assert.IsTrue(response.Success);
         }
 
@@ -25,7 +25,7 @@ namespace SGFlooringCorp.Tests
         public void FoundFileFailure()
         {
             var ops = new OrderOperations();
-            var response = ops.GetFile("02020202");
+            var response = ops.GetFile(new DateTime(2015, 02, 02));
             Assert.IsFalse(response.Success);
 
         }
@@ -34,7 +34,7 @@ namespace SGFlooringCorp.Tests
         public void GetAllOrdersSuccess()
         {
             var ops = new OrderOperations();
-            var response = ops.GetAllOrders("01132015");
+            var response = ops.GetAllOrders(new DateTime(2015, 24, 02));
             Assert.IsTrue(response.Success);
 
         }
@@ -43,7 +43,7 @@ namespace SGFlooringCorp.Tests
         public void GetAllOrdersFailure()
         {
             var ops = new OrderOperations();
-            var response = ops.GetAllOrders("02020202");
+            var response = ops.GetAllOrders(new DateTime(2015, 04, 02));
             Assert.IsFalse(response.Success);
 
         }

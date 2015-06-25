@@ -13,32 +13,32 @@ namespace SGFlooringCorp.UI.Workflows
     {
         public void Execute()
         {
+            var request = new OrderRequest();
+            GenerateOrderInformation(request);
+            UserInteractions.PressKeyToContinue();
 
         }
 
-        public OrderRequest GenerateOrderInformation(OrderRequest request)
+        public void GenerateOrderInformation(OrderRequest request)
         {
             request.OrderDate = DateTime.Today;
+            Console.WriteLine("Order Date: {0}",request.OrderDate.ToString("D"));
+            request.Order = new Order();
 
             //need to create an order number generator in BLL
-            request.Order.OrderNumber ="1";
+            request.Order.OrderNumber ="10";
 
             //user requested
-            request.Order.CustomerName = UserInteractions.GetRequiredStringFromUser();
-            request.Order.State = UserInteractions.GetStateAbbreviation();
-            request.Order.ProductType = "";
-            request.Order.Area = 0;
+            Console.WriteLine("Please enter your name");
+            request.Order.CustomerName = Console.ReadLine();
+            Console.WriteLine("Please enter your state");
+            request.Order.State = Console.ReadLine();
+            Console.WriteLine("Please enter your product type");
+            request.Order.ProductType = Console.ReadLine();
+            Console.WriteLine("Please enter the area");
+            request.Order.Area =decimal.Parse(Console.ReadLine());
 
-            //develop access to taxrates, etc.
-            request.Order.TotalTax = 0;
-            request.Order.CostPerSquareFoot = 0;
-            request.Order.LaborCostPerSquareFoot = 0;
-            request.Order.TotalLaborCost = 0;
-            request.Order.MaterialCost = 0;
-            request.Order.Total = 0;
-
-
-            return request;
+            return;
 
 
 

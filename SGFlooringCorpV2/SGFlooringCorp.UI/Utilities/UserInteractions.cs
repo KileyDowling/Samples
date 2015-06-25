@@ -21,7 +21,7 @@ namespace SGFlooringCorp.UI.Utilities
             return input;
         }
 
-        public static string GetDateFromUser()
+        public static DateTime GetDateFromUser()
         {
             do
             {
@@ -29,11 +29,11 @@ namespace SGFlooringCorp.UI.Utilities
                 Console.WriteLine("Enter the date of the order you wish to look up ");
                 Console.Write("in this format(MMDDYYYY): ");
                 string input = Console.ReadLine();
-                int thisDate;
+                DateTime thisDate;
 
-                if (int.TryParse(input, out thisDate))
+                if (DateTime.TryParse(input, out thisDate))
                 {
-                    return input;
+                    return thisDate;
                 }
 
                 Console.WriteLine("That was not a valid date.  Press any key to continue...");
@@ -48,10 +48,7 @@ namespace SGFlooringCorp.UI.Utilities
             return request;
         }
 
-        internal static string GetStateAbbreviation()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 
 

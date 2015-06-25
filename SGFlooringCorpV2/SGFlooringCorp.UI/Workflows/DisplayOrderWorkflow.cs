@@ -19,17 +19,17 @@ namespace SGFlooringCorp.UI.Workflows
 
         public void Execute()
         {
-            string date = UserInteractions.GetDateFromUser();
+            DateTime date = UserInteractions.GetDateFromUser();
 
             DisplayAllOrdersForTheDay(date);
         }
 
        
 
-        public void DisplayAllOrdersForTheDay(string date)
+        public void DisplayAllOrdersForTheDay(DateTime orderDate)
         {
             var ops = new OrderOperations();
-            var response = ops.GetAllOrders(date);
+            var response = ops.GetAllOrders(orderDate);
 
             Console.Clear();
             if (response.Success)

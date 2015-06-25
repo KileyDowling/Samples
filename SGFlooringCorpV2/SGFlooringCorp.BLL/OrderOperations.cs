@@ -13,7 +13,7 @@ namespace SGFlooringCorp.BLL
 {
     public class OrderOperations
     {
-        public Response<List<Order>> GetAllOrders(string orderDate)
+        public Response<List<Order>> GetAllOrders(DateTime orderDate)
         {
             var response = new Response<List<Order>>();
             var validFile = GetFile(orderDate);
@@ -22,9 +22,8 @@ namespace SGFlooringCorp.BLL
             {
                 if (validFile.Success)
                 {
-                    string filePath = validFile.Data;
                     var repo = new OrderRepository();
-                    response.Data = repo.GetAllOrders(filePath);
+                    response.Data = repo.GetAllOrders(orderDate);
                     response.Success = true;
 
                 }
@@ -44,7 +43,7 @@ namespace SGFlooringCorp.BLL
             return response;
         }
 
-        public Response<string> GetFile(string filePathWithDate)
+        public Response<string> GetFile(DateTime orderDate)
         {
             var repo = new OrderRepository();
 
@@ -52,7 +51,7 @@ namespace SGFlooringCorp.BLL
 
             try
             {
-                var orderFilePath = repo.CreateFilePath(filePathWithDate);
+                var orderFilePath = repo.CreateFilePath(orderDate);
                 if (!File.Exists(orderFilePath))
                 {
                     response.Success = false;
