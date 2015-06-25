@@ -79,8 +79,7 @@ namespace SGFlooringCorp.BLL
 
             return response;
         }
-
-
+        
         public Response<List<Order>> CreateFile(OrderRequest orderToAddRequest)
         {
             var response = new Response<List<Order>>();
@@ -129,6 +128,34 @@ namespace SGFlooringCorp.BLL
 
             return response;
         }
+
+        public Response<Order> GetSelectedOrder(OrderRequest selectedOrder)
+        {
+            var response = new Response<Order>();
+            var orderRepo = new OrderRepository();
+            Order order =  orderRepo.GetOrder(selectedOrder);
+            if (order != null)
+            {
+                response.Success = true;
+                response.Data = order;
+            }
+
+            return response;
+        }
+
+        public Response<Order> EditSelectedOrder(OrderRequest selecteOrder, OrderRequest editedOrderRequest)
+        {
+
+            //should be using display orders to get all 
+            var selectedOrderResponse = GetSelectedOrder(selecteOrder);
+            var repo = new OrderRepository();
+            var response = new Response<Order>();
+            response.Data = repo.EditOrder(selecteOrder, editedOrderRequest);
+            response.Success = true;
+            return response;
+        }
+
+
     }
 
 

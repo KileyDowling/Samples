@@ -34,7 +34,7 @@ namespace SGFlooringCorp.UI.Workflows
 
         public void RemoveOrder(OrderRequest request)
         {
-            var ops = OperationsFactory.RemoveOrderOperations();
+            var ops = OperationsFactory.EditOrderOperations();
             var response = ops.DeleteOrder(request);
 
             Console.Clear();
