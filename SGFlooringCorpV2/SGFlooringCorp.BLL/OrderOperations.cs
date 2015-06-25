@@ -7,13 +7,21 @@ using System.Threading.Tasks;
 using SGFlooringCorp.Data;
 using SGFlooringCorp.Models;
 using System.IO;
+using SGFlooringCorp.Models.Interfaces;
 
 
 namespace SGFlooringCorp.BLL
 {
     public class OrderOperations
     {
-        public Response<List<Order>> GetAllOrders(DateTime orderDate)
+        private IOrderRepository _orderRepo;
+
+        public OrderOperations(IOrderRepository myRepo)
+        {
+            _orderRepo = myRepo;
+        }
+
+        public Response<List<Order>> ListAll(DateTime orderDate)
         {
             var response = new Response<List<Order>>();
             var validFile = GetFile(orderDate);
@@ -23,7 +31,7 @@ namespace SGFlooringCorp.BLL
                 if (validFile.Success)
                 {
                     var repo = new OrderRepository();
-                    response.Data = repo.GetAllOrders(orderDate);
+                    response.Data = repo.ListAll(orderDate);
                     response.Success = true;
 
                 }
@@ -77,7 +85,7 @@ namespace SGFlooringCorp.BLL
         {
             var response = new Response<List<Order>>();
             var repo = new OrderRepository();
-            response.Data = repo.AddOrder(orderToAddRequest);
+            repo.Add(orderToAddRequest);
 
 
             try

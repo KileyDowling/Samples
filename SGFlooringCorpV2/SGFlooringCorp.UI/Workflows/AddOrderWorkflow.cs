@@ -24,7 +24,7 @@ namespace SGFlooringCorp.UI.Workflows
 
         public void SaveOrderInformation(OrderRequest request)
         {
-            var ops = new OrderOperations();
+            var ops = OperationsFactory.DisplayOrderOperations();
             ops.CreateFile(request);
         }
 
@@ -41,7 +41,7 @@ namespace SGFlooringCorp.UI.Workflows
             Console.WriteLine("Please enter your name");
             request.Order.CustomerName = Console.ReadLine();
             Console.WriteLine("Please enter your state");
-            request.Order.State = Console.ReadLine();
+            request.Order.StateAbbreviation = Console.ReadLine();
             Console.WriteLine("Please enter your product type");
             request.Order.ProductType = Console.ReadLine();
             Console.WriteLine("Please enter the area");

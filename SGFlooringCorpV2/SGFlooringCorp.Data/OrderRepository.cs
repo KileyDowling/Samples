@@ -6,10 +6,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using SGFlooringCorp.Models;
+using SGFlooringCorp.Models.Interfaces;
 
 namespace SGFlooringCorp.Data
 {
-	public class OrderRepository
+	public class OrderRepository : IOrderRepository
 	{
 	   public string GenerateFilePathString(DateTime orderDate)
 	   {
@@ -20,7 +21,7 @@ namespace SGFlooringCorp.Data
 		   return fileWithDateName;
 	   }
 
-		public List<Order> GetAllOrders(DateTime orderDate)
+		public List<Order> ListAll(DateTime orderDate)
 		{
 			List<Order> orders = new List<Order>();
 
@@ -40,7 +41,7 @@ namespace SGFlooringCorp.Data
 
 					order.OrderNumber = columns[0];
 					order.CustomerName = columns[1];
-					order.State = columns[2];
+					order.StateAbbreviation = columns[2];
 					order.TaxRate = decimal.Parse(columns[3]);
 					order.ProductType = columns[4];
 					order.Area = decimal.Parse(columns[5]);
@@ -59,10 +60,10 @@ namespace SGFlooringCorp.Data
 			return null;
 		}
 
-		public List<Order> AddOrder(OrderRequest orderToAddRequest)
+		public void Add(OrderRequest orderToAddRequest)
 		{
 			
-			var orders = GetAllOrders(orderToAddRequest.OrderDate);
+			var orders = ListAll(orderToAddRequest.OrderDate);
 
 			if (orders == null)
 			{
@@ -72,12 +73,11 @@ namespace SGFlooringCorp.Data
 			orders.Add(orderToAddRequest.Order);
 			OverWriteFile(orders,orderToAddRequest.OrderDate);
 
-			return orders;
 		}
 
 		public List<Order> RemoveOrder(OrderRequest orderToDeleteRequest)
 		{
-			var orders = GetAllOrders(orderToDeleteRequest.OrderDate);
+			var orders = ListAll(orderToDeleteRequest.OrderDate);
 
 			if (orders != null)
 			{
@@ -108,7 +108,7 @@ namespace SGFlooringCorp.Data
 					writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}",
 						order.OrderNumber,
 						order.CustomerName,
-						order.State,
+						order.StateAbbreviation,
 						order.TaxRate,
 						order.ProductType,
 						order.Area,

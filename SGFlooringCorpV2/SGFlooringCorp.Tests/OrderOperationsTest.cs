@@ -15,7 +15,7 @@ namespace SGFlooringCorp.Tests
         public void CanLoadOrders()
         {
             var repo = new OrderRepository();
-            var orders = repo.GetAllOrders(new DateTime(2015, 24, 02));
+            var orders = repo.ListAll(new DateTime(2015, 24, 02));
             var customerName = orders.Where(x => x.OrderNumber == "3").Select(y => y.CustomerName);
             var orderNumber = orders.Where(x => x.OrderNumber == "3").Select(y => y.OrderNumber);
 

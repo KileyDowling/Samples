@@ -11,7 +11,7 @@ namespace SGFlooringCorp.Models
         //public string OrderDate { get; set; }
         public string OrderNumber { get; set; }
         public string CustomerName { get; set; }
-        public string State { get; set; }
+        public string StateAbbreviation { get; set; }
         public decimal TaxRate  { get; set; }
         public string ProductType  { get; set; }
 
