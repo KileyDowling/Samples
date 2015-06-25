@@ -14,7 +14,7 @@ namespace SGFlooringCorp.Data
 	   public string GenerateFilePathString(DateTime orderDate)
 	   {
 		   string fileWithDateName = @"DataFiles\Orders_";
-		   fileWithDateName+= orderDate.ToString("mmddyyyy");
+	       fileWithDateName += orderDate.ToString("MMddyyyy");
 		   fileWithDateName += ".txt";
 
 		   return fileWithDateName;
@@ -77,7 +77,6 @@ namespace SGFlooringCorp.Data
 
 		public List<Order> RemoveOrder(OrderRequest orderToDeleteRequest)
 		{
-			string orderDate = orderToDeleteRequest.OrderDate.ToString("mmddyyyy");
 			var orders = GetAllOrders(orderToDeleteRequest.OrderDate);
 
 			if (orders != null)

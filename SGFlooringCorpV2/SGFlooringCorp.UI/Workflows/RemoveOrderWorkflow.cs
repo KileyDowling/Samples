@@ -13,9 +13,23 @@ namespace SGFlooringCorp.UI.Workflows
     {
         public void Execute()
         {
-            var orderRequest = UserInteractions.PromptForValidOrder();
+            var request = new OrderRequest();
+            request = OrderToRemoveInformation();
+            RemoveOrder(request);
 
+        }
 
+        public OrderRequest OrderToRemoveInformation()
+        {
+            var request = new OrderRequest();
+            Console.WriteLine("Please enter an order date");
+            DateTime orderDate = UserInteractions.GetDateFromUser();
+            request.OrderDate = orderDate;
+            request.Order = new Order();
+            Console.WriteLine("Please enter an order number");
+            request.Order.OrderNumber = Console.ReadLine();
+
+            return request;
         }
 
         public void RemoveOrder(OrderRequest request)

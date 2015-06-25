@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,11 +30,11 @@ namespace SGFlooringCorp.UI.Utilities
                 Console.WriteLine("Enter the date of the order you wish to look up ");
                 Console.Write("in this format(MMDDYYYY): ");
                 string input = Console.ReadLine();
-                DateTime thisDate;
+                DateTime thisDate = DateTime.Parse(input);
 
                 if (DateTime.TryParse(input, out thisDate))
                 {
-                    return thisDate;
+                    return DateTime.Parse(input);
                 }
 
                 Console.WriteLine("That was not a valid date.  Press any key to continue...");
