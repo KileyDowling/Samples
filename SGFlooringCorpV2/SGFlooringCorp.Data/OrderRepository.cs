@@ -94,7 +94,7 @@ namespace SGFlooringCorp.Data
             return orders;
         }
 
-        private void OverWriteFile(List<Order> orders, DateTime orderDate)
+        public void OverWriteFile(List<Order> orders, DateTime orderDate)
         {
             var filePath = GenerateFilePathString(orderDate);
 
