@@ -83,7 +83,6 @@ namespace SGFlooringCorp.BLL
         public Response<Order> CreateOrder(OrderRequest orderToAddRequest)
         {
             var response = new Response<Order>();
-            var repo = new OrderRepository();
             try
             {
                 var orders = _orderRepo.ListAll(orderToAddRequest.OrderDate);
@@ -98,6 +97,9 @@ namespace SGFlooringCorp.BLL
                 orderToAddRequest.Order.OrderNumber = orderNumber;
 
                 _orderRepo.Add(orderToAddRequest);
+
+                response.Success = true;
+                response.Data = orderToAddRequest.Order;
 
 
             }
@@ -153,6 +155,7 @@ namespace SGFlooringCorp.BLL
 
             //should be using display orders to get all 
             var selectedOrderResponse = GetSelectedOrder(selecteOrder);
+            selecteOrder.Order = selectedOrderResponse.Data;
             var repo = new OrderRepository();
             var response = new Response<Order>();
             response.Data = repo.EditOrder(selecteOrder, editedOrderRequest);

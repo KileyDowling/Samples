@@ -134,7 +134,7 @@ namespace SGFlooringCorp.Data
             return selectedOrder;
         }
 
-        public Order EditOrder(OrderRequest updatedOrderRequest, OrderRequest previousOrderRequest)
+        public Order EditOrder(OrderRequest previousOrderRequest,OrderRequest updatedOrderRequest)
         {
            RemoveOrder(previousOrderRequest);
             Add(updatedOrderRequest);

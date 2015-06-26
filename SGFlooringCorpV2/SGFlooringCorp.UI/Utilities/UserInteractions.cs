@@ -19,6 +19,12 @@ namespace SGFlooringCorp.UI.Utilities
         public static string GetRequiredStringFromUser()
         {
             string input ="";
+            bool validInput = false;
+
+            do
+            {
+                
+            } while (!validInput);
             return input;
         }
 
