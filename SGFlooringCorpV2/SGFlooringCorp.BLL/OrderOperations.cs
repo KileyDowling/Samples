@@ -79,7 +79,7 @@ namespace SGFlooringCorp.BLL
 
             return response;
         }
-        
+
         public Response<Order> CreateOrder(OrderRequest orderToAddRequest)
         {
             var response = new Response<Order>();
@@ -116,15 +116,23 @@ namespace SGFlooringCorp.BLL
             var response = new Response<Order>();
             var orderRepo = new OrderRepository();
 
+            var listAll = orderRepo.ListAll(request.OrderDate);
+
             try
             {
-                var orders = orderRepo.RemoveOrder(request);
-                if (orders != null)
-                {
+                if (listAll.Count > 0)
+                { 
+                    orderRepo.RemoveOrder(request);
                     response.Success = true;
                     response.Message = "Order successfully deleted!";
-
                 }
+                else
+                {
+
+                    response.Success = false;
+                    response.Message = "Order date not found";
+                }
+                
             }
 
             catch (Exception ex)
@@ -140,11 +148,16 @@ namespace SGFlooringCorp.BLL
         {
             var response = new Response<Order>();
             var orderRepo = new OrderRepository();
-            Order order =  orderRepo.GetOrder(selectedOrder);
-            if (order != null)
+            Order order = orderRepo.GetOrder(selectedOrder);
+            if (order !=null)
             {
                 response.Success = true;
                 response.Data = order;
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = "Order not found";
             }
 
             return response;
@@ -152,19 +165,39 @@ namespace SGFlooringCorp.BLL
 
         public Response<Order> EditSelectedOrder(OrderRequest selecteOrder, OrderRequest editedOrderRequest)
         {
-
-            //should be using display orders to get all 
-            var selectedOrderResponse = GetSelectedOrder(selecteOrder);
-            selecteOrder.Order = selectedOrderResponse.Data;
-            var repo = new OrderRepository();
             var response = new Response<Order>();
-            response.Data = repo.EditOrder(selecteOrder, editedOrderRequest);
-            response.Success = true;
+            
+            var selectedOrderResponse = GetSelectedOrder(selecteOrder);
+            if (!selectedOrderResponse.Success)
+            {
+                response.Message = selectedOrderResponse.Message;
+                return response;
+
+            }
+            else
+            {
+                try
+                {
+
+                    if (selectedOrderResponse.Success)
+                    {
+                        selecteOrder.Order = selectedOrderResponse.Data;
+                        var repo = new OrderRepository();
+                        response.Data = repo.EditOrder(selecteOrder, editedOrderRequest);
+
+                        response.Success = true;
+                        return response;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    response.Success = false;
+                    response.Message = ex.Message;
+                }
+            }
+          
             return response;
         }
-
-
     }
-
-
 }

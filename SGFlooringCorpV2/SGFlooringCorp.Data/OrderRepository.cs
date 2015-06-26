@@ -12,14 +12,14 @@ namespace SGFlooringCorp.Data
 {
     public class OrderRepository : IOrderRepository
     {
-       public string GenerateFilePathString(DateTime orderDate)
-       {
-           string fileWithDateName = @"DataFiles\Orders_";
-           fileWithDateName += orderDate.ToString("MMddyyyy");
-           fileWithDateName += ".txt";
+        public string GenerateFilePathString(DateTime orderDate)
+        {
+            string fileWithDateName = @"DataFiles\Orders_";
+            fileWithDateName += orderDate.ToString("MMddyyyy");
+            fileWithDateName += ".txt";
 
-           return fileWithDateName;
-       }
+            return fileWithDateName;
+        }
 
         public List<Order> ListAll(DateTime orderDate)
         {
@@ -53,7 +53,7 @@ namespace SGFlooringCorp.Data
                     order.Total = decimal.Parse(columns[11]);
 
                     orders.Add(order);
-                }		    
+                }
                 return orders;
 
             }
@@ -62,7 +62,7 @@ namespace SGFlooringCorp.Data
 
         public void Add(OrderRequest orderToAddRequest)
         {
-            
+
             var orders = ListAll(orderToAddRequest.OrderDate);
 
             if (orders == null)
@@ -71,7 +71,7 @@ namespace SGFlooringCorp.Data
             }
 
             orders.Add(orderToAddRequest.Order);
-            OverWriteFile(orders,orderToAddRequest.OrderDate);
+            OverWriteFile(orders, orderToAddRequest.OrderDate);
 
         }
 
@@ -79,13 +79,17 @@ namespace SGFlooringCorp.Data
         {
             var orders = ListAll(orderToDeleteRequest.OrderDate);
 
-            if (orders != null)
+            if (orders.Count != 0)
             {
                 var orderToReplace = orders.FirstOrDefault(x => x.OrderNumber == orderToDeleteRequest.Order.OrderNumber);
                 orders.Remove(orderToReplace);
                 //TODO: delete the file if there are no more orders
             }
 
+            else
+            {
+                orders = null;
+            }
             OverWriteFile(orders, orderToDeleteRequest.OrderDate);
             return orders;
         }
@@ -119,24 +123,36 @@ namespace SGFlooringCorp.Data
                         order.TotalTax,
                         order.Total);
                 }
-    
-         
-    
+
+
+
 
             }
-    }
+        }
 
         public Order GetOrder(OrderRequest orderRequest)
         {
             var orders = ListAll(orderRequest.OrderDate);
-            var selectedOrder =	 orders.First(x => x.OrderNumber == orderRequest.Order.OrderNumber);
+            try
+            {
+                if (orders != null)
+                {
+                    var selectedOrder = orders.First(x => x.OrderNumber == orderRequest.Order.OrderNumber);
+                    return selectedOrder;
 
-            return selectedOrder;
+                }
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            return null;
         }
 
-        public Order EditOrder(OrderRequest previousOrderRequest,OrderRequest updatedOrderRequest)
+        public Order EditOrder(OrderRequest previousOrderRequest, OrderRequest updatedOrderRequest)
         {
-           RemoveOrder(previousOrderRequest);
+            RemoveOrder(previousOrderRequest);
             Add(updatedOrderRequest);
             var order = GetOrder(updatedOrderRequest);
             return order;
