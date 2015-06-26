@@ -28,7 +28,7 @@ namespace SGFlooringCorp.UI.Workflows
 
         public void DisplayAllOrdersForTheDay(DateTime orderDate)
         {
-            var ops = OperationsFactory.DisplayOrderOperations();
+            var ops = OperationsFactory.CreateOrderOperations();
             var response = ops.ListAll(orderDate);
 
             Console.Clear();
@@ -54,9 +54,12 @@ namespace SGFlooringCorp.UI.Workflows
                 Console.Write("{0}, ", item.CustomerName);
                 Console.Write("{0}, ", item.ProductType);
                 Console.Write("{0}, ", item.StateAbbreviation);
-                Console.Write("{0}, ", item.TaxRate);
-                Console.Write("{0}, ", item.Area);
-                Console.Write("{0} \n\n", item.Total);
+                Console.Write("{0:C}, ", item.TaxRate);
+                Console.Write("{0:0.##}, ", item.Area);
+                Console.Write("{0:C}, ", item.MaterialCost);
+                Console.Write("{0:C}, ", item.TotalLaborCost);
+                Console.Write("{0:C}, ", item.TotalTax);
+                Console.Write("{0:C}, \n\n", item.Total);
                 
             }
         }

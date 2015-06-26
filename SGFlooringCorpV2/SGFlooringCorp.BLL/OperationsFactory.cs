@@ -35,38 +35,6 @@ namespace SGFlooringCorp.BLL
             }
         }
 
-        public static OrderOperations DisplayOrderOperations()
-        {
-            if (mode == "Test")
-                return new OrderOperations(new OrderRepository());
-            else
-            {
-                //return new TaxOperations(new OrderRepository());
-                throw new Exception("Prod repository not yet implemented");
-            }
-        }
-
-        public static OrderOperations RemoveOrderOperations()
-        {
-            if (mode == "Test")
-                return new OrderOperations(new OrderRepository());
-            else
-            {
-                //return new TaxOperations(new OrderRepository());
-                throw new Exception("Prod repository not yet implemented");
-            }
-        }
-        public static OrderOperations EditOrderOperations()
-        {
-            if (mode == "Test")
-                return new OrderOperations(new OrderRepository());
-            else
-            {
-                //return new TaxOperations(new OrderRepository());
-                throw new Exception("Prod repository not yet implemented");
-            }
-        }
-
         public static ProductOperations CreateProductOperations()
         {
             if (mode == "Test")

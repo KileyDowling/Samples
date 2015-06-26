@@ -16,8 +16,8 @@ namespace SGFlooringCorp.Tests
         {
             var repo = new OrderRepository();
             var orders = repo.ListAll(new DateTime(2015, 24, 02));
-            var customerName = orders.Where(x => x.OrderNumber == "3").Select(y => y.CustomerName);
-            var orderNumber = orders.Where(x => x.OrderNumber == "3").Select(y => y.OrderNumber);
+            var customerName = orders.Where(x => x.OrderNumber == 3).Select(y => y.CustomerName);
+            var orderNumber = orders.Where(x => x.OrderNumber == 3).Select(y => y.OrderNumber);
 
 
             Assert.AreEqual(5, orders.Count);

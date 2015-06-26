@@ -9,7 +9,7 @@ namespace SGFlooringCorp.Models
     public class Order
     {
         //public string OrderDate { get; set; }
-        public string OrderNumber { get; set; }
+        public int OrderNumber { get; set; }
         public string CustomerName { get; set; }
         public string StateAbbreviation { get; set; }
         public decimal TaxRate  { get; set; }

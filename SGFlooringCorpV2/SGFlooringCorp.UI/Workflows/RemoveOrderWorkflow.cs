@@ -27,14 +27,14 @@ namespace SGFlooringCorp.UI.Workflows
             request.OrderDate = orderDate;
             request.Order = new Order();
             Console.WriteLine("Please enter an order number");
-            request.Order.OrderNumber = Console.ReadLine();
+            request.Order.OrderNumber = int.Parse(Console.ReadLine());
 
             return request;
         }
 
         public void RemoveOrder(OrderRequest request)
         {
-            var ops = OperationsFactory.EditOrderOperations();
+            var ops = OperationsFactory. CreateOrderOperations();
             var response = ops.DeleteOrder(request);
 
             Console.Clear();

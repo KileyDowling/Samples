@@ -39,7 +39,7 @@ namespace SGFlooringCorp.Data
                     //OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,
                     //MaterialCost,TotalLaborCost,TotalTax,Total
 
-                    order.OrderNumber = columns[0];
+                    order.OrderNumber = int.Parse(columns[0]);
                     order.CustomerName = columns[1];
                     order.StateAbbreviation = columns[2];
                     order.TaxRate = decimal.Parse(columns[3]);

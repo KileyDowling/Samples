@@ -80,20 +80,25 @@ namespace SGFlooringCorp.BLL
             return response;
         }
         
-        public Response<List<Order>> CreateFile(OrderRequest orderToAddRequest)
+        public Response<Order> CreateOrder(OrderRequest orderToAddRequest)
         {
-            var response = new Response<List<Order>>();
+            var response = new Response<Order>();
             var repo = new OrderRepository();
-            repo.Add(orderToAddRequest);
-
-
             try
             {
-                if (response.Data != null)
-                {
-                    response.Success = true;
-                    response.Message = "Order added";
-                }
+                var orders = _orderRepo.ListAll(orderToAddRequest.OrderDate);
+
+                int orderNumber = 0;
+
+                if (orders != null)
+                    orderNumber = orders.Max(o => o.OrderNumber);
+
+                orderNumber++;
+
+                orderToAddRequest.Order.OrderNumber = orderNumber;
+
+                _orderRepo.Add(orderToAddRequest);
+
 
             }
             catch (Exception ex)

@@ -37,6 +37,23 @@ namespace SGFlooringCorp.BLL
             return allStates.Any(s => s.StateAbbreviation == stateAbbreviation);
         }
 
-
+        public Response<Order> GetTax(OrderRequest orderRequest)
+        {
+            var response = new Response<Order>();
+            
+            bool validState = IsValidState(orderRequest.Order.StateAbbreviation);
+            if (validState)
+            {
+                orderRequest.Order.TaxRate = GetRate(orderRequest.Order.StateAbbreviation);
+                response.Success = true;
+                response.Data = orderRequest.Order;
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = "Invalid state entered";
+            }
+            return response;
+        }
     }
 }
