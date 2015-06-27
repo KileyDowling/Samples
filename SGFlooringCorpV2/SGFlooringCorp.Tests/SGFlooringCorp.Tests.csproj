@@ -46,6 +46,7 @@
     <Compile Include="OrderRepositoryTests.cs" />
     <Compile Include="ProductOperationsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaxOperationsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
