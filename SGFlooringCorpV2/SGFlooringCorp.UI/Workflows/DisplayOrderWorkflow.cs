@@ -15,10 +15,11 @@ namespace SGFlooringCorp.UI.Workflows
 {
     class DisplayOrderWorkflow
     {
-        private List<Order> _currentOrder = new List<Order>();
+        private Response<List<Order>> _currentOrder = new Response<List<Order>>();
 
         public void Execute()
         {
+            Screens.ShowRequestDateForOrder();
             DateTime date = UserInteractions.GetDateFromUser();
 
             DisplayAllOrdersForTheDay(date);
@@ -30,39 +31,23 @@ namespace SGFlooringCorp.UI.Workflows
         {
             var ops = OperationsFactory.CreateOrderOperations();
             var response = ops.ListAll(orderDate);
+            _currentOrder = response;
+
 
             Console.Clear();
             if (response.Success)
             {
-                _currentOrder = response.Data;
-                PrintOrderDetails(response);
+                Screens.ShowListOfOrders(_currentOrder, orderDate);
                 UserInteractions.PressKeyToContinue();
             }
             else
             {
-                Console.WriteLine(response.Message);
+               Screens.ShowDisplayOrdersFailed(_currentOrder, orderDate);
                 UserInteractions.PressKeyToContinue();
             }
         }
 
-        
-        private void PrintOrderDetails(Response<List<Order>> response)
-        {
-            foreach (var item in response.Data)
-            {
-                Console.Write("Order #{0}: ", item.OrderNumber);
-                Console.Write("{0}, ", item.CustomerName);
-                Console.Write("{0}, ", item.ProductType);
-                Console.Write("{0}, ", item.StateAbbreviation);
-                Console.Write("{0:C}, ", item.TaxRate);
-                Console.Write("{0:0.##}, ", item.Area);
-                Console.Write("{0:C}, ", item.MaterialCost);
-                Console.Write("{0:C}, ", item.TotalLaborCost);
-                Console.Write("{0:C}, ", item.TotalTax);
-                Console.Write("{0:C}, \n\n", item.Total);
-                
-            }
-        }
+       
        
     }
 }

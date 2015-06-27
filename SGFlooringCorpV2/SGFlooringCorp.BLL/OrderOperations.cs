@@ -117,11 +117,14 @@ namespace SGFlooringCorp.BLL
             var orderRepo = new OrderRepository();
 
             var listAll = orderRepo.ListAll(request.OrderDate);
+            var orderInformation = listAll.First(x => x.OrderNumber == request.Order.OrderNumber);
+
 
             try
             {
                 if (listAll.Count > 0)
-                { 
+                {
+                    response.Data = orderInformation;
                     orderRepo.RemoveOrder(request);
                     response.Success = true;
                     response.Message = "Order successfully deleted!";

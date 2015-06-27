@@ -14,8 +14,13 @@ namespace SGFlooringCorp.UI.Workflows
         public void Execute()
         {
             var request = new OrderRequest();
+            Screens.ShowRemoveAnOrder();
             request = OrderToRemoveInformation();
-            RemoveOrder(request);
+            var response = RemoveOrder(request);
+            Screens.ShowConfirmRemoveOrder(response.Data);
+            UserInteractions.PressKeyToContinue();
+            Screens.ShowRemoveOrderConfirmation(response.Data);
+            UserInteractions.PressKeyToContinue();
 
         }
 
@@ -32,22 +37,14 @@ namespace SGFlooringCorp.UI.Workflows
             return request;
         }
 
-        public void RemoveOrder(OrderRequest request)
+        public Response<Order> RemoveOrder(OrderRequest request)
         {
-            var ops = OperationsFactory. CreateOrderOperations();
+            var ops = OperationsFactory.CreateOrderOperations();
             var response = ops.DeleteOrder(request);
 
             Console.Clear();
-            if (response.Success)
-            {
-                Console.WriteLine(response.Message);
-                UserInteractions.PressKeyToContinue();
-            }
-            else
-            {
-                Console.WriteLine(response.Message);
-                UserInteractions.PressKeyToContinue();
-            }
+
+            return response;
         }
     }
 }

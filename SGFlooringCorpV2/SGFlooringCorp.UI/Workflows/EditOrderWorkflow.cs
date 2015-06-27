@@ -13,9 +13,6 @@ namespace SGFlooringCorp.UI.Workflows
     {
         public void Execute()
         {
-            //get orderDate from user
-            //get orderNumber from user
-            //display only that order to user using PrintOrderDetails
             OrderRequest newOrderRequest = new OrderRequest();
             OrderOperations ops = OperationsFactory.CreateOrderOperations();
 
@@ -51,19 +48,28 @@ namespace SGFlooringCorp.UI.Workflows
 
         }
 
+
         public OrderRequest MakeEdits(OrderRequest oldOrderRequest)
         {
             Console.WriteLine("Please input a new customer name ({0})", oldOrderRequest.Order.CustomerName);
-            oldOrderRequest.Order.CustomerName = Console.ReadLine();
+            var input = Console.ReadLine();
+            if (!String.IsNullOrEmpty(input))
+                oldOrderRequest.Order.CustomerName = input;
 
             Console.WriteLine("Please input the state abbreviation ({0})", oldOrderRequest.Order.StateAbbreviation);
-            oldOrderRequest.Order.StateAbbreviation = Console.ReadLine();
+            input = Console.ReadLine();
+            if (!String.IsNullOrEmpty(input))
+                oldOrderRequest.Order.StateAbbreviation = input;
 
             Console.WriteLine("Please input the product type ({0})", oldOrderRequest.Order.ProductType);
-            oldOrderRequest.Order.ProductType = Console.ReadLine();
+            input = Console.ReadLine();
+            if (!String.IsNullOrEmpty(input))
+                oldOrderRequest.Order.ProductType= input;
 
             Console.WriteLine("Please input the area ({0})", oldOrderRequest.Order.Area);
-            oldOrderRequest.Order.Area = decimal.Parse(Console.ReadLine());
+             input = Console.ReadLine();
+            if (!String.IsNullOrEmpty(input))
+                oldOrderRequest.Order.Area = decimal.Parse(input);
 
             return oldOrderRequest;
         }

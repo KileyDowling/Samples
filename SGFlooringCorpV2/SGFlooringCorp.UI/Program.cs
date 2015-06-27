@@ -12,8 +12,8 @@ namespace SGFlooringCorp.UI
     {
         static void Main(string[] args)
         {
-            var mainMenu = new MainMenu();
-            mainMenu.Execute(); 
+            MenuWorkflow menu = new MenuWorkflow();
+            menu.Execute();
         }
     }
 }

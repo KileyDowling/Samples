@@ -43,11 +43,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Screens.cs" />
     <Compile Include="Utilities\UserInteractions.cs" />
     <Compile Include="Workflows\AddOrderWorkflow.cs" />
     <Compile Include="Workflows\DisplayOrderWorkflow.cs" />
     <Compile Include="Workflows\EditOrderWorkflow.cs" />
-    <Compile Include="Workflows\MainMenu.cs" />
+    <Compile Include="Workflows\MenuWorkflow.cs" />
     <Compile Include="Workflows\RemoveOrderWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>

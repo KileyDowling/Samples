@@ -14,21 +14,23 @@ namespace SGFlooringCorp.UI.Workflows
         public void Execute()
         {
             var request = new OrderRequest();
+            Screens.ShowAddOrder();
             request = GenerateOrderInformation(request);
             request = GetTaxRate(request);
             request = UpdateCosts(request);
-            SaveOrderInformation(request);
-            PrintOrderDetails(request);
+           var response = SaveOrderInformation(request);
+            Screens.ShowAddOrderConfirmation(response.Data);
 
 
             UserInteractions.PressKeyToContinue();
 
         }
 
-        public void SaveOrderInformation(OrderRequest request)
+        public Response<Order> SaveOrderInformation(OrderRequest request)
         {
             var ops = OperationsFactory.CreateOrderOperations();
             var response = ops.CreateOrder(request);
+            return response;
 
         }
 
@@ -76,22 +78,7 @@ namespace SGFlooringCorp.UI.Workflows
 
         }
 
-        private void PrintOrderDetails(OrderRequest orderRequest)
-        {
-            Console.Clear();
-            Console.WriteLine("********** ORDER SUMMARY **********");
-            Console.WriteLine("Order #{0}: ", orderRequest.Order.OrderNumber);
-            Console.WriteLine("\tCustomer Name: {0}", orderRequest.Order.CustomerName);
-            Console.WriteLine("\tProduct Type: {0}", orderRequest.Order.ProductType);
-            Console.WriteLine("\tState: {0}", orderRequest.Order.StateAbbreviation);
-            Console.WriteLine("\tTax Rate: {0:C}", orderRequest.Order.TaxRate);
-            Console.WriteLine("\tArea: {0}", orderRequest.Order.Area);
-            Console.WriteLine("\tLabor Cost: {0:C}", orderRequest.Order.TotalLaborCost);
-            Console.WriteLine("\tMaterial Cost: {0:C}", orderRequest.Order.MaterialCost);
-            Console.WriteLine("\tTotal Tax: {0:C}", orderRequest.Order.TotalTax);
-            Console.WriteLine("\t\tTotal: {0:C} \n\n", orderRequest.Order.Total);
-
-        }
+     
 
        
     }

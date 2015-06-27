@@ -15,7 +15,7 @@ namespace SGFlooringCorp.Data
         {
             List<StateTax> stateTaxes = new List<StateTax>();
 
-          const string FilePath = @"DataFiles\Taxes";
+          const string FilePath = @"DataFiles\Taxes.txt";
             if(File.Exists(FilePath))
             {
                 var reader = File.ReadAllLines(FilePath);
