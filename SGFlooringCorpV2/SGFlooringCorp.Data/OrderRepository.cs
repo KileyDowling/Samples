@@ -75,6 +75,7 @@ namespace SGFlooringCorp.Data
 
         }
 
+
         public List<Order> RemoveOrder(OrderRequest orderToDeleteRequest)
         {
             var orders = ListAll(orderToDeleteRequest.OrderDate);
@@ -148,14 +149,6 @@ namespace SGFlooringCorp.Data
                 return null;
             }
             return null;
-        }
-
-        public Order EditOrder(OrderRequest previousOrderRequest, OrderRequest updatedOrderRequest)
-        {
-            RemoveOrder(previousOrderRequest);
-            Add(updatedOrderRequest);
-            var order = GetOrder(updatedOrderRequest);
-            return order;
         }
     }
 }

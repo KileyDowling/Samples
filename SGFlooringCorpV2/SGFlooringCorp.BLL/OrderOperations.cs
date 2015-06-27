@@ -95,7 +95,8 @@ namespace SGFlooringCorp.BLL
                 orderNumber++;
 
                 orderToAddRequest.Order.OrderNumber = orderNumber;
-
+                orderToAddRequest = GetTaxRate(orderToAddRequest);
+                orderToAddRequest = UpdateCosts(orderToAddRequest);
                 _orderRepo.Add(orderToAddRequest);
 
                 response.Success = true;
@@ -166,11 +167,11 @@ namespace SGFlooringCorp.BLL
             return response;
         }
 
-        public Response<Order> EditSelectedOrder(OrderRequest selecteOrder, OrderRequest editedOrderRequest)
+        public Response<Order> EditSelectedOrder(OrderRequest oldOrderRequest, OrderRequest editedOrderRequest)
         {
             var response = new Response<Order>();
             
-            var selectedOrderResponse = GetSelectedOrder(selecteOrder);
+            var selectedOrderResponse = GetSelectedOrder(oldOrderRequest);
             if (!selectedOrderResponse.Success)
             {
                 response.Message = selectedOrderResponse.Message;
@@ -184,9 +185,10 @@ namespace SGFlooringCorp.BLL
 
                     if (selectedOrderResponse.Success)
                     {
-                        selecteOrder.Order = selectedOrderResponse.Data;
                         var repo = new OrderRepository();
-                        response.Data = repo.EditOrder(selecteOrder, editedOrderRequest);
+                        repo.RemoveOrder(oldOrderRequest);
+                        var editedOrderResponse = CreateOrder(editedOrderRequest);
+                        response.Data = editedOrderResponse.Data;
 
                         response.Success = true;
                         return response;
@@ -201,6 +203,31 @@ namespace SGFlooringCorp.BLL
             }
           
             return response;
+        }
+
+        public OrderRequest GetTaxRate(OrderRequest orderRequest)
+        {
+            var ops = OperationsFactory.CreateTaxOperations();
+            orderRequest.Order.TaxRate = ops.GetRate(orderRequest.Order.StateAbbreviation);
+
+            return orderRequest;
+
+        }
+
+        public OrderRequest UpdateCosts(OrderRequest orderRequest)
+        {
+            var ops = OperationsFactory.CreateProductOperations();
+            orderRequest.Order.LaborCostPerSquareFoot = ops.GetLaborCostPerSquareFoot(orderRequest.Order.ProductType);
+            orderRequest.Order.CostPerSquareFoot = ops.GetCostPerSquareFoot(orderRequest.Order.ProductType);
+            orderRequest.Order.MaterialCost = ops.CalculateMaterialCost(orderRequest);
+            orderRequest.Order.TotalLaborCost = ops.CalculateLaborCost(orderRequest);
+            orderRequest.Order.TotalTax = ops.CalculateTax(orderRequest);
+            orderRequest.Order.Total = ops.CalculateTotal(orderRequest);
+
+
+
+            return orderRequest;
+
         }
     }
 }

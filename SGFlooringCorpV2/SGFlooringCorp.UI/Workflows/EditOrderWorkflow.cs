@@ -39,7 +39,7 @@ namespace SGFlooringCorp.UI.Workflows
 
             //edit order details
             newOrderRequest = MakeEdits(oldOrderRequest);
-            Response<Order> editedOrdeResponse = ops.EditSelectedOrder(newOrderRequest, oldOrderRequest);
+            Response<Order> editedOrdeResponse = ops.EditSelectedOrder(oldOrderRequest,newOrderRequest);
 
             //save response to file
             UserInteractions.PressKeyToContinue();

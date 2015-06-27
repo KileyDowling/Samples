@@ -16,8 +16,6 @@ namespace SGFlooringCorp.UI.Workflows
             var request = new OrderRequest();
             Screens.ShowAddOrder();
             request = GenerateOrderInformation(request);
-            request = GetTaxRate(request);
-            request = UpdateCosts(request);
            var response = SaveOrderInformation(request);
             Screens.ShowAddOrderConfirmation(response.Data);
 
@@ -53,30 +51,6 @@ namespace SGFlooringCorp.UI.Workflows
             return request;
         }
 
-        public OrderRequest GetTaxRate(OrderRequest orderRequest)
-        {
-            var ops = OperationsFactory.CreateTaxOperations();
-            orderRequest.Order.TaxRate = ops.GetRate(orderRequest.Order.StateAbbreviation);
-
-            return orderRequest;
-
-        }
-
-        public OrderRequest UpdateCosts(OrderRequest orderRequest)
-        {
-            var ops = OperationsFactory.CreateProductOperations();
-            orderRequest.Order.LaborCostPerSquareFoot = ops.GetLaborCostPerSquareFoot(orderRequest.Order.ProductType);
-            orderRequest.Order.CostPerSquareFoot = ops.GetCostPerSquareFoot(orderRequest.Order.ProductType);
-            orderRequest.Order.MaterialCost = ops.CalculateMaterialCost(orderRequest);
-            orderRequest.Order.TotalLaborCost = ops.CalculateLaborCost(orderRequest);
-            orderRequest.Order.TotalTax = ops.CalculateTax(orderRequest);
-            orderRequest.Order.Total = ops.CalculateTotal(orderRequest);
-
-
-
-            return orderRequest;
-
-        }
 
      
 
