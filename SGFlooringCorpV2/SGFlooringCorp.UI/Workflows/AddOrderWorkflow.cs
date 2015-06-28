@@ -40,10 +40,8 @@ namespace SGFlooringCorp.UI.Workflows
             Console.WriteLine("Please enter your name");
             request.Order.CustomerName = Console.ReadLine();
             request.Order.StateAbbreviation = UserInteractions.PromptForValidState("Please enter your state");
-            Console.WriteLine("Please enter your product type");
-            request.Order.ProductType = Console.ReadLine();
-            Console.WriteLine("Please enter the area");
-            request.Order.Area = decimal.Parse(Console.ReadLine());
+            request.Order.ProductType = UserInteractions.PromptForValidProductType("Please enter your product type");
+            request.Order.Area = UserInteractions.PromptForDecimal("Please enter the area");
 
             return request;
         }

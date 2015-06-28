@@ -70,31 +70,9 @@ namespace SGFlooringCorp.Tests
             var order = repo.GetOrder(request);
 
             Assert.AreEqual(1, order.OrderNumber);
-            Assert.AreEqual("Cynthia Lewis", order.CustomerName);
+            Assert.AreEqual("Diedre Douglas", order.CustomerName);
         }
 
-        [Test]
-        public void EditOrderSucess()
-        {
-            //var repo = new OrderRepository();
-            //var prevRequest = new OrderRequest();
-            //var updatedRequest = new OrderRequest();
-
-            //prevRequest.OrderDate = new DateTime(2015, 02, 24);
-            //updatedRequest.OrderDate = new DateTime(2015, 02, 24);
-            //prevRequest.Order = new Order();
-            //updatedRequest.Order = new Order();
-
-            //prevRequest.Order.OrderNumber = 1;
-            //updatedRequest.Order.OrderNumber = 1;
-            //updatedRequest.Order.CustomerName = "Diedre Douglas";
-            //updatedRequest.Order.StateAbbreviation = "OH";
-            //var orderWithChanges = repo.EditOrder(prevRequest, updatedRequest);
-            //Assert.AreEqual("Diedre Douglas", orderWithChanges.CustomerName);
-            //Assert.AreEqual("OH", orderWithChanges.StateAbbreviation);
-
-
-        }
 
         [Test]
         public void OverWriteFileSuccess()

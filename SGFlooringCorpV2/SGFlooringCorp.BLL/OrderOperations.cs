@@ -134,7 +134,7 @@ namespace SGFlooringCorp.BLL
                 {
 
                     response.Success = false;
-                    response.Message = "Order date not found";
+                    response.Message = "There are no orders to delete for this date";
                 }
                 
             }

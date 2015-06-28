@@ -16,10 +16,7 @@ namespace SGFlooringCorp.UI.Workflows
             var request = new OrderRequest();
             Screens.ShowRemoveAnOrder();
             request = OrderToRemoveInformation();
-            var response = RemoveOrder(request);
-            Screens.ShowConfirmRemoveOrder(response.Data);
-            UserInteractions.PressKeyToContinue();
-            Screens.ShowRemoveOrderConfirmation(response.Data);
+            ConfirmRemoval(request);
             UserInteractions.PressKeyToContinue();
 
         }
@@ -27,14 +24,29 @@ namespace SGFlooringCorp.UI.Workflows
         public OrderRequest OrderToRemoveInformation()
         {
             var request = new OrderRequest();
-            Console.WriteLine("Please enter an order date");
-            DateTime orderDate = UserInteractions.GetDateFromUser();
-            request.OrderDate = orderDate;
+            request = UserInteractions.PromptForValidOrderDate(request);
             request.Order = new Order();
-            Console.WriteLine("Please enter an order number");
-            request.Order.OrderNumber = int.Parse(Console.ReadLine());
+            request = UserInteractions.PromptForValidOrderNumber(request);
 
             return request;
+        }
+
+
+        public void ConfirmRemoval(OrderRequest request)
+        {
+            var ops = OperationsFactory.CreateOrderOperations();
+            Screens.ShowConfirmRemoveOrder(request.Order);
+            var confirm = UserInteractions.PromptForConfirmation("Remove Order? (Y)es or (N)o.");
+            var response = new Response<Order>();
+            if (confirm == "Y")
+            {
+                response = RemoveOrder(request);
+                Screens.ShowRemoveOrderConfirmation(response.Data);
+            }
+            else
+            {
+                Console.WriteLine("Order not deleted");
+            }
         }
 
         public Response<Order> RemoveOrder(OrderRequest request)

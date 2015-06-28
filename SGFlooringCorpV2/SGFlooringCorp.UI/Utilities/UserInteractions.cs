@@ -63,7 +63,7 @@ namespace SGFlooringCorp.UI.Utilities
             do
             {
                 Console.WriteLine("Enter the date of the order you wish to look up ");
-                Console.Write("in this format(MMDDYYYY): ");
+                Console.Write("in this format(MM/DD/YYYY): ");
                 string input = Console.ReadLine();
                 DateTime thisDate;
 
@@ -96,6 +96,7 @@ namespace SGFlooringCorp.UI.Utilities
                 }
                 else
                 {
+                    orderRequest.OrderDate = orderDate;
                     return orderRequest;
                 }
             } while (true);
@@ -141,6 +142,30 @@ namespace SGFlooringCorp.UI.Utilities
             return num;
         }
 
+        public static decimal PromptForDecimal(string message, string mode = "Add")
+        {
+            bool validInput = false;
+            decimal output = 0;
+
+            while (!validInput)
+            {
+                Console.Write(message);
+                var input = Console.ReadLine();
+
+                if (mode == "Edit" && String.IsNullOrWhiteSpace(input))
+                    return -1;
+
+                validInput = Decimal.TryParse(input, out output);
+
+                if (!validInput)
+                {
+                    Console.WriteLine("That is not a valid decimal!");
+                }
+            }
+
+            return output;
+        }
+
         public static string PromptForValidState(string message)
         {
             bool validInput = false;
@@ -164,6 +189,31 @@ namespace SGFlooringCorp.UI.Utilities
 
             return output;
         }
+
+        public static string PromptForValidProductType(string message)
+        {
+            bool validInput = false;
+            string output = "";
+            var productOperations = OperationsFactory.CreateProductOperations();
+
+            while (!validInput)
+            {
+                Console.WriteLine(message);
+                output = Console.ReadLine();
+
+                if (!productOperations.IsValidProductType(output))
+                {
+                    Console.Write("That is not a valid product type. ");
+                }
+                else
+                {
+                    validInput = true;
+                }
+            }
+
+            return output;
+        }
+
 
         public static string PromptForConfirmation(string message)
         {
