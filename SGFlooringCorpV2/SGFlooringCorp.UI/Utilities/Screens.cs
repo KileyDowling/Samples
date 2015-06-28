@@ -186,12 +186,13 @@ namespace SGFlooringCorp.UI.Utilities
             Console.WriteLine("");
         }
 
-        private static string FormatedOrder(Order order)
+        public static string FormatedOrder(Order order)
         {
             return string.Format("Order Number:                   {0}" +
                                   "\nCustomer Name:                  {1}" +
                                   "\nProduct Type:                   {2}" +
                                   "\nState Abbreviation:             {3}" +
+                                  "\nArea:                           {11}" +
                                   "\nCost Per Square Foot:           {4:C}" +
                                   "\nLabor Cost Per Square Foot:     {5:C}" +
                                   "\nMaterial Cost:                  {6:C}" +
@@ -200,7 +201,7 @@ namespace SGFlooringCorp.UI.Utilities
                                   "\nTax:                            {9:C}" +
                                   "\nTotal:                          {10:C}",
                                   order.OrderNumber, order.CustomerName, order.ProductType, order.StateAbbreviation, order.CostPerSquareFoot,
-                                  order.LaborCostPerSquareFoot, order.MaterialCost, order.TotalLaborCost, order.TaxRate / 100, order.TotalTax, order.Total);
+                                  order.LaborCostPerSquareFoot, order.MaterialCost, order.TotalLaborCost, order.TaxRate /100, order.TotalTax, order.Total, order.Area);
         }
     }
 

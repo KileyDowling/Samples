@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SGFlooringCorp.BLL;
 using SGFlooringCorp.Models;
 using SGFlooringCorp.UI.Workflows;
 
@@ -47,12 +48,12 @@ namespace SGFlooringCorp.UI.Utilities
 
         public static string GetRequiredStringFromUser()
         {
-            string input ="";
+            string input = "";
             bool validInput = false;
 
             do
             {
-                
+
             } while (!validInput);
             return input;
         }
@@ -77,13 +78,119 @@ namespace SGFlooringCorp.UI.Utilities
             } while (true);
         }
 
-        public static OrderRequest PromptForValidOrder()
+        public static OrderRequest PromptForValidOrderDate(OrderRequest orderRequest)
         {
-            var request = new OrderRequest();
+            var ops = OperationsFactory.CreateOrderOperations();
 
-            return request;
+            Console.Clear();
+            do
+            {
+                Console.Clear();
+                var orderDate = GetDateFromUser();
+                var response = ops.ListAll(orderDate);
+
+                if (!response.Success)
+                {
+                    Console.WriteLine("\n*** ERROR: {0} ***\n",response.Message.ToUpper());
+                    PressKeyToContinue();
+                }
+                else
+                {
+                    return orderRequest;
+                }
+            } while (true);
         }
+
+
+        public static OrderRequest PromptForValidOrderNumber(OrderRequest orderRequest)
+        {
+            var ops = OperationsFactory.CreateOrderOperations();
+            var response = new Response<Order>();
+
+            do
+            {
+                var orderNumber = GetValidIntFromUser("Please enter an order number");
+                orderRequest.Order = new Order();
+                orderRequest.Order.OrderNumber = orderNumber;
+                response = ops.GetSelectedOrder(orderRequest);
+                orderRequest.Order = response.Data;
+                if (!response.Success)
+                    Console.Write("{0}. ", response.Message);
+            } while (!response.Success);
+
+            return orderRequest;
+
+
+        }
+
+        public static int GetValidIntFromUser(string message)
+        {
+            int num = -1;
+            bool validInput = false;
+
+            while (!validInput)
+            {
+                Console.WriteLine("{0}", message);
+                validInput = int.TryParse(Console.ReadLine(), out num);
+
+                if (!validInput)
+                {
+                    Console.Write("Not a valid number! ");
+                }
+            }
+            return num;
+        }
+
+        public static string PromptForValidState(string message)
+        {
+            bool validInput = false;
+            string output = "";
+            var taxOperations = OperationsFactory.CreateTaxOperations();
+
+            while (!validInput)
+            {
+                Console.WriteLine(message);
+                output = Console.ReadLine();
+
+                if (!taxOperations.IsValidState(output))
+                {
+                    Console.Write("That is not a state we sell in. ");
+                }
+                else
+                {
+                    validInput = true;
+                }
+            }
+
+            return output;
+        }
+
+        public static string PromptForConfirmation(string message)
+        {
+            bool validInput = false;
+            string output = "";
+
+            while (!validInput)
+            {
+                Console.Write(message);
+                output = Console.ReadLine();
+
+
+                if (String.IsNullOrEmpty(output))
+                {
+                    Console.WriteLine("Please make a selection.");
+                }
+                else
+                {
+                    output = output.Substring(0, 1).ToUpper();
+                    if (output == "Y" || output == "N")
+                        validInput = true;
+                }
+            }
+
+            return output;
+        }
+
+
     }
-
-
 }

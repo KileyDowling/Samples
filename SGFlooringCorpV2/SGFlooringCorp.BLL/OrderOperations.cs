@@ -89,7 +89,7 @@ namespace SGFlooringCorp.BLL
 
                 int orderNumber = 0;
 
-                if (orders != null)
+                if (orders.Count > 0)
                     orderNumber = orders.Max(o => o.OrderNumber);
 
                 orderNumber++;
