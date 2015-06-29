@@ -24,13 +24,13 @@ namespace SGFlooringCorp.BLL
         public Response<List<Order>> ListAll(DateTime orderDate)
         {
             var response = new Response<List<Order>>();
-            var validFile = GetFile(orderDate);
+            var repo = new OrderRepository();
+            bool validFile = repo.GetFile(orderDate);
 
             try
             {
-                if (validFile.Success)
+                if (validFile)
                 {
-                    var repo = new OrderRepository();
                     response.Data = repo.ListAll(orderDate);
                     response.Success = true;
 
@@ -51,35 +51,19 @@ namespace SGFlooringCorp.BLL
             return response;
         }
 
-        public Response<string> GetFile(DateTime orderDate)
+        public int GenerateOrderNumber(List<Order> orders)
         {
-            var repo = new OrderRepository();
-
-            var response = new Response<string>();
-
-            try
+            int orderNumber = 0;
+            if (orders.Count > 0)
             {
-                var orderFilePath = repo.GenerateFilePathString(orderDate);
-                if (!File.Exists(orderFilePath))
-                {
-                    response.Success = false;
-                    response.Message = "Order date not found";
-                }
-                else
-                {
-                    response.Success = true;
-                    response.Data = orderFilePath;
-                }
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = ex.Message;
+                orderNumber = orders.Max(o => o.OrderNumber);
             }
 
-            return response;
+            orderNumber++;
+
+            return orderNumber;
         }
-
+    
         public Response<Order> CreateOrder(OrderRequest orderToAddRequest)
         {
             var response = new Response<Order>();
@@ -87,14 +71,11 @@ namespace SGFlooringCorp.BLL
             {
                 var orders = _orderRepo.ListAll(orderToAddRequest.OrderDate);
 
-                int orderNumber = 0;
-
-                if (orders.Count > 0)
-                    orderNumber = orders.Max(o => o.OrderNumber);
-
-                orderNumber++;
-
-                orderToAddRequest.Order.OrderNumber = orderNumber;
+                if (orderToAddRequest.Order.OrderNumber == 0)
+                {
+                   orderToAddRequest.Order.OrderNumber = GenerateOrderNumber(orders);
+                }
+                
                 orderToAddRequest = GetTaxRate(orderToAddRequest);
                 orderToAddRequest = UpdateCosts(orderToAddRequest);
                 _orderRepo.Add(orderToAddRequest);

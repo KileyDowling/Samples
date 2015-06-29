@@ -13,6 +13,23 @@ namespace SGFlooringCorp.Tests
     [TestFixture]
     public class OrderRepositoryTests
     {
+
+        [Test]
+        public void FoundFileSuccess()
+        {
+            var repo = new OrderRepository();
+            var response = repo.GetFile(new DateTime(2015, 02, 24));
+            Assert.IsTrue(response);
+        }
+
+        [Test]
+        public void FoundFileFailure()
+        {
+            var repo = new OrderRepository();
+            var response = repo.GetFile(new DateTime(2015, 02, 02));
+            Assert.IsFalse(response);
+
+        }
         [Test]
         public void LoadOrdersSuccess()
         {

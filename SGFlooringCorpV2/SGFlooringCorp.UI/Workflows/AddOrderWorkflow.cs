@@ -37,11 +37,11 @@ namespace SGFlooringCorp.UI.Workflows
             request.Order = new Order();
 
             //user requested
-            Console.WriteLine("Please enter your name");
+            Console.Write("Please enter your name: ");
             request.Order.CustomerName = Console.ReadLine();
-            request.Order.StateAbbreviation = UserInteractions.PromptForValidState("Please enter your state");
-            request.Order.ProductType = UserInteractions.PromptForValidProductType("Please enter your product type");
-            request.Order.Area = UserInteractions.PromptForDecimal("Please enter the area");
+            request.Order.StateAbbreviation = UserInteractions.PromptForValidState("Please enter your state: ");
+            request.Order.ProductType = UserInteractions.PromptForValidProductType("Please enter your product type: ");
+            request.Order.Area = UserInteractions.PromptForDecimal("Please enter the area: ");
 
             return request;
         }
@@ -51,7 +51,7 @@ namespace SGFlooringCorp.UI.Workflows
             var ops = OperationsFactory.CreateOrderOperations();
             request = ops.GetTaxRate(request);
             request = ops.UpdateCosts(request);
-            Screens.ShowAddOrderConfirmation(request.Order);
+            Screens.ShowConfirmAddOrder(request.Order);
             var confirm = UserInteractions.PromptForConfirmation("Add Order? (Y)es or (N)o.");
             if (confirm == "Y")
             {

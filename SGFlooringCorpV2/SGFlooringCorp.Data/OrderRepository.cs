@@ -55,7 +55,6 @@ namespace SGFlooringCorp.Data
                     orders.Add(order);
                 }
                 return orders;
-
             }
             return null;
         }
@@ -149,6 +148,23 @@ namespace SGFlooringCorp.Data
                 return null;
             }
             return null;
+        }
+
+        public bool GetFile(DateTime orderDate)
+        {
+                bool fileExists;
+                var orderFilePath = GenerateFilePathString(orderDate);
+                if (!File.Exists(orderFilePath))
+                {
+                    fileExists = false;
+                }
+                else
+                {
+                    fileExists = true;
+                }
+            
+
+            return fileExists;
         }
     }
 }

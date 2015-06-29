@@ -131,7 +131,7 @@ namespace SGFlooringCorp.UI.Utilities
 
             while (!validInput)
             {
-                Console.WriteLine("{0}", message);
+                Console.Write("{0}", message);
                 validInput = int.TryParse(Console.ReadLine(), out num);
 
                 if (!validInput)
@@ -149,7 +149,7 @@ namespace SGFlooringCorp.UI.Utilities
 
             while (!validInput)
             {
-                Console.Write(message);
+                Console.Write("{0}", message);
                 var input = Console.ReadLine();
 
                 if (mode == "Edit" && String.IsNullOrWhiteSpace(input))
@@ -174,7 +174,7 @@ namespace SGFlooringCorp.UI.Utilities
 
             while (!validInput)
             {
-                Console.WriteLine(message);
+                Console.Write("{0}",message);
                 output = Console.ReadLine();
 
                 if (!taxOperations.IsValidState(output))
@@ -198,7 +198,7 @@ namespace SGFlooringCorp.UI.Utilities
 
             while (!validInput)
             {
-                Console.WriteLine(message);
+                Console.Write("{0}", message);
                 output = Console.ReadLine();
 
                 if (!productOperations.IsValidProductType(output))
@@ -222,7 +222,7 @@ namespace SGFlooringCorp.UI.Utilities
 
             while (!validInput)
             {
-                Console.Write(message);
+                Console.Write("{0}",message);
                 output = Console.ReadLine();
 
 

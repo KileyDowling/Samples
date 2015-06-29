@@ -12,22 +12,7 @@ namespace SGFlooringCorp.Tests
 {
     public class OrderOperationsTests
     {
-        [Test]
-        public void FoundFileSuccess()
-        {
-            var ops = OperationsFactory.CreateOrderOperations();
-            var response = ops.GetFile(new DateTime(2015, 02, 24));
-            Assert.IsTrue(response.Success);
-        }
-
-        [Test]
-        public void FoundFileFailure()
-        {
-            var ops = OperationsFactory.CreateOrderOperations();
-            var response = ops.GetFile(new DateTime(2015, 02, 02));
-            Assert.IsFalse(response.Success);
-
-        }
+  
 
         [Test]
         public void GetAllOrdersSuccess()
