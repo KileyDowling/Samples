@@ -38,8 +38,11 @@ namespace SGFlooringCorp.Tests
             var ops = OperationsFactory.CreateOrderOperations();
             var orderRequest = new OrderRequest();
             orderRequest.Order = new Order();
-            orderRequest.OrderDate = new DateTime(2015,07,01);
+            orderRequest.OrderDate = new DateTime(2015,07,05);
             orderRequest.Order.CustomerName = "Vishy Marocha";
+            orderRequest.Order.StateAbbreviation = "PA";
+            orderRequest.Order.ProductType = "Hardwood";
+            orderRequest.Order.Area = 5;
             var response = ops.CreateOrder(orderRequest);
             Assert.AreEqual(true,response.Success);
             Assert.AreEqual("Vishy Marocha", response.Data.CustomerName);
@@ -52,11 +55,10 @@ namespace SGFlooringCorp.Tests
             var orderRequest = new OrderRequest();
             orderRequest.Order = new Order();
             orderRequest.OrderDate = new DateTime(2015, 07, 01);
-            orderRequest.Order.OrderNumber = 1;
+            orderRequest.Order.OrderNumber = 8;
             var response = ops.DeleteOrder(orderRequest);
             Assert.AreEqual(true, response.Success);
             Assert.AreEqual("Order successfully deleted!", response.Message);
-            Assert.AreEqual(null, response.Data);
         }
 
         [Test]
@@ -79,10 +81,10 @@ namespace SGFlooringCorp.Tests
             var orderRequest = new OrderRequest();
             orderRequest.OrderDate = new DateTime(2015,07,01);
             orderRequest.Order = new Order();
-            orderRequest.Order.OrderNumber = 7;
+            orderRequest.Order.OrderNumber = 12;
             var response = ops.GetSelectedOrder(orderRequest);
             Assert.AreEqual(true,response.Success);
-            Assert.AreEqual(7, response.Data.OrderNumber);
+            Assert.AreEqual(12, response.Data.OrderNumber);
             Assert.AreEqual("Vishy Marocha", response.Data.CustomerName);
         }
 
@@ -108,14 +110,17 @@ namespace SGFlooringCorp.Tests
             var editedOrder = new OrderRequest();
             oldOrder.Order = new Order();
             editedOrder.Order = new Order();
-            oldOrder.OrderDate = new DateTime(2015, 07, 01);
-            editedOrder.OrderDate = new DateTime(2015, 07, 01);
+            oldOrder.OrderDate = new DateTime(2015, 01, 13);
+            editedOrder.OrderDate = new DateTime(2015, 01, 13);
             oldOrder.Order.OrderNumber = 3;
             editedOrder.Order.OrderNumber = 3;
-            editedOrder.Order.CustomerName = "Kiwi Marocha";
+            editedOrder.Order.CustomerName = "Kiwi M";
+            editedOrder.Order.StateAbbreviation = "OH";
+            editedOrder.Order.ProductType = "Hardwood";
+            editedOrder.Order.Area = 5;
             var response = ops.EditSelectedOrder(oldOrder, editedOrder);
             Assert.AreEqual(true, response.Success);
-            Assert.AreEqual("Kiwi Marocha", response.Data.CustomerName);
+            Assert.AreEqual("Kiwi M", response.Data.CustomerName);
 
         }
 

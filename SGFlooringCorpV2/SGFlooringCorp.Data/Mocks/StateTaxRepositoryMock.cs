@@ -15,8 +15,8 @@ namespace SGFlooringCorp.Data.Mocks
         {
             return new List<StateTax>()
             {
-                new StateTax() {StateAbbreviation = "OH", TaxRate = 0.065M},
-                new StateTax() {StateAbbreviation = "PA", TaxRate = 0.075M}
+                new StateTax() {StateAbbreviation = "OH", TaxRate = 15M},
+                new StateTax() {StateAbbreviation = "PA", TaxRate = 7.5M}
             };
         }
     }

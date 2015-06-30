@@ -102,7 +102,7 @@ namespace SGFlooringCorp.BLL
         public decimal CalculateTax(OrderRequest orderRequest)
         {
              decimal totalPreTax = orderRequest.Order.TotalLaborCost + orderRequest.Order.MaterialCost;
-            decimal total = totalPreTax * orderRequest.Order.TaxRate;
+            decimal total = totalPreTax * (orderRequest.Order.TaxRate/100);
 
             return total;
         }

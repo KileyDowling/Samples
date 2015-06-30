@@ -42,16 +42,25 @@ namespace SGFlooringCorp.BLL
             var response = new Response<Order>();
             
             bool validState = IsValidState(orderRequest.Order.StateAbbreviation);
-            if (validState)
+            try
             {
-                orderRequest.Order.TaxRate = GetRate(orderRequest.Order.StateAbbreviation);
-                response.Success = true;
-                response.Data = orderRequest.Order;
+
+                if (validState)
+                {
+                    orderRequest.Order.TaxRate = GetRate(orderRequest.Order.StateAbbreviation);
+                    response.Success = true;
+                    response.Data = orderRequest.Order;
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = "Invalid state entered";
+                }
             }
-            else
+            catch (Exception ex)
             {
                 response.Success = false;
-                response.Message = "Invalid state entered";
+                response.Message = ex.Message;
             }
             return response;
         }

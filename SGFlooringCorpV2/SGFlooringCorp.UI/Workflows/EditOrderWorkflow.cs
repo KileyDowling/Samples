@@ -13,8 +13,6 @@ namespace SGFlooringCorp.UI.Workflows
     {
         public void Execute()
         {
-            OrderOperations ops = OperationsFactory.CreateOrderOperations();
-
             OrderRequest oldOrderRequest = new OrderRequest();
             OrderRequest newOrderRequest = new OrderRequest();
             oldOrderRequest = SetUpOrderRequest(oldOrderRequest);
@@ -38,7 +36,7 @@ namespace SGFlooringCorp.UI.Workflows
 
         public OrderRequest MakeEdits(OrderRequest oldOrderRequest)
         {
-            Console.WriteLine("Please input a new customer name ({0})", oldOrderRequest.Order.CustomerName);
+            Console.WriteLine("Please input a new customer name ({0}), or press enter to continue without changing it", oldOrderRequest.Order.CustomerName);
             var input = Console.ReadLine();
             if (!String.IsNullOrEmpty(input))
                 oldOrderRequest.Order.CustomerName = input;

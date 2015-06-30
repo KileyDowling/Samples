@@ -54,7 +54,7 @@ namespace SGFlooringCorp.BLL
         public int GenerateOrderNumber(List<Order> orders)
         {
             int orderNumber = 0;
-            if (orders.Count > 0)
+            if (orders != null && orders.Count > 0)
             {
                 orderNumber = orders.Max(o => o.OrderNumber);
             }
@@ -99,13 +99,13 @@ namespace SGFlooringCorp.BLL
             var orderRepo = new OrderRepository();
 
             var listAll = orderRepo.ListAll(request.OrderDate);
-            var orderInformation = listAll.First(x => x.OrderNumber == request.Order.OrderNumber);
 
 
             try
             {
                 if (listAll.Count > 0)
                 {
+                    var orderInformation = listAll.First(x => x.OrderNumber == request.Order.OrderNumber);
                     response.Data = orderInformation;
                     orderRepo.RemoveOrder(request);
                     response.Success = true;
