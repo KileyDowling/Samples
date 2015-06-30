@@ -59,10 +59,6 @@ namespace SGFlooringCorp.UI.Workflows
                 Screens.ShowAddOrderConfirmation(response.Data);
             }
         }
-
-     
-
-       
     }
 
 }
