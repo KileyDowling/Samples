@@ -8,7 +8,7 @@ using SGCorpHR.Models;
 
 namespace SGCorpHR.BLL
 {
-    class SuggestionOperations
+    public class SuggestionOperations
     {
         public Response<List<Suggestion>> DisplaySuggestions()
         {
@@ -35,6 +35,23 @@ namespace SGCorpHR.BLL
                 response.Message = ex.Message;
             }
             return response;
+        }
+
+        public void DeleteSuggestions(int suggestionID)
+        {
+            var repo = new SuggestionRepository();
+            var response = new Response<List<Suggestion>>();
+            repo.RemoveFile(suggestionID);
+            try
+            {
+                response.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+            
         }
     }
 }

@@ -7,6 +7,8 @@ using SGCorpHR.BLL;
 using SGCorpHR.Models;
 using System.IO;
 using System.Net;
+using SGCorpHR.DATA;
+
 
 namespace SGCorpHR.UI.Controllers
 {
@@ -49,6 +51,27 @@ namespace SGCorpHR.UI.Controllers
             var response = ops.DisplayFiles();
             return View(response);
 
+        }
+
+        public ActionResult ViewSuggestions()
+        {
+            var ops = new SuggestionOperations();
+            var response = ops.DisplaySuggestions();
+            return View(response);
+        }
+
+        public ActionResult DeleteSuggestion(int suggestionID)
+        {
+            var ops = new SuggestionOperations();
+            ops.DeleteSuggestions(suggestionID);
+            return RedirectToAction("ViewSuggestions");
+
+        }
+
+        
+        public ActionResult AddSuggestion()
+        {
+            return View("AddSuggestion");
         }
     }
 }

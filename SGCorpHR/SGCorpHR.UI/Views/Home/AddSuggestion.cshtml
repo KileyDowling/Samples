@@ -1,0 +1,24 @@
+﻿@model SGCorpHR.Models.Suggestion
+@{
+    ViewBag.Title = "AddSuggestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddSuggestion</h2>
+<div>
+    @using (Html.BeginForm("AddSuggestion", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="@Model.EmployeeName"/>
+
+        </div>
+        <div class="form-group">
+            <label>Suggestion</label>
+            <input type="text" class="form-control" name="@Model.SuggestionText"/>
+
+        </div>
+        <button class="btn btn-primary">Submit</button>
+    }
+</div>
+

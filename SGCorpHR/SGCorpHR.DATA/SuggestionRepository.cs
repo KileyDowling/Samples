@@ -10,12 +10,16 @@ namespace SGCorpHR.DATA
 {
     public class SuggestionRepository
     {
-        public string filePath = "Suggestions\\Suggestions.txt";
+        public string filePath = @"C:\github\DennisDrellishakJr\SGCorpHR\SGCorpHR.UI\Suggestions\Suggestions.txt";
+
+
         public List<Suggestion> GetAllSuggestions()
         {
+
+            
             List<Suggestion> suggestions = new List<Suggestion>();
 
-            var reader = File.ReadAllLines(@filePath);
+            var reader = File.ReadAllLines(filePath);
 
             for (int i = 1; i < reader.Length; i++)
             {
