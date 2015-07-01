@@ -45,6 +45,7 @@
     <Compile Include="FileOperationsTest.cs" />
     <Compile Include="FileRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SuggestionRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -68,6 +69,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ResumesNull\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Suggestions\Suggestions.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

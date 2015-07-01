@@ -6,59 +6,12 @@
     ViewBag.Title = "Index"; 
 }
 
-<h2>Index</h2>
+
 
 <div>
-    <div class="page-header">
-        <h1> Uploaded Resumes</h1>
-    </div>
-
-    @using (Html.BeginForm("Save", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <table>
-            <tr>
-                <td>File:</td>
-                <td>
-                    <input type="file" name="file" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" name="Submit" value="Submit" />
-                </td>
-            </tr>
-        </table>
-    }
+  
 
 
-    @if (Model.Data!=null)
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        FileName
-                    </th>
-                    <th>FilePath</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var file in Model.Data)
-                {
-                    <tr>
-                        <td>@file.FileName</td>
-                        <td>@file.FilePath</td>
-                        
-                    </tr>
-                }
-            </tbody>
-
-        </table>
-    }
-    else
-    {
-        { <p>@Model.Message</p>}
-    }
+<h1>Welcome</h1>
+    
 </div>

@@ -13,14 +13,16 @@ namespace SGCorpHR.DATA
    {
        public List<Resumes> GetFiles()
        {
-           var resume = new Resumes();
-           var directory = new DirectoryInfo(@"C:\Users\Apprentice\Desktop\GitHub\KileyDowling\SGCorpHR\SGCorpHR.UI\Resumes");
+           
+           var directory = new DirectoryInfo(@"C:\github\DennisDrellishakJr\SGCorpHR\SGCorpHR.UI\Resumes");
            var files = directory.GetFiles();
            if (files.Any())
            {
+
                var resumes = new List<Resumes>();
                foreach (var file in files)
                {
+                   var resume = new Resumes();
                    resume.FilePath = file.FullName;
                    resume.FileName = file.Name;
                    resumes.Add(resume);
