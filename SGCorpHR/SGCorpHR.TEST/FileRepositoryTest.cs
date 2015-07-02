@@ -12,22 +12,22 @@ namespace SGCorpHR.TEST
 {[TestFixture]
    public class FileRepositoryTest
     {
-    [Test]
-    public void GetResumesTest()
-    {
-        var repo = new FileRepository();
-       var resumes = repo.GetFiles();
-        var resume = resumes.First();
-        Assert.AreEqual("TestResume.pdf", resume.FileName);
-    }
-    //[Test]
-    //public void GetResumesNullTest()
-    //{
-    //    var repo = new FileRepository();
-    //    var resumes = repo.GetFiles();
+//    [Test]
+//    //public void GetResumesTest()
+//    //{
+//    //    var repo = new FileRepository();
+//    //   var resumes = repo.GetFiles();
+//    //    var resume = resumes.First();
+//    //    Assert.AreEqual("TestResume.pdf", resume.FileName);
+//    //}
+//    //[Test]
+//    //public void GetResumesNullTest()
+//    //{
+//    //    var repo = new FileRepository();
+//    //    var resumes = repo.GetFiles();
         
-    //    Assert.AreEqual(null, resumes);
-    //}
+//    ////    Assert.AreEqual(null, resumes);
+//    ////}
 
     }
 }

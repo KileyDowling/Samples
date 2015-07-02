@@ -108,9 +108,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Resumes\TestResume.pdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -121,6 +118,7 @@
     <Content Include="Views\Home\ViewResume.cshtml" />
     <Content Include="Views\Home\ViewSuggestions.cshtml" />
     <Content Include="Views\Home\AddSuggestion.cshtml" />
+    <Content Include="Views\Home\ConfirmationPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -131,6 +129,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Resumes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGCorpHR.BLL\SGCorpHR.BLL.csproj">

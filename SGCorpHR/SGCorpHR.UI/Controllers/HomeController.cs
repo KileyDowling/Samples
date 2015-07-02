@@ -31,7 +31,7 @@ namespace SGCorpHR.UI.Controllers
             }
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewResume");
 
         }
        
@@ -48,7 +48,8 @@ namespace SGCorpHR.UI.Controllers
         {
 
             var ops = new FileOperations();
-            var response = ops.DisplayFiles();
+            var filePath = Server.MapPath(@"~/Resumes"); ;
+            var response = ops.DisplayFiles(filePath);
             return View(response);
 
         }
@@ -68,17 +69,38 @@ namespace SGCorpHR.UI.Controllers
 
         }
 
+        public ActionResult DownloadResume(string filePath)
+        {
+           
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@filePath);
+            string fileName = filePath.Substring(filePath.Length-8, 8);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+           
+
+        }
+
+        public ActionResult DeleteResume(string filePath)
+        {
+
+           System.IO.File.Delete(@filePath);
+           return RedirectToAction("ViewResume");
+
+
+        }
+
         
         public ActionResult AddSuggestion()
         {
-            return View("AddSuggestion");
+            return View();
         }
         [HttpPost]
         public ActionResult AddSuggestionForm(Suggestion suggestion)
         {
             var ops = new SuggestionOperations();
             ops.AddSuggestion(suggestion);
-            return RedirectToAction("AddSuggestion");
+
+            
+            return View("ConfirmationPage");
         }
     }
 }

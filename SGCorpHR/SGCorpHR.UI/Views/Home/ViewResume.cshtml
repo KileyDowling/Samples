@@ -27,7 +27,19 @@
                 {
                     <tr>
                         <td>@file.FileName</td>
-                        <td><a href="@file.FilePath" target="_blank">@file.FilePath</a></td>
+
+                        <td>
+                            <form action="/Home/DownloadResume" method="Post">
+                                <input type="hidden" name="FilePath" id="FilePath" value="@file.FilePath"/>
+                                <button>Download</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/Home/DeleteResume" method="Post">
+                                <input type="hidden" name="FilePath" id="FilePath" value="@file.FilePath" />
+                                <button>Delete</button>
+                            </form>
+                        </td>
 
                     </tr>
                 }

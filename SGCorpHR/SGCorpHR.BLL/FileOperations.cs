@@ -11,7 +11,7 @@ namespace SGCorpHR.BLL
 {
     public class FileOperations
     {
-        public Response<List<Resumes>> DisplayFiles()
+        public Response<List<Resumes>> DisplayFiles(string filePath)
         {
            
                 var repo = new FileRepository();
@@ -20,7 +20,7 @@ namespace SGCorpHR.BLL
 
             try
             {
-                response.Data = repo.GetFiles();
+                response.Data = repo.GetFiles(filePath);
                 if (response.Data != null)
                 {
                     response.Success = true;

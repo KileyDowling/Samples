@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,10 +12,10 @@ namespace SGCorpHR.DATA
 {
    public class FileRepository
    {
-       public List<Resumes> GetFiles()
+       public List<Resumes> GetFiles(string filePath)
        {
-           
-           var directory = new DirectoryInfo(@"C:\github\DennisDrellishakJr\SGCorpHR\SGCorpHR.UI\Resumes");
+          
+           var directory = new DirectoryInfo(filePath);
            var files = directory.GetFiles();
            if (files.Any())
            {
