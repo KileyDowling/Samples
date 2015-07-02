@@ -53,5 +53,13 @@ namespace SGCorpHR.BLL
             }
             
         }
+
+        public void AddSuggestion(Suggestion suggestion)
+        {
+            var repo = new SuggestionRepository();
+            repo.AddSuggestion(suggestion);
+           
+
+        }
     }
 }

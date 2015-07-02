@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SGCorpHR.DATA;
+using SGCorpHR.Models;
 
 namespace SGCorpHR.TEST
 {
@@ -33,6 +34,22 @@ namespace SGCorpHR.TEST
 
             var suggestions = repo.GetAllSuggestions();
             Assert.IsFalse(suggestions.Exists(s => s.SuggestionID == 1));
+
+        }
+        [Test]
+        public void SubmitSuggestionTest()
+        {
+            var repo = new SuggestionRepository();
+
+            var suggestion = new Suggestion()
+            {
+                SuggestionText = "Test",
+                EmployeeName = "Johnny"
+            };
+
+
+            repo.AddSuggestion(suggestion);
+            Assert.AreEqual("Johnny", suggestion.EmployeeName);
 
         }
     }

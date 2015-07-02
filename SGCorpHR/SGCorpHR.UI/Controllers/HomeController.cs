@@ -73,5 +73,12 @@ namespace SGCorpHR.UI.Controllers
         {
             return View("AddSuggestion");
         }
+        [HttpPost]
+        public ActionResult AddSuggestionForm(Suggestion suggestion)
+        {
+            var ops = new SuggestionOperations();
+            ops.AddSuggestion(suggestion);
+            return RedirectToAction("AddSuggestion");
+        }
     }
 }

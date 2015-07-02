@@ -37,6 +37,18 @@ namespace SGCorpHR.DATA
             return suggestions;
         }
 
+        public void AddSuggestion(Suggestion suggestion)
+        {
+            var suggestionsList = GetAllSuggestions();
+
+            int suggestionID = (suggestionsList.Max(s => s.SuggestionID) + 1);
+
+            suggestion.SuggestionID = suggestionID;
+            suggestionsList.Add(suggestion);
+            OverwriteFile(suggestionsList);
+
+        }
+
         public void RemoveFile(int suggestionID)
         {
             var suggestionsList = GetAllSuggestions();
@@ -45,7 +57,6 @@ namespace SGCorpHR.DATA
             OverwriteFile(suggestionsList);
 
         }
-        
 
         private void OverwriteFile(List<Suggestion> suggestionsList)
         {
