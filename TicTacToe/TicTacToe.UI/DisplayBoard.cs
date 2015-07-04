@@ -10,13 +10,8 @@ namespace TicTacToe.UI
     public class DisplayBoard
     {
 
-        public static  bool UpdateGameBoard(string userSelection, int playersTurn)
+        public static bool UpdateGameBoard(string userSelection, UserInfo currentPlayer)
         {
-            string playersMarker = "";
-            if (playersTurn == 1)
-                playersMarker = "X";
-            else
-                playersMarker = "O";
 
             bool foundChoice = false;
 
@@ -26,7 +21,7 @@ namespace TicTacToe.UI
                 {
                     if (GameBoard.gameBoard[i, j] == userSelection)
                     {
-                        GameBoard.gameBoard[i, j] = playersMarker;
+                        GameBoard.gameBoard[i, j] = currentPlayer.UserMarker;
                         foundChoice = true;
                     }
                 }
@@ -80,6 +75,6 @@ namespace TicTacToe.UI
             return result;
         }
 
-        
+
     }
 }

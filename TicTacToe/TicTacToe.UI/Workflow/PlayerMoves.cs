@@ -3,31 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLogic.Models;
 
 namespace TicTacToe.UI.Workflow
 {
     public class PlayerMoves
     {
-        public string GetPlayersUserName(int playersTurn, string playerOneUserName, string playerTwoUserName)
-        {
-            string playersUserName;
-            if (playersTurn == 1)
-                playersUserName = playerOneUserName;
-            else
-                playersUserName = playerTwoUserName;
+        private int _playersTurn = 1;
 
-            return playersUserName;
-            
+        public UserInfo GetPlayersTurn(UserInfo userOne, UserInfo userTwo)
+        {
+            if (_playersTurn == 1)
+            {
+                _playersTurn = 2;
+                return userOne;
+            }
+            else
+            {
+                _playersTurn = 1;
+                return userTwo;
+            }
         }
 
-        public string RequestPlayerMove(int playersTurn, string playerUsername)
+        public string RequestPlayerMove(UserInfo userInfo)
         {
             string userInput = "";
             int validNum = -1;
 
             while (validNum < 0 || validNum > 10)
-            {            
-                Console.WriteLine("{0}, please enter the space you would like to select", playerUsername);
+            {
+                Console.WriteLine("{0}, please enter the space you would like to select", userInfo.UserName);
                 userInput = Console.ReadLine();
                 bool isAValidNum = int.TryParse(userInput, out validNum);
                 if (isAValidNum)
@@ -37,16 +42,5 @@ namespace TicTacToe.UI.Workflow
             return userInput;
         }
 
-        public string GetPlayersMarker(int playersTurn)
-        {
-            string playersMarker = "";
-            if (playersTurn == 1)
-                playersMarker = "X";
-            else
-                playersMarker = "O";
-
-            return playersMarker;
-
-        }
     }
 }

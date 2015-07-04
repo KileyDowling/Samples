@@ -9,12 +9,12 @@ namespace GameLogic
 {
     public class GamePlay
     {
-        public int WonOrTie(int playersTurn, string marker1, string marker2)
+        public int WonOrTie(UserInfo userInfo)
         {
-            bool wonAcross = WonAcross(playersTurn, marker1, marker2);
-            bool wonUpAndDown = WonUpAndDown(playersTurn, marker1, marker2);
-            bool wonDiagonal = WonDiagonal(playersTurn, marker1, marker2);
-            bool itIsATie = IsItATie(marker1, marker2);
+            bool wonAcross = WonAcross(userInfo);
+            bool wonUpAndDown = WonUpAndDown(userInfo);
+            bool wonDiagonal = WonDiagonal(userInfo);
+            bool itIsATie = IsItATie();
             int result = 0;
 
             if (wonAcross)
@@ -29,20 +29,20 @@ namespace GameLogic
 
         }
 
-        public bool KeepPlaying(int playersTurn, string marker1, string marker2)
+        public bool KeepPlaying(UserInfo userInfo)
         {
             bool result = false;
 
-            result = WonAcross(playersTurn, marker1, marker2);
+            result = WonAcross(userInfo);
             if (!result)
             {
-                result = WonUpAndDown(playersTurn, marker1, marker2);
+                result = WonUpAndDown(userInfo);
                 if (!result)
                 {
-                    result = WonDiagonal(playersTurn, marker1, marker2);
+                    result = WonDiagonal(userInfo);
                     if (!result)
                     {
-                        result = IsItATie(marker1, marker2);
+                        result = IsItATie();
                     }
                 }
 
@@ -50,17 +50,11 @@ namespace GameLogic
             return result;
         }
 
-        public bool WonAcross(int playersTurn, string marker1, string marker2)
+        public bool WonAcross(UserInfo userInfo)
         {
             bool result = false;
             int num = 0;
             int counter = 0;
-            string playersMarker = "";
-            if (playersTurn == 1)
-                playersMarker = "X";
-            else
-                playersMarker = "O";
-
 
             while (counter < 3)
             {
@@ -68,7 +62,7 @@ namespace GameLogic
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        if (GameBoard.gameBoard[i, j] == playersMarker)
+                        if (GameBoard.gameBoard[i, j] == userInfo.UserMarker)
                         {
                             num += 1;
                             if (num > 2)
@@ -86,25 +80,19 @@ namespace GameLogic
             return result;
         }
 
-        public bool WonUpAndDown(int playersTurn, string marker1, string marker2)
+        public bool WonUpAndDown(UserInfo userInfo)
         {
             bool result = false;
             int num = 0;
             int counter = 0;
-            string playersMarker = "";
-            if (playersTurn == 1)
-                playersMarker = "X";
-            else
-                playersMarker = "O";
 
-            //won up & down
             while (counter < 3)
             {
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = counter; j < counter + 1; j++)
                     {
-                        if (GameBoard.gameBoard[i, j] == playersMarker)
+                        if (GameBoard.gameBoard[i, j] == userInfo.UserMarker)
                         {
                             num += 1;
                             if (num > 2)
@@ -122,23 +110,16 @@ namespace GameLogic
             return result;
         }
 
-        public bool WonDiagonal(int playersTurn, string marker1, string marker2)
+        public bool WonDiagonal(UserInfo userInfo)
         {
             bool result = false;
             int num = 0;
 
-            string playersMarker = "";
-            if (playersTurn == 1)
-                playersMarker = "X";
-            else
-                playersMarker = "O";
-
-            if (GameBoard.gameBoard[0, 2] == playersMarker && GameBoard.gameBoard[2, 0] == playersMarker && GameBoard.gameBoard[1, 1] == playersMarker)
+            if (GameBoard.gameBoard[0, 2] == userInfo.UserMarker && GameBoard.gameBoard[2, 0] == userInfo.UserMarker && GameBoard.gameBoard[1, 1] == userInfo.UserMarker)
                 num += 3;
 
-            else if (GameBoard.gameBoard[0, 0] == playersMarker && GameBoard.gameBoard[2, 2] == playersMarker && GameBoard.gameBoard[1, 1] == playersMarker)
+            else if (GameBoard.gameBoard[0, 0] == userInfo.UserMarker && GameBoard.gameBoard[2, 2] == userInfo.UserMarker && GameBoard.gameBoard[1, 1] == userInfo.UserMarker)
                 num += 3;
-
 
             if (num == 3)
             {
@@ -147,16 +128,17 @@ namespace GameLogic
             return result;
         }
 
-        public bool IsItATie(string marker1, string marker2)
+        public bool IsItATie()
         {
             bool result = false;
             int num = 0;
+            int randomNum = 0;
 
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (GameBoard.gameBoard[i, j] == marker1 || GameBoard.gameBoard[i, j] == marker2)
+                    if (!int.TryParse(GameBoard.gameBoard[i, j], out randomNum))
                         num += 1;
                 }
                 if (num > 8)
@@ -165,18 +147,6 @@ namespace GameLogic
                 }
             }
             return result;
-        }
-
-        public int NextPlayersTurn(int lastPlayersTurn)
-        {
-            int result;
-            if (lastPlayersTurn == 1)
-                result = 2;
-            else
-                result = 1;
-
-            return result;
-
         }
     }
 }
