@@ -37,19 +37,15 @@ namespace SGCorpHR.UI.Controllers
        
         public ActionResult Save()
         {
-           
             return View("Save");
-
         }
 
         public ActionResult ViewResume()
         {
-
             var ops = new FileOperations();
             var filePath = Server.MapPath(@"~/Resumes"); ;
             var response = ops.DisplayFiles(filePath);
             return View(response);
-
         }
 
         public ActionResult ViewSuggestions()
@@ -81,14 +77,10 @@ namespace SGCorpHR.UI.Controllers
 
         public ActionResult DeleteResume(string filePath)
         {
-
            System.IO.File.Delete(@filePath);
            return RedirectToAction("ViewResume");
-
-
         }
-
-        
+   
         public ActionResult AddSuggestion()
         {
             return View();
@@ -100,13 +92,12 @@ namespace SGCorpHR.UI.Controllers
             var ops = new SuggestionOperations();
             ops.AddSuggestion(suggestion, filePath);
 
-            
             return View("ConfirmationPage");
         }
 
         public ActionResult ViewPolicyDocuments()
         {
-            var filePath = Server.MapPath(@"~/PolicyDocuments/PolicyDocuments.txt"); 
+            var filePath = Server.MapPath(@"~/PolicyDocuments"); 
             var ops = new PolicyDocumentsOperations();
             var response = ops.GetAllPolicyDocuments(filePath);
             return View(response);
@@ -121,18 +112,12 @@ namespace SGCorpHR.UI.Controllers
                 file.SaveAs(String.Format(@"{0}\{1}", fullPath, file.FileName));
             }
 
-            
             return RedirectToAction("ViewPolicyDocuments");
-
         }
 
         public ActionResult UploadPolicyDoc()
         {
-
             return View("UploadPolicyDoc");
-
         }
-
-      
     }
 }
