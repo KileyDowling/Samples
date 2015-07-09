@@ -70,6 +70,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="PolicyDocuments\DressCode\" />
     <Folder Include="ResumesNull\" />
   </ItemGroup>
   <ItemGroup>

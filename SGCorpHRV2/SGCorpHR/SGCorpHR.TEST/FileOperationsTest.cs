@@ -11,14 +11,14 @@ namespace SGCorpHR.TEST
 {[TestFixture]
     public class FileOperationsTest
     {
-    //[Test]
-    //public void DisplayFiles()
-    //{
-    //    var ops = new FileOperations();
-
-    //    var response = ops.DisplayFiles();
-    //    Assert.IsTrue(response.Success);
-    //    Assert.IsNotNull(response.Data);
-    //}
+        [Test]
+        public void DisplayFiles()
+        {
+            var ops = new FileOperations();
+            string filePath = @"C:\Users\Apprentice\Desktop\GitHub\KileyDowling\SGCorpHRV2\SGCorpHR\SGCorpHR.TEST\Resumes";
+    ;        var response = ops.DisplayFiles(filePath);
+            Assert.IsTrue(response.Success);
+            Assert.IsNotNull(response.Data);
+        }
     }
 }

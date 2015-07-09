@@ -137,6 +137,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="PolicyDocuments\DressCode\" />
     <Folder Include="Resumes\" />
   </ItemGroup>
   <ItemGroup>
