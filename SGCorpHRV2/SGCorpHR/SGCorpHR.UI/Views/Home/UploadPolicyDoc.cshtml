@@ -1,4 +1,4 @@
-﻿
+﻿@model SGCorpHR.Models.PolicyDocument
 @{
     ViewBag.Title = "UploadPolicyDoc";
 }
@@ -8,7 +8,26 @@
 {
 
     <h1>Upload Policy Document</h1>
-    <table>
+    <div>
+        <label>Name</label>
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+    <div>
+        <label>Upload File</label>
+        @*@Html.TextBoxFor(m => m.FilePath, new {type="file", name="file"})*@
+        <input type="file" name="file" />
+    </div>
+    <div>
+        <label>Category</label>
+        @Html.TextBoxFor(m => m.Category.CategoryName)
+        <input type="submit" name="Submit" value="Submit" />
+    </div>
+
+
+
+
+
+     @*<table>
         <tr>
             <td>File:</td>
             <td>
@@ -20,7 +39,7 @@
                 <input type="submit" name="Submit" value="Submit" />
             </td>
         </tr>
-    </table>
+    </table>*@
 }
 
 

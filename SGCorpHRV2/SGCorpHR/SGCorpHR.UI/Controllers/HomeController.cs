@@ -104,12 +104,20 @@ namespace SGCorpHR.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult SavePolicyDocument(HttpPostedFileBase file)
+        public ActionResult SavePolicyDocument(HttpPostedFileBase file, PolicyDocument policyDocument)
         {
             if (file.ContentLength > 0)
             {
                 var fullPath = Server.MapPath(@"~/PolicyDocuments");
-                file.SaveAs(String.Format(@"{0}\{1}", fullPath, file.FileName));
+                var filePathComplete = String.Format(@"{0}\{1}\{2}", fullPath, policyDocument.Category.CategoryName, file.FileName);
+                policyDocument.FilePath = filePathComplete;
+
+                var ops = new PolicyDocumentsOperations();
+
+                var folderPath = fullPath + @"\" + policyDocument.Category.CategoryName;
+                ops.AddPolicyDocument(policyDocument, folderPath);                
+                //file.SaveAs(filePathComplete);
+
             }
 
             return RedirectToAction("ViewPolicyDocuments");

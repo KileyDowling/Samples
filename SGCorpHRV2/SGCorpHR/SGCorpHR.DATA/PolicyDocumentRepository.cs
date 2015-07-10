@@ -34,18 +34,20 @@ namespace SGCorpHR.DATA
 
         public void AddNewPolicyDocument(PolicyDocument policyDoc, string folderPath)
         {
-            var allPolicyDocs = GetAllPolicyDocuments(folderPath);
 
             if (Directory.Exists(folderPath))
             {
-                allPolicyDocs.Add(policyDoc);
+                File.Create(policyDoc.FilePath);
             }
             else
             {
-                Directory.CreateDirectory(policyDoc.Category);
-                allPolicyDocs.Add(policyDoc);
-            }
+                var newFolder = string.Format(@"{0}\{1}", folderPath, policyDoc.Category.CategoryName);
+                Directory.CreateDirectory(newFolder);
+                var directory = new DirectoryInfo(newFolder);
+                File.Create(policyDoc.FilePath);
+                
 
+            }
         }
     }
 }

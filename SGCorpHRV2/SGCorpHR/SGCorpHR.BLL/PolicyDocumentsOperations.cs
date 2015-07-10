@@ -37,5 +37,11 @@ namespace SGCorpHR.BLL
             }
             return response;
         }
+
+        public void AddPolicyDocument(PolicyDocument policyDocument, string folderPath)
+        {
+            var repo = new PolicyDocumentRepository();
+           repo.AddNewPolicyDocument(policyDocument, folderPath);
+        }
     }
 }
