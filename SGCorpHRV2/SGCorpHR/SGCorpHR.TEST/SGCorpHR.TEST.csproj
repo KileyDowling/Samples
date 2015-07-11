@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PolicyDocuments\DressCode\" />
+    <Folder Include="PolicyDocuments\TimeOff\" />
+    <Folder Include="PolicyDocuments\Transfers\" />
     <Folder Include="ResumesNull\" />
   </ItemGroup>
   <ItemGroup>

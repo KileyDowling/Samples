@@ -13,6 +13,16 @@ namespace SGCorpHR.TEST
 {[TestFixture]
     public class PolicyDocumentsRepoTest
     {
+    [Test]
+    public void GetAllCategoriesTest()
+    {
+        var repo = new PolicyDocumentRepository();
+        var folderPath =
+            @"C:\Users\Apprentice\Desktop\GitHub\KileyDowling\SGCorpHRV2\SGCorpHR\SGCorpHR.TEST\PolicyDocuments";
+        var allCategories = repo.GetAllPolicyDocCategories(folderPath);
+        Assert.AreEqual("DressCode", allCategories.First());
+    }
+
 //********CANNOT BE TESTED AT THIS TIME
     
     //[Test]

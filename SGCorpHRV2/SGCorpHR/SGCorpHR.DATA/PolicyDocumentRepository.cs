@@ -55,5 +55,17 @@ namespace SGCorpHR.DATA
 
             }
         }
+
+        public List<string> GetAllPolicyDocCategories(string folderPath)
+        {
+            List<string> folders = new List<string>();
+            var directory = new DirectoryInfo(folderPath);
+            var folderNames = directory.GetDirectories();
+            foreach (var folderName in folderNames)
+            {
+                folders.Add(folderName.ToString());
+            }
+            return folders;
+        }
     }
 }

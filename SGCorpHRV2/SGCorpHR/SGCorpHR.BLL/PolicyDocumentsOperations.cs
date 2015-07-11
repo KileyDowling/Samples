@@ -10,6 +10,18 @@ namespace SGCorpHR.BLL
 {
     public class PolicyDocumentsOperations
     {
+        public Response<List<string>> GetAllCategories(string folderPath)
+        {
+            var repo = new PolicyDocumentRepository();
+            Response<List<string>> response = new Response<List<string>>();
+            List<string> allCategories = repo.GetAllPolicyDocCategories(folderPath);
+
+            response.Data = allCategories;
+            response.Success = true; 
+
+            return response;
+        }
+
         public Response<List<PolicyDocument>> GetAllPolicyDocuments(string filePath)
         {
             var repo = new PolicyDocumentRepository();
