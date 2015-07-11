@@ -8,6 +8,7 @@ using SGCorpHR.Models;
 using System.IO;
 using System.Net;
 using SGCorpHR.DATA;
+using SGCorpHR.UI.Models;
 
 
 namespace SGCorpHR.UI.Controllers
@@ -29,8 +30,6 @@ namespace SGCorpHR.UI.Controllers
                 var fullPath = Server.MapPath(@"~/Resumes");
                 file.SaveAs(String.Format(@"{0}\{1}", fullPath, file.FileName));
             }
-
-
             return RedirectToAction("ViewResume");
 
         }
@@ -67,12 +66,9 @@ namespace SGCorpHR.UI.Controllers
 
         public ActionResult DownloadResume(string filePath)
         {
-           
             byte[] fileBytes = System.IO.File.ReadAllBytes(@filePath);
             string fileName = filePath.Substring(filePath.Length-8, 8);
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
-           
-
         }
 
         public ActionResult DeleteResume(string filePath)
@@ -85,6 +81,7 @@ namespace SGCorpHR.UI.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult AddSuggestionForm(Suggestion suggestion)
         {
@@ -95,12 +92,28 @@ namespace SGCorpHR.UI.Controllers
             return View("ConfirmationPage");
         }
 
-        public ActionResult ViewPolicyDocuments()
+        public ActionResult SelectPolicyDocCategory()
         {
-            var filePath = Server.MapPath(@"~/PolicyDocuments"); 
+            return View("SelectPolicyDocCategory");
+        }
+
+        [HttpPost]
+        public ActionResult SelectPolicyDocCategory(string categoryName)
+        {
+           return RedirectToAction("ViewPolicyDocuments", new { category = categoryName });
+        }
+    
+        public ActionResult ViewPolicyDocuments(string category)
+        {
+            var filePathToMap = string.Format(@"~/PolicyDocuments/{0}", category);
+            var filePath = Server.MapPath(@filePathToMap);
             var ops = new PolicyDocumentsOperations();
-            var response = ops.GetAllPolicyDocuments(filePath);
-            return View(response);
+            var vm = new CategoryVM()
+            {
+                CategoryName = category,
+                Response = ops.GetAllPolicyDocuments(filePath)
+            };
+            return View(vm);
         }
 
         [HttpPost]
@@ -120,7 +133,7 @@ namespace SGCorpHR.UI.Controllers
 
             }
 
-            return RedirectToAction("ViewPolicyDocuments");
+            return RedirectToAction("ViewPolicyDocuments", new { category = policyDocument.Category.CategoryName});
         }
 
         public ActionResult UploadPolicyDoc()

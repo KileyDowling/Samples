@@ -1,15 +1,16 @@
-﻿@model SGCorpHR.Models.Response<List<SGCorpHR.Models.PolicyDocument>>
+﻿@model SGCorpHR.UI.Models.CategoryVM
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>View Policy Documents</h2>
+<h2>View Policy Documents</h2><br/>
+<h3>Category: @Html.DisplayTextFor(m => m.CategoryName)</h3>
 
 <div>
 
 
 
 
-    @if (Model.Data != null)
+    @if (Model.Response.Data != null)
     {
         <table class="table">
             <thead>
@@ -17,17 +18,15 @@
                     <th>
                         Name
                     </th>
-                    <th>Category</th>
                     <th>File Path</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var policyDoc in Model.Data)
+                @foreach (var policyDoc in Model.Response.Data)
                 {
                     <tr>
                         <td>@policyDoc.Name</td>
-                        <td>@policyDoc.Category</td>
                         <td>
                             @policyDoc.FilePath
                             @*<form action="/Home/DeleteSuggestion" method="Post">
@@ -44,7 +43,7 @@
     }
     else
     {
-        { <p>@Model.Message</p>}
+        { <p>@Model.Response.Message</p>}
     }
 </div>
 

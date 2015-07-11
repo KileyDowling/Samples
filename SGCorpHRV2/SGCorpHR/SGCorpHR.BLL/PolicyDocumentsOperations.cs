@@ -17,15 +17,23 @@ namespace SGCorpHR.BLL
             List<PolicyDocument> policyDocs = repo.GetAllPolicyDocuments(filePath);
             try
             {
-                if (policyDocs.Count > 0)
+                if (policyDocs != null)
                 {
-                    response.Success = true;
-                    response.Data = policyDocs;
+                    if (policyDocs.Count > 0)
+                    {
+                        response.Success = true;
+                        response.Data = policyDocs;
+                    }
+                    else
+                    {
+                        response.Success = false;
+                        response.Message = "There are no files to display.";
+                    }
                 }
                 else
                 {
                     response.Success = false;
-                    response.Message = "There are no files to display.";
+                    response.Message = "That category does not currently exist";
                 }
 
             }
