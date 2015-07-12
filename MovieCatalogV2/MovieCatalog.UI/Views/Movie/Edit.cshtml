@@ -8,17 +8,36 @@
 
 
 @{
-    var id = ViewContext.RouteData.Values["id"];
+   var movieID = ViewContext.RouteData.Values["id"];
 }
 
 @using (Html.BeginForm())
 {
-    @Html.Hidden("MovieToEdit.MovieID", id)
     @Html.Label("Title")
     @Html.TextBoxFor(m => m.MovieToEdit.Title)
-    <br/>
+    <br />    <br />
+
     @Html.Label("Release Year")
     @Html.TextBoxFor(m => m.MovieToEdit.ReleaseYear)
+    <br />    <br />
+    @Html.Display("Actors In Movie", @Model.ActorsInMovie)
+
+
+    <br />    <br />
+
+
+    @Html.DropDownList("Genre", @Model.Genres)
+
+    <br />    <br />
+
+    @Html.DropDownList("Actors Not In Movie", @Model.ActorsNotInMovie)
+
+    <br />    <br />
+
+
+    <input type="submit" name="submit"id="Submit" value="Submit" class="btn btn-default"/>
+    
+    
 }
 
 <div>

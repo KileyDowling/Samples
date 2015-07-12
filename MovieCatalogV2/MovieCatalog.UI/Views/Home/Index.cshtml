@@ -22,7 +22,7 @@
                 <td>@movie.Title</td>
                 <td>@movie.ReleaseYear</td>
                 <td>@movie.GenreID</td>
-                <td>@Html.ActionLink("Edit", "Edit", "Movie", new {id=@movie.MovieID}, new {@class="btn btn-primary"})</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Movie", new { movieID=@movie.MovieID}, new {@class="btn btn-primary"})</td>
             </tr>
         }
     </tbody>

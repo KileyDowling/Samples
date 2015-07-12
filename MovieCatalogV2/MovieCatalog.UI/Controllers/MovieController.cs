@@ -12,14 +12,10 @@ namespace MovieCatalog.UI.Controllers
     {
         // GET: Movie
 
-        public ActionResult Edit()
-        {
-            return View();
-        }
-        [HttpPost]
         public ActionResult Edit(int movieID)
         {
             var model = new MovieEditVM();
+
             var movieOps = new MovieOperations();
             var genreOps = new GenreOperations();
             var actorOps = new ActorOperations();
