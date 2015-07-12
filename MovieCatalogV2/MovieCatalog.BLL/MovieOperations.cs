@@ -21,5 +21,11 @@ namespace MovieCatalog.BLL
             var repo = new MovieRepository();
             return repo.GetMovieList();
         }
+
+        public Movie UpdateMovie(Movie updatedMovie)
+        {
+            var repo = new MovieRepository();
+            return repo.UpdateMovie(updatedMovie);
+        }
 }
 }

@@ -11,8 +11,9 @@
    var movieID = ViewContext.RouteData.Values["id"];
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Movie", FormMethod.Post))
 {
+    @Html.HiddenFor(m=>m.MovieToEdit.MovieID, movieID)
     @Html.Label("Title")
     @Html.TextBoxFor(m => m.MovieToEdit.Title)
     <br />    <br />
@@ -26,7 +27,7 @@
     <br />    <br />
 
 
-    @Html.DropDownList("Genre", @Model.Genres)
+    @Html.DropDownListFor(m=>m.MovieToEdit.GenreID,Model.Genres)
 
     <br />    <br />
 
@@ -35,9 +36,9 @@
     <br />    <br />
 
 
-    <input type="submit" name="submit"id="Submit" value="Submit" class="btn btn-default"/>
-    
-    
+    <input type="submit" value="Submit" class="btn btn-default" />
+
+
 }
 
 <div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MovieCatalog.BLL;
+using MovieCatalog.Models;
 using MovieCatalog.UI.Models;
 
 namespace MovieCatalog.UI.Controllers
@@ -32,6 +33,16 @@ namespace MovieCatalog.UI.Controllers
 
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(MovieEditVM movieEditVm)
+        {
+            var movieOps = new MovieOperations();
+            movieEditVm.MovieToEdit = movieOps.UpdateMovie(movieEditVm.MovieToEdit);
+
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
