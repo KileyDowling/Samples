@@ -10,14 +10,14 @@ namespace SGCorpHR.BLL
 {
     public class PolicyDocumentsOperations
     {
-        public Response<List<string>> GetAllCategories(string folderPath)
+        public Response<List<Category>> GetAllCategories(string folderPath)
         {
             var repo = new PolicyDocumentRepository();
-            Response<List<string>> response = new Response<List<string>>();
-            List<string> allCategories = repo.GetAllPolicyDocCategories(folderPath);
+            Response<List<Category>> response = new Response<List<Category>>();
+            List<Category> allCategories = repo.GetAllPolicyDocCategories(folderPath);
 
             response.Data = allCategories;
-            response.Success = true; 
+            response.Success = true;
 
             return response;
         }
@@ -61,7 +61,10 @@ namespace SGCorpHR.BLL
         public void AddPolicyDocument(PolicyDocument policyDocument, string folderPath)
         {
             var repo = new PolicyDocumentRepository();
-           repo.AddNewPolicyDocument(policyDocument, folderPath);
+            repo.AddNewPolicyDocument(policyDocument, folderPath);
+            List<Category> categories = repo.GetAllPolicyDocCategories(folderPath);
         }
+
     }
+    
 }

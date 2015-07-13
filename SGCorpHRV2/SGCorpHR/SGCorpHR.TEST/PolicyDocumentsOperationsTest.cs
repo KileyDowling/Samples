@@ -16,8 +16,9 @@ namespace SGCorpHR.TEST
         {
             var ops = new PolicyDocumentsOperations();
             var folderPath = @"C:\Users\Apprentice\Desktop\GitHub\KileyDowling\SGCorpHRV2\SGCorpHR\SGCorpHR.TEST\PolicyDocuments";
-            var response = ops.GetAllPolicyDocuments(folderPath);
+            var response = ops.GetAllCategories(folderPath);
             Assert.IsTrue(response.Success);
+            Assert.AreEqual(3,response.Data.Count);
 
         }
         

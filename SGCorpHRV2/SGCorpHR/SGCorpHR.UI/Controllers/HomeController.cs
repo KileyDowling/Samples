@@ -110,7 +110,10 @@ namespace SGCorpHR.UI.Controllers
             var ops = new PolicyDocumentsOperations();
             var vm = new CategoryVM()
             {
-                CategoryName = category,
+                Category =
+                {
+                    CategoryName = category
+                },
                 Response = ops.GetAllPolicyDocuments(filePath)
             };
             return View(vm);
@@ -138,7 +141,23 @@ namespace SGCorpHR.UI.Controllers
 
         public ActionResult UploadPolicyDoc()
         {
+            var ops = new PolicyDocumentsOperations();
+            var model = new CategoryVM();
+            //model.CreateCategoryList(ops.GetAllCategories());
             return View("UploadPolicyDoc");
+        }
+
+        public ActionResult DownloadPolicyDoc(string filePath)
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@filePath);
+            string fileName = filePath.Substring(filePath.Length - 8, 8);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public ActionResult DeletePolicyDoc(string filePath, CategoryVM model)
+        {
+            System.IO.File.Delete(@filePath);
+            return RedirectToAction("ViewPolicyDocuments", new { category = model.Category});
         }
     }
 }

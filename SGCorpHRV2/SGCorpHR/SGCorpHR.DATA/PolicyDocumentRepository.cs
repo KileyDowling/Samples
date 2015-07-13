@@ -9,8 +9,7 @@ using SGCorpHR.Models;
 namespace SGCorpHR.DATA
 {
     public class PolicyDocumentRepository
-    {
-
+    { 
         public List<PolicyDocument> GetAllPolicyDocuments(string folderPath)
         {
             var directory = new DirectoryInfo(folderPath);
@@ -56,16 +55,31 @@ namespace SGCorpHR.DATA
             }
         }
 
-        public List<string> GetAllPolicyDocCategories(string folderPath)
+        public List<Category> GetAllPolicyDocCategories(string folderPath)
         {
-            List<string> folders = new List<string>();
+            List<Category> categoryNames = new List<Category>();
             var directory = new DirectoryInfo(folderPath);
             var folderNames = directory.GetDirectories();
-            foreach (var folderName in folderNames)
+
+            for (int i = 0; i < folderNames.Length; i++)
             {
-                folders.Add(folderName.ToString());
+                Category newCategory = new Category();
+                categoryNames.Add(newCategory);
             }
-            return folders;
+            int counter = 0;
+                foreach (var category in categoryNames)
+                {
+                    category.CategoryName = folderNames[counter].ToString();
+                    counter += 1;
+                    category.CategoryID = counter;
+                }
+                
+            return categoryNames;
+            
+            
+           
         }
+
     }
-}
+
+    }

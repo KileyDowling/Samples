@@ -1,4 +1,4 @@
-﻿@model SGCorpHR.Models.PolicyDocument
+﻿@model SGCorpHR.UI.Models.CategoryVM
 @{
     ViewBag.Title = "UploadPolicyDoc";
 }
@@ -10,7 +10,7 @@
     <h1>Upload Policy Document</h1>
     <div>
         <label>Name</label>
-        @Html.TextBoxFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Category.CategoryName)
     </div>
     <div>
         <label>Upload File</label>
@@ -19,7 +19,7 @@
     </div>
     <div>
         <label>Category</label>
-        @Html.TextBoxFor(m => m.Category.CategoryName)
+        @Html.DropDownListFor(m => m.Category.CategoryName, Model.Categories)
         <input type="submit" name="Submit" value="Submit" />
     </div>
 

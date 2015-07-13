@@ -27,15 +27,23 @@
                 {
                     <tr>
                         <td>@policyDoc.Name</td>
+
                         <td>
-                            @policyDoc.FilePath
-                            @*<form action="/Home/DeleteSuggestion" method="Post">
-                                <input type="hidden" name="SuggestionID" id="SuggestionID" value="@suggestion.SuggestionID" />
+                            <form action="/Home/DownloadPolicyDoc" method="Post">
+                                <input type="hidden" name="FilePath" id="FilePath" value="@policyDoc.FilePath" />
+                                <button>Download</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/Home/DeletePolicyDoc" method="Post">
+                                @Html.HiddenFor(m => m.CategoryName)
+
+                                <input type="hidden" name="FilePath" id="FilePath" value="@policyDoc.FilePath"/>
                                 <button>Delete</button>
-                            </form>*@
+                            </form>
                         </td>
 
-                    </tr>
+                   </tr>
                 }
             </tbody>
 
