@@ -21,5 +21,23 @@ namespace MovieCatalog.BLL
             var repo = new MovieRepository();
             return repo.GetMovieList();
         }
+
+        public void RemoveActorFromMovie(int actorID, int movieID)
+        {
+            var repo = new MovieRepository();
+            repo.RemoveActorFromMovie(actorID, movieID);
+        }
+
+        public void AddActors(List<int> ActorIDs, int MovieID)
+        {
+            var repo = new MovieRepository();
+            repo.AddActors(ActorIDs, MovieID);
+        }
+
+        public void UpdateMovie(Movie movie)
+        {
+         var repo = new MovieRepository();
+            repo.Update(movie);
+        }
 }
 }

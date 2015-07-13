@@ -70,5 +70,53 @@ namespace MovieCatalog.Data
            return results;
 
        }
+
+       public void RemoveActorFromMovie(int ActorID, int MovieID)
+       {
+           using (var cn = new SqlConnection(Settings.GetConnectionString()))
+           {
+              var cmd = new SqlCommand("MovieDeleteActor", cn);
+               cmd.CommandType = CommandType.StoredProcedure;
+               cmd.Parameters.AddWithValue("@MovieID", MovieID);
+               cmd.Parameters.AddWithValue("@ActorID", ActorID);
+
+               cn.Open();
+               cmd.ExecuteNonQuery();
+           }   
+       }
+
+       public void AddActors(List<int> ActorIDs, int MovieID)
+       {
+           using (var cn = new SqlConnection(Settings.GetConnectionString()))
+           {
+
+               cn.Open();
+               foreach (var id in ActorIDs)
+               {
+                   var cmd = new SqlCommand("MovieInsertActor", cn);
+                   cmd.CommandType = CommandType.StoredProcedure;
+                   cmd.Parameters.AddWithValue("@MovieID", MovieID);
+                   cmd.Parameters.AddWithValue("@ActorID", id);
+                   cmd.ExecuteNonQuery();
+               }
+           }   
+       }
+
+       public void Update(Movie movie)
+       {
+           using (var cn = new SqlConnection(Settings.GetConnectionString()))
+           {
+               var cmd = new SqlCommand("MovieUpdate", cn);
+               cmd.CommandType = CommandType.StoredProcedure;
+               
+               cmd.Parameters.AddWithValue("@MovieID", movie.MovieID);
+               cmd.Parameters.AddWithValue("@Title", movie .Title);
+               cmd.Parameters.AddWithValue("@ReleaseYear", movie.ReleaseYear);
+               cmd.Parameters.AddWithValue("@GenreId", movie.GenreID);
+
+               cn.Open();
+               cmd.ExecuteNonQuery();
+           }
+       }
     }
 }
