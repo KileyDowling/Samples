@@ -141,9 +141,14 @@ namespace SGCorpHR.UI.Controllers
 
         public ActionResult UploadPolicyDoc()
         {
+            var fullPath = Server.MapPath(@"~/PolicyDocuments");
             var ops = new PolicyDocumentsOperations();
             var model = new CategoryVM();
-            //model.CreateCategoryList(ops.GetAllCategories());
+
+            var response = ops.GetAllCategories(fullPath);
+
+            model.CreateCategoryList(response.Data);
+
             return View("UploadPolicyDoc");
         }
 
