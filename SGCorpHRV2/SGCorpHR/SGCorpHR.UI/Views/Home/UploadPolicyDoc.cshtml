@@ -10,16 +10,16 @@
     <h1>Upload Policy Document</h1>
     <div>
         <label>Name</label>
-        @Html.TextBoxFor(m => m.Category.CategoryName)
+        @Html.TextBoxFor(m => m.PolicyDocumentToAdd.Name)
     </div>
     <div>
         <label>Upload File</label>
-        @*@Html.TextBoxFor(m => m.FilePath, new {type="file", name="file"})*@
         <input type="file" name="file" />
     </div>
     <div>
         <label>Category</label>
-        @Html.DropDownListFor(m => m.Category.CategoryName, Model.Categories)
+        @Html.DropDownListFor(m => m.PolicyDocumentToAdd.Category.CategoryName, Model.Categories)
+        
         <input type="submit" name="Submit" value="Submit" />
     </div>
 

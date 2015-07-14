@@ -9,6 +9,7 @@ namespace SGCorpHR.UI.Models
 {
     public class CategoryVM
     {
+        public PolicyDocument PolicyDocumentToAdd { get; set; }
         public Category Category { get; set; }
         public Response<List<PolicyDocument>> Response { get; set; }
         public List<SelectListItem> Categories { get; set; }
@@ -19,7 +20,7 @@ namespace SGCorpHR.UI.Models
 
             foreach (var c in categories)
             {
-                Categories.Add(new SelectListItem() {Text = c.CategoryName, Value = c.CategoryID.ToString()});
+                Categories.Add(new SelectListItem() {Text = c.CategoryName, Value = c.CategoryName});
             }
         }
     }

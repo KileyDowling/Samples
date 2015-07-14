@@ -100,43 +100,45 @@ namespace SGCorpHR.UI.Controllers
         [HttpPost]
         public ActionResult SelectPolicyDocCategory(string categoryName)
         {
-           return RedirectToAction("ViewPolicyDocuments", new { category = categoryName });
+            return RedirectToAction("ViewPolicyDocuments", new { nameOfCategory = categoryName });
         }
     
-        public ActionResult ViewPolicyDocuments(string category)
+        public ActionResult ViewPolicyDocuments(string nameOfCategory)
         {
-            var filePathToMap = string.Format(@"~/PolicyDocuments/{0}", category);
+            var filePathToMap = string.Format(@"~/PolicyDocuments/{0}", nameOfCategory);
             var filePath = Server.MapPath(@filePathToMap);
             var ops = new PolicyDocumentsOperations();
-            var vm = new CategoryVM()
+            var model = new CategoryVM()
             {
-                Category =
+                Response = ops.GetAllPolicyDocuments(filePath),
+                Category = new Category()
                 {
-                    CategoryName = category
-                },
-                Response = ops.GetAllPolicyDocuments(filePath)
+                    CategoryName = nameOfCategory
+                }
+         
             };
-            return View(vm);
+           
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult SavePolicyDocument(HttpPostedFileBase file, PolicyDocument policyDocument)
+        public ActionResult SavePolicyDocument(HttpPostedFileBase file, CategoryVM model)
         {
             if (file.ContentLength > 0)
             {
                 var fullPath = Server.MapPath(@"~/PolicyDocuments");
-                var filePathComplete = String.Format(@"{0}\{1}\{2}", fullPath, policyDocument.Category.CategoryName, file.FileName);
-                policyDocument.FilePath = filePathComplete;
+                var filePathComplete = String.Format(@"{0}\{1}\{2}", fullPath, model.PolicyDocumentToAdd.Category.CategoryName, file.FileName);
+                model.PolicyDocumentToAdd.FilePath = filePathComplete;
 
                 var ops = new PolicyDocumentsOperations();
 
-                var folderPath = fullPath + @"\" + policyDocument.Category.CategoryName;
-                ops.AddPolicyDocument(policyDocument, folderPath);                
+                var folderPath = fullPath + @"\" + model.PolicyDocumentToAdd.Category.CategoryName;
+                ops.AddPolicyDocument(model.PolicyDocumentToAdd, folderPath);                
                 //file.SaveAs(filePathComplete);
 
             }
 
-            return RedirectToAction("ViewPolicyDocuments", new { category = policyDocument.Category.CategoryName});
+            return RedirectToAction("ViewPolicyDocuments", new { nameOfCategory = model.PolicyDocumentToAdd.Category.CategoryName});
         }
 
         public ActionResult UploadPolicyDoc()
@@ -149,7 +151,7 @@ namespace SGCorpHR.UI.Controllers
 
             model.CreateCategoryList(response.Data);
 
-            return View("UploadPolicyDoc");
+            return View(model);
         }
 
         public ActionResult DownloadPolicyDoc(string filePath)
