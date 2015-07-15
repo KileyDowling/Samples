@@ -32,7 +32,7 @@
                         <td>@suggestion.EmployeeName</td>
                         <td>@suggestion.SuggestionText</td>
                         <td>
-                            <form action="/Home/DeleteSuggestion" method="Post">
+                            <form action="/Suggestions/DeleteSuggestion" method="Post">
                                 <input type="hidden" name="SuggestionID" id="SuggestionID" value="@suggestion.SuggestionID"/>
                                 <button>Delete</button>
                             </form>

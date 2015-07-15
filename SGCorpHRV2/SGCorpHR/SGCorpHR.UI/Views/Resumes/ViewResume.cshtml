@@ -29,13 +29,13 @@
                         <td>@file.FileName</td>
 
                         <td>
-                            <form action="/Home/DownloadResume" method="Post">
+                            <form action="/Resumes/DownloadResume" method="Post">
                                 <input type="hidden" name="FilePath" id="FilePath" value="@file.FilePath"/>
                                 <button>Download</button>
                             </form>
                         </td>
                         <td>
-                            <form action="/Home/DeleteResume" method="Post">
+                            <form action="/Resumes/DeleteResume" method="Post">
                                 <input type="hidden" name="FilePath" id="FilePath" value="@file.FilePath" />
                                 <button>Delete</button>
                             </form>
