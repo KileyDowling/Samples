@@ -43,6 +43,7 @@
     <Compile Include="PolicyDocumentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuggestionRepository.cs" />
+    <Compile Include="TimeTrackerRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGCorpHR.Models\SGCorpHR.Models.csproj">
