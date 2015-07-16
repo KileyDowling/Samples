@@ -43,6 +43,7 @@
     <Compile Include="PolicyDocumentsOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuggestionOperations.cs" />
+    <Compile Include="TimeTrackerOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGCorpHR.DATA\SGCorpHR.DATA.csproj">

@@ -47,6 +47,7 @@
     <Compile Include="Response.cs" />
     <Compile Include="Suggestion.cs" />
     <Compile Include="Timesheet.cs" />
+    <Compile Include="TimeTrackerSummary.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

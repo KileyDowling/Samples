@@ -48,8 +48,11 @@
     <Compile Include="PolicyDocumentsRepoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuggestionRepositoryTest.cs" />
+    <Compile Include="TimeTrackerOpsTest.cs" />
+    <Compile Include="TimeTrackerRepoTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Resumes\TestResume.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
