@@ -121,6 +121,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PolicyDocumentsController.cs" />
     <Compile Include="Controllers\ResumesController.cs" />
+    <Compile Include="Controllers\TimeTrackerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +147,7 @@
     <Content Include="Views\PolicyDocuments\ViewPolicyDocuments.cshtml" />
     <Content Include="Views\PolicyDocuments\UploadPolicyDoc.cshtml" />
     <Content Include="Views\PolicyDocuments\SelectPolicyDocCategory.cshtml" />
+    <Content Include="Views\TimeTracker\TimeTracker.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -157,7 +159,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="PolicyDocuments\DressCode\" />
     <Folder Include="Resumes\" />
-    <Folder Include="Views\TimeTracker\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGCorpHR.BLL\SGCorpHR.BLL.csproj">

@@ -10,10 +10,10 @@ namespace SGCorpHR.BLL
 {
     public class TimeTrackerOperations
     {
-        public Response<List<Timesheet>> GetAllTimesheets(int empId)
+        public Response<TimeTrackerSummary> GetTimeTrackerSummary(int empId)
         {
             TimeTrackerRepository repo = new TimeTrackerRepository();
-            Response<List<Timesheet>> response = new Response<List<Timesheet>>();
+            var response = new Response<TimeTrackerSummary>();
             List<Timesheet> listOfTimesheets = repo.GetAllTimeSheets(empId);
 
             try
@@ -21,8 +21,13 @@ namespace SGCorpHR.BLL
                 if (listOfTimesheets.Count > 0)
                 {
                     response.Success = true;
-                    response.Data = listOfTimesheets;
+                    response.Data = new TimeTrackerSummary()
+                    {
+                       SelectedEmployee = repo.GetSingleEmployee(empId),
+                        AllTimesheets = listOfTimesheets
+                    };
                 }
+
                 else
                 {
                     response.Success = false;

@@ -16,9 +16,9 @@ namespace SGCorpHR.TEST
         public void TimesheetOperationsTest()
         {
             TimeTrackerOperations ops = new TimeTrackerOperations();
-            Response<List<Timesheet>> response = ops.GetAllTimesheets(6);
+          var response = ops.GetTimeTrackerSummary(6);
             Assert.IsTrue(response.Success);
-            Assert.AreEqual(4, response.Data.Count);
+            Assert.AreEqual(4, response.Data.AllTimesheets.Count);
         }
     }
 }

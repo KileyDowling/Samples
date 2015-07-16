@@ -20,5 +20,23 @@ namespace SGCorpHR.TEST
             timesheets = repo.GetAllTimeSheets(6);
             Assert.AreEqual(4, timesheets.Count);
         }
+
+        [Test]
+        public void GetSingleEmployee()
+        {
+            var repo = new TimeTrackerRepository();
+            Employee singleEmployee = repo.GetSingleEmployee(6);
+            Assert.AreEqual("Lisa", singleEmployee.FirstName);
+
+        }
+
+        [Test]
+        public void GetAllEmployees()
+        {
+            var repo = new TimeTrackerRepository();
+            List<Employee> allEmployees = repo.GetAllEmployees();
+            Assert.AreEqual(13, allEmployees.Count);
+
+        }
     }
 }
