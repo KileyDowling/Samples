@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SGCorpHR.BLL;
+using SGCorpHR.DATA;
 using SGCorpHR.Models;
 
 namespace SGCorpHR.TEST
@@ -19,6 +21,25 @@ namespace SGCorpHR.TEST
           var response = ops.GetTimeTrackerSummary(6);
             Assert.IsTrue(response.Success);
             Assert.AreEqual(4, response.Data.AllTimesheets.Count);
+            Assert.AreEqual(31, response.Data.TotalHoursWorked);
+        }
+
+        [Test]
+        public void GetAllEmployeesTest()
+        {
+            TimeTrackerOperations ops = new TimeTrackerOperations();
+            var response = ops.GetAllEmployees();
+            Assert.AreEqual(13, response.Data.Count);
+        }
+
+        [Test]
+        public void DeleteEmpTimesheetTest()
+        {
+            TimeTrackerOperations ops = new TimeTrackerOperations();
+            ops.DeleteSingleTimesheet(15);
+            var repo = new TimeTrackerRepository();
+            List<Timesheet> listOfSheets = repo.GetAllTimeSheets(6);
+            Assert.IsFalse(listOfSheets.Exists(p => p.TimesheetId == 15));
         }
     }
 }
