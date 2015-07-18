@@ -21,7 +21,7 @@ namespace SGCorpHR.TEST
           var response = ops.GetTimeTrackerSummary(6);
             Assert.IsTrue(response.Success);
             Assert.AreEqual(4, response.Data.AllTimesheets.Count);
-            Assert.AreEqual(31, response.Data.TotalHoursWorked);
+            Assert.AreEqual(22, response.Data.TotalHoursWorked);
         }
 
         [Test]
@@ -29,16 +29,16 @@ namespace SGCorpHR.TEST
         {
             TimeTrackerOperations ops = new TimeTrackerOperations();
             var response = ops.GetAllEmployees();
-            Assert.AreEqual(13, response.Data.Count);
+            Assert.AreEqual(14, response.Data.Count);
         }
 
         [Test]
         public void DeleteEmpTimesheetTest()
         {
             TimeTrackerOperations ops = new TimeTrackerOperations();
-            ops.DeleteSingleTimesheet(15);
+            ops.DeleteSingleTimesheet(14);
             var repo = new TimeTrackerRepository();
-            List<Timesheet> listOfSheets = repo.GetAllTimeSheets(6);
+            List<Timesheet> listOfSheets = repo.GetAllTimeSheets(5);
             Assert.IsFalse(listOfSheets.Exists(p => p.TimesheetId == 15));
         }
     }

@@ -35,7 +35,7 @@ namespace SGCorpHR.TEST
         {
             var repo = new TimeTrackerRepository();
             List<Employee> allEmployees = repo.GetAllEmployees();
-            Assert.AreEqual(13, allEmployees.Count);
+            Assert.AreEqual(14, allEmployees.Count);
 
         }
 
@@ -44,7 +44,7 @@ namespace SGCorpHR.TEST
         {
             var repo = new TimeTrackerRepository();
             int totalHoursWorked = repo.TotalHoursWorked(6);
-            Assert.AreEqual(31, totalHoursWorked);
+            Assert.AreEqual(22, totalHoursWorked);
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace SGCorpHR.TEST
         {
             var repo = new  TimeTrackerRepository();
             repo.DeleteTimesheet(1);
-            List<Timesheet> listOfSheets = repo.GetAllTimeSheets(6); 
+            List<Timesheet> listOfSheets = repo.GetAllTimeSheets(1); 
             Assert.IsFalse(listOfSheets.Exists(p => p.TimesheetId == 1));
         }
     }
