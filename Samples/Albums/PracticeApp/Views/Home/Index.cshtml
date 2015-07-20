@@ -1,0 +1,51 @@
+﻿@using PracticeApp.Models
+@model List<Album>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<div>
+    <h1>My Albums</h1>
+    <h3>@Html.ActionLink("Add a new album", "Add", "Home")</h3>
+    @if (Model.Any())
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>Album Title</th>
+                <th>Arist Name</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+
+            </thead>
+            <tbody>
+            @foreach (var album in Model)
+            {
+                <tr>
+                    <td>@album.AlbumTitle</td>
+                    <td>@album.ArtistName</td>
+                </tr>
+
+            }
+
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+        <p>You have no albums.</p>
+    }
+    </div>
+</body>
+</html>

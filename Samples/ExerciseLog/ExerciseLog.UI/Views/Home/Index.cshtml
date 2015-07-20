@@ -1,0 +1,46 @@
+﻿@using System.ServiceModel.Security
+@using ExerciseLog.UI.Models;
+@model List<ExerciseLog>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h1>Exercise Log</h1>
+
+        @if (@Model.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <td>Exercise Name</td>
+                        <td>Length of Time</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var exercise in Model)
+                    {
+                        <tr>
+                            <td>@exercise.ExerciseName</td>
+                            <td>@exercise.LengthOfTime</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        else
+        {
+            <p>You are doing poorly fatty</p>
+        }
+    </div>
+</body>
+</html>

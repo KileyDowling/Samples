@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeLabs.BLL", "ChallengeLabs.BLL\ChallengeLabs.BLL.csproj", "{E3DB7397-A96C-4543-A786-09F28D316724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeLabs.Tests", "ChallengeLabs.Tests\ChallengeLabs.Tests.csproj", "{F1B9A6E1-C8C7-4E79-A9A8-861ACE75852C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeLabs", "ChallengeLabs\ChallengeLabs.csproj", "{7D6B380B-0FCE-4013-AF24-3BBE912979F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3DB7397-A96C-4543-A786-09F28D316724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3DB7397-A96C-4543-A786-09F28D316724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3DB7397-A96C-4543-A786-09F28D316724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3DB7397-A96C-4543-A786-09F28D316724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1B9A6E1-C8C7-4E79-A9A8-861ACE75852C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B9A6E1-C8C7-4E79-A9A8-861ACE75852C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B9A6E1-C8C7-4E79-A9A8-861ACE75852C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B9A6E1-C8C7-4E79-A9A8-861ACE75852C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D6B380B-0FCE-4013-AF24-3BBE912979F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D6B380B-0FCE-4013-AF24-3BBE912979F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D6B380B-0FCE-4013-AF24-3BBE912979F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D6B380B-0FCE-4013-AF24-3BBE912979F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

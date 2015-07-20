@@ -1,0 +1,35 @@
+﻿@using MyContacts.UI.Models;
+@model Contact
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+<div>
+    <h1>Edit Contact</h1>
+    <h3>@Html.ActionLink("Back to List", "Index", "Home")</h3>
+    <form action="/Home/EditContact", method="POST">
+        <input type="hidden" name="ContactID" id="ContactID" value="@Model.ContactID"/>
+        <p>
+            <label>Name</label>
+            <input type="text" id="Name" name="Name" value="@Model.Name"/>
+        </p>
+        <p>
+            <label>PhoneNumber</label>
+            <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber"/>
+        </p>
+        <button>Save</button>
+
+
+    </form>
+
+</div>
+</body>
+</html>
