@@ -33,9 +33,9 @@ namespace SGCorpHR.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectPolicyDocCategory(string categoryName)
+        public ActionResult SelectPolicyDocCategory(CategoryVM model)
         {
-            return RedirectToAction("ViewPolicyDocuments", new { nameOfCategory = categoryName });
+            return RedirectToAction("ViewPolicyDocuments", new { nameOfCategory = model.PolicyDocumentToAdd.Category.CategoryName });
         }
 
         public ActionResult ViewPolicyDocuments(string nameOfCategory)
