@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<title>Example Page</title>
+		<script src="scripts/DOM.js" type="text/javascript"> </script>
+	</head>
+	<body>
+		<div id="place" class="one" title="Header text"  lang="en" dir="ltr"> 
+			<p>Hello World
+			
+			<strong>I'm  HERE  in the p tag</strong>
+			</p>
+			<strong>I'm  HERE</strong>
+		</div>
+		<div>
+			<fieldset>
+				<legend>What color do you prefer?</legend>
+				<ul>
+					<li>
+						<input type="radio" value="red" name="color" id="colorRed">
+						<label for="colorRed">Red</label>
+					</li>
+					<li>
+						<input type="radio" value="blue" name="color" id="colorBlue">
+						<label for="colorBlue">Blue</label>
+					</li>
+				</ul>
+			</fieldset>
+		</div>
+		<script type="text/javascript">
+			var div = document.getElementById("place");
+			//alert(div.id);
+			//alert(div.dir);
+			div.className = "two";
+			div.title="Not header text";
+			
+			//alert(div.innerHTML);
+			
+			var radios = document.getElementsByName("color");
+			
+			document.write("<p>Hello Monkey</p>");
+			
+			var element = document.createElement("div");
+			element.className = "one";
+			
+			var textNode = document.createTextNode("Hello  Kiwi");
+			element.appendChild(textNode);
+			
+			document.body.appendChild(element);
+			
+			var body = document.querySelector("body"); //html element 
+			var myDiv = document.querySelector("#place"); //by id
+			var clsOne = document.querySelector(".one");  //by class
+			var  clsDivOne = document.querySelector("div.one"); //div with the class one
+			var strongs = document.querySelector("p strong"); // strong elements in p
+			
+			alert(strongs.innerHTML);
+			
+		</script>
+	</body>
+</html>
