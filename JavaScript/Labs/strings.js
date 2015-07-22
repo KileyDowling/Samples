@@ -1,3 +1,92 @@
+/* -------- STRINGS #19:
+
+Given two strings, append them together (known as "concatenation") and return the result. 
+However, if the concatenation creates a double-char, then omit one of the chars, so "abc" and "cat" yields "abcat". 
+
+ConCat("abc", "cat") -> "abcat"
+ConCat("dog", "cat") -> "dogcat"
+ConCat("abc", "") -> "abc" 
+
+var conCat = function (strA, strB) {
+	if(strA.slice(-1) != strB.slice(0,1))
+	{
+		return strA + strB;
+	}
+	else 
+	{
+		return strA.slice(0,strA.length-1) + strB;
+	}
+}
+
+console.log(conCat("abc", "cat"));
+console.log(conCat("dog", "cat"));
+console.log(conCat("abc", ""));
+*/
+/* -------- STRINGS #18:
+Given 2 strings, a and b, return a new string made of the first char of a and the last char of b, so "yo" and "java" yields "ya". 
+If either string is length 0, use '@' for its missing char. 
+
+LastChars("last", "chars") -> "ls"
+LastChars("yo", "mama") -> "ya"
+LastChars("hi", "") -> "h@"
+
+var lastChars = function(str1,str2)
+{
+	if(str1.length > 0 && str2.length > 0)
+	{
+		return str1.substring(0,1) + str2.slice(-1);
+	} else if(str1.length == 0 && str2.length != 0) {
+		return "@" + str2.slice(-1);
+	} else if (str1.length != 0 && str2.length == 0) {
+		return str1.substring(0,1) +"@";
+	} else {
+		return "@" + "@";
+	}
+}
+console.log(lastChars("last", "chars"));
+console.log(lastChars("yo", "mama"));
+console.log(lastChars("hi", ""));
+
+*/
+/* -------- STRINGS #17:
+Given a string, return a string length 2 made of its first 2 chars. If the string length is less than 2, use '@' for the missing chars. 
+
+AtFirst("hello") -> "he"
+AtFirst("hi") -> "hi"
+AtFirst("h") -> "h@"
+var AtFirst = function (str) {
+	if(str.length < 2)
+	{
+		return str + "@";
+	} else {
+		return str.substring(0,2);
+	}
+}
+console.log(AtFirst("hello"));
+console.log(AtFirst("hi"));
+console.log(AtFirst("h"));
+*/
+/* -------- STRINGS #16:
+Given a string, return true if "bad" appears starting at index 0 or 1 in the string, 
+such as with "badxxx" or "xbadxx" but not "xxbadxx". The string may be any length, including 0.
+
+HasBad("badxx") -> true
+HasBad("xbadxx") -> true
+HasBad("xxbadxx") -> false 
+var hasBad = function(str) {
+	if(str.substring(0,3) == "bad" || str.substring(1,4) == "bad")
+	{
+		return true;
+	} else {
+		return false;
+	}
+}
+
+console.log(hasBad("badxx"));
+console.log(hasBad("xbadxx"));
+console.log(hasBad("xxbadxx"));
+*/
+
 /* -------- STRINGS #15:
 Given a string and an index, return a string length 2 starting at the given index. 
 If the index is too big or too small to define a string length 2, use the first 2 chars. The string length will be at least 2. 
