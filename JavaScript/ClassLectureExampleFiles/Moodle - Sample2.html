@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>Example Page</title>
+		<script src="Moodle - day2.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="place" class="one" title="Header text" lang="en" dir="ltr">
+			<p>Hello World!
+			<strong>I'm HERE</strong></p>
+		</div>
+		<div>
+			<fieldset>
+				<legend>What color do you prefer?</legend>
+				<ul>
+					<li>
+						<input type="radio" value="red" name="color" id="colorRed">
+						<label for="colorRed">Red</label>
+					</li>
+					<li>
+						<input type="radio" value="blue" name="color" id="colorBlue">
+						<label for="colorBlue">Blue</label>
+					</li>
+				</ul>
+			</fieldset>
+		</div>
+		<script type="text/javascript">
+			// get an element by the id attribute
+			var div = document.getElementById("place");
+			// display attributes
+			alert(div.id);
+			alert(div.dir);
+			// change the values
+			div.className = "two";
+			div.title = "Not Header text";
+			alert(div.innerHTML);
+			
+			// get elements by name
+			var radios = document.getElementsByName("color");
+
+			// write HTML directly to the page
+			document.write("<p>HELLO</p>");
+			
+			// write an element using methods instead of static text.
+			var element = document.createElement("div");
+			element.className = "one";		
+			var textNode = document.createTextNode("Hello World!");
+			element.appendChild(textNode);
+			document.body.appendChild(element);
+			
+			// query for elements on the page
+			// element name will find all elements of that type
+			// # = id search
+			// . = class search			
+			var body = document.querySelector("body"); // HTML element
+			var myDiv = document.querySelector("#place"); // by id
+			var clsOne = document.querySelector(".one"); // by class
+			var clsDivOne = document.querySelector("div.one"); // div with class one
+			var strongs = document.querySelector("p strong"); // strong elements in p
+			alert(strongs.innerHTML)
+		</script>
+	</body>
+</html>
