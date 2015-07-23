@@ -1,0 +1,52 @@
+﻿@model MVC_RSVP.UI.Models.RsvpResponse
+
+@{
+    ViewBag.Title = "RegistrationForm2";
+}
+
+
+
+<div class="row">
+    <div class="col-xs-6">
+        <h3>RSVP Form</h3>
+        @using (Html.BeginForm("RegistrationForm", "Home", null, FormMethod.Post, new { id = "rsvpForm" }))
+        {
+            <div class="form-group">
+                <label>Your Name: </label>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+
+            </div>
+            <div class="form-group">
+                <label>Your Email:</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+
+            </div>
+            <div class="form-group">
+                <label>Your Phone</label>
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+
+            </div>
+            <div class="form-group">
+                <label>Your Favorite Game:</label>
+                @Html.TextBoxFor(m => m.FavoriteGame, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Will you attend?</label>
+                @Html.DropDownListFor(m => m.WillAttend, new[]
+                {
+                    new SelectListItem {Text = "Yes", Value = bool.TrueString},
+                    new SelectListItem {Text = "No", Value = bool.FalseString},
+                }, "Choose an Option", new { @class = "form-control" })
+
+            </div>
+            <input type="submit" value="Submit RSVP" class="btn btn-primary" />
+        }
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/app/jquery-validate-defaults.js"></script>
+    <script src="~/Scripts/app/rsvpValidation.js"></script>
+}

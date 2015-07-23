@@ -1,0 +1,21 @@
+﻿@model MVC_RSVP.UI.Models.RsvpResponse
+
+@{
+    ViewBag.Title = "Thanks";
+}
+
+<div>
+    <div class="col-xs-12">
+        <h1>Thank you, @Model.Name</h1>
+        @if (Model.WillAttend.Value)
+        {
+            <p>
+                It's great that you're coming, we will see you if others like @Model.FavoriteGame and play it if so!
+            </p>
+        }
+        else
+        {
+            <p> Sorry you couldn't make it this time</p>
+        }
+    </div>
+</div>
