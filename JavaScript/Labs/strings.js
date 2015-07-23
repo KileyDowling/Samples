@@ -1,3 +1,125 @@
+/* -------- STRINGS #24:
+Given a string, if the first or last chars are 'x', return the string without those 'x' chars, and otherwise return the string unchanged. 
+
+StripX("xHix") -> "Hi"
+StripX("xHi") -> "Hi"
+StripX("Hxix") -> "Hxi" */
+
+function StripX(str) {
+	var indexOfX = str.indexOf("x");
+	var lastLetter = str.slice(-1)
+	if(indexOfX == 0 && lastLetter == "x") {
+		return str.slice(1,str.length-1);
+	} else if(indexOfX != 0 && lastLetter == "x") {
+		return str.slice(0,str.length-1);
+	} else {
+		return str.slice(1,str.length);
+	}
+}
+console.log(StripX("xHix"));
+console.log(StripX("xHi"));
+console.log(StripX("Hxix"));
+
+
+/* -------- STRINGS #23:
+Given a string, return a version without the first 2 chars. Except keep the first char if it is 'a' and keep the second char if it is 'b'. 
+The string may be any length.
+
+TweakFront("Hello") -> "llo"
+TweakFront("away") -> "aay"
+TweakFront("abed") -> "abed"
+
+function TweakFront(str) {
+	var firstLetter = str.slice(0,1);
+	var secondLetter = str.slice(1,2);
+	if(firstLetter !="a" && secondLetter !="b") {
+		return str.slice(2,str.length);
+	} else if(firstLetter =="a" && secondLetter =="b") {
+		return str;
+	} else if(firstLetter =="a") {
+		return str.slice(0,1) + str.slice(2);
+	} else {
+		return str.slice(1);
+	}
+}
+
+console.log(TweakFront("Hello"));
+console.log(TweakFront("away"));
+console.log(TweakFront("abed"));
+console.log(TweakFront("mbed")); */
+
+/* -------- STRINGS #22:
+Given two strings, append them together (known as "concatenation") and return the result.
+ However, if the strings are different lengths, omit chars from the longer string 
+ so it is the same length as the shorter string. So "Hello" and "Hi" yield "loHi". The strings may be any length. 
+
+MinCat("Hello", "Hi") -> "loHi"
+MinCat("Hello", "java") -> "ellojava"
+MinCat("java", "Hello") -> "javaello"
+
+function MinCat(strA, strB) {
+	var aLength = strA.length;
+	var bLength = strB.length;
+	if(aLength == bLength) {
+		return strA+strB;
+	} else if(aLength > bLength) {
+		var diff = aLength - bLength;
+		var newA = strA.slice(diff, aLength);
+		return newA + strB;
+	} else {
+		var diff = bLength-aLength;
+		var newB = strB.slice(diff, bLength);
+		return strA + newB;
+	}
+}
+console.log(MinCat("Hello", "Hi"));
+console.log(MinCat("Hello", "java"));
+console.log(MinCat("java", "Hello"));
+*/
+
+/* -------- STRINGS #21:
+Given a string, return true if the first 2 chars in the string also appear at the end of the string, such as with "edited". 
+
+FrontAgain("edited") -> true
+FrontAgain("edit") -> false
+FrontAgain("ed") -> true 
+
+function FrontAgain(str) {
+	var first2 = str.slice(0,2);
+	var last2 = str.slice(str.length-2,str.legnth);
+	if(first2 == last2) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+console.log(FrontAgain("edited"));
+console.log(FrontAgain("edit"));
+console.log(FrontAgain("ed")); */
+
+/* -------- STRINGS #20:
+Given a string of any length, return a new string where the last 2 chars, if present, are swapped, so "coding" yields "codign". 
+
+SwapLast("coding") -> "codign"
+SwapLast("cat") -> "cta"
+SwapLast("ab") -> "ba"
+
+function swapLast(str) {
+	if(str.length > 1)
+	{
+		var newStr = str.slice(0,str.length-2);
+		newStr += str.slice(str.length-1); 
+		newStr += str.slice(str.length-2, str.length-1);
+
+		return newStr;
+	}
+}
+
+console.log(swapLast("coding"));
+console.log(swapLast("cat"));
+console.log(swapLast("ab")); */
+
 /* -------- STRINGS #19:
 
 Given two strings, append them together (known as "concatenation") and return the result. 
