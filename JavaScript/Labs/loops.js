@@ -1,17 +1,49 @@
+/* Loops #14:
+Suppose the string "yak" is unlucky. Given a string, return a version where all the "yak" are removed, 
+but the "a" can be any char. The "yak" strings will not overlap. 
+
+DoNotYak("yakpak") -> "pak"
+DoNotYak("pakyak") -> "pak"
+DoNotYak("yak123ya") -> "123ya" 
+
+function DoNotYak(str) {
+	var result = "";
+	var n = str.indexOf("yak");
+	if(n > -1) {
+		for(var i=0; i < str.length-3; i++) {		
+		if((str[i] == "y") && (str[i+1] ="a") && (str[i+2] =="k")) {
+			result += str.substring(i+3);
+			break;
+		} else {
+			result += str[i];
+		}
+	}
+}	
+	return result;
+} 
+console.log(DoNotYak("yakpak"));
+console.log(DoNotYak("pakyak"));
+console.log(DoNotYak("yak123ya")); */
+
 /* Loops #13:
 Given a string, return a string made of the chars at indexes 0,1, 4,5, 8,9 ... so "kittens" yields "kien". 
 
 AltPairs("kitten") -> "kien"
 AltPairs("Chocolate") -> "Chole"
-AltPairs("CodingHorror") -> "Congrr" */
+AltPairs("CodingHorror") -> "Congrr"
 
 function AltPairs(str) {
-	var counter = 0;
-	var num = 0;
 	var newStr ="";
-	while(counter < str.length) {
+	for (var i = 0; i < str.length; i += 4) {
+		newStr += str.substring(i, Math.min(str.length, i + 2));          
 	}
+	return newStr;
 } 
+
+console.log(AltPairs("kitten"));
+console.log(AltPairs("Chocolate"));
+console.log(AltPairs("CodingHorror")); */
+
 /* Loops #12:
 Given a string, return a version where all the "x" have been removed. Except an "x" at the very start or end should not be removed. 
 
