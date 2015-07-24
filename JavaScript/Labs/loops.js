@@ -1,3 +1,75 @@
+/* Loops #17:
+Given an array of ints, return true if it contains a 2, 7, 1 pattern
+ -- a value, followed by the value plus 5, followed by the value minus 1.
+
+Pattern51({1, 2, 7, 1}) -> true
+Pattern51({1, 2, 8, 1}) -> false
+Pattern51({2, 7, 1}) -> true
+
+function Pattern51(numbers) {
+	var counter = 0;
+	while(counter < numbers.length) {
+		var plus5 = numbers[counter]+5;
+		var plus1 = numbers[counter]-1;
+		if(((numbers[counter+1]) == plus5) && (numbers[counter+2]==plus1)) 
+		{
+			return true;
+		}
+		counter++;
+	}
+return false;
+}
+console.log(Pattern51([1, 2, 7, 1]));
+console.log(Pattern51([1, 2, 8, 1]));
+console.log(Pattern51([2, 7, 1]));
+console.log(Pattern51([5, 10, 4])); */
+
+/* Loops #16:
+Given an array of ints, we'll say that a triple is a value appearing 3 times in a row in the array. Return true if the array does not contain any triples. 
+
+NoTriples({1, 1, 2, 2, 1}) -> true
+NoTriples({1, 1, 2, 2, 2, 1}) -> false
+NoTriples({1, 1, 1, 2, 2, 2, 1}) -> false
+
+function  NoTriples(numbers) {
+	var counter = 0;
+	while(counter < numbers.length) {
+		if((numbers[counter]==numbers[counter+1]) && (numbers[counter+1]==numbers[counter+2]))
+		{
+			return false;
+		} 
+		counter++;
+	}
+	return true;
+} 
+console.log(NoTriples([1, 1, 2, 2, 1]));
+console.log(NoTriples([1, 1, 2, 2, 2, 1]));
+console.log(NoTriples([1, 1, 1, 2, 2, 2, 1])); */
+
+/* Loops #15: 
+Given an array of ints, return the number of times that two 6's are next to each other in the array. 
+Also count instances where the second "6" is actually a 7. 
+Array667({6, 6, 2}) -> 1
+Array667({6, 6, 2, 6}) -> 1
+Array667({6, 7, 2, 6}) -> 1 
+
+function Array667(numbers) {
+	var counter = 0;
+	var found6 = 0;
+	while(counter < numbers.length) {
+		if((numbers[counter] == 6) && (numbers[counter+1]==6) || (numbers[counter+1]==7))
+		{
+			found6++;
+		}
+		counter ++;
+	}
+	return found6;
+}
+console.log(Array667([6, 6, 2]));
+console.log(Array667([6, 6, 2, 6]));
+console.log(Array667([6, 7, 2, 6]));
+console.log(Array667([6, 7, 2, 6,6])); */
+
 /* Loops #14:
 Suppose the string "yak" is unlucky. Given a string, return a version where all the "yak" are removed, 
 but the "a" can be any char. The "yak" strings will not overlap. 
