@@ -1,0 +1,19 @@
+﻿@model SGCorpHR.UI.Models.CategoryVM
+
+@{
+    ViewBag.Title = "SelectPolicyDocCategory";
+}
+
+<h2>View Policy Documents</h2>
+
+@using (Html.BeginForm("SelectPolicyDocCategory", "PolicyDocuments", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <h3>Submit a category name to view all related documents</h3><br/>
+    <div>
+        <label>Category Name</label>
+        @Html.DropDownListFor(m => m.Category.CategoryName, Model.Categories)
+        <input type="submit" name="Submit" value="Submit" />
+    </div>
+
+}
