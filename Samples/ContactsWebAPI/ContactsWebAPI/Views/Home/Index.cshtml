@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Partial("_EditContactModal")
+        @Html.Partial("_CreateContactModal")
+    </div>
+</div>
+
+<h2>My Contacts</h2>
+<div class="row">
+    <h3> All Contacts</h3>
+
+    <table id="contacts" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+{
+    <script>
+        var uri = '/api/contacts';
+
+        $(document).ready(function() {
+            loadContacts();
+        });
+
+        function loadContacts() {
+            //send GET request to WebAPI endpoint
+            $.getJSON(uri)
+                .done(function(data) {
+                    //clear the table
+                    $('#contacts tbody tr').remove();
+
+                    //on succes, get the data and add the rows
+                    $.each(data, function(index, contact) {
+                        $(createRow(contact)).appendTo($('#contacts tbody'));
+                    });
+                });
+        }
+
+        function createRow(contact) {
+
+            return '<tr><td>' + contact.ContactID + '</td><td>' +
+               contact.Name + '</td><td>' + contact.PhoneNumber + '</td>  <td><button type="button" class="btn btn-primary" id="btnEditContact" onclick="clickEdit(' + contact.ContactID + ')">Edit Contact</button>' + '</td> <td><button type="button" class="btn btn-primary" id="btnDeleteContact" onclick="clickDelete(' + contact.ContactID + ')">Delete Contact</button>' + '</td></tr>';
+
+
+
+        }
+    </script>
+<script src="~/Scripts/app/createContact.js"></script>
+<script src="~/Scripts/app/deleteContact.js"></script>
+<script src="~/Scripts/app/editContact.js"></script>
+}
+
