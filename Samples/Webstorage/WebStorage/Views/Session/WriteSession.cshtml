@@ -1,0 +1,19 @@
+﻿@model WebStorage.Models.Contact
+@{
+    ViewBag.Title = "WriteSession";
+}
+
+<h2>Write Session</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        <label>Name</label>
+        @Html.TextBoxFor(c=>c.Name)
+    </p>
+    <p>
+        <label>Email</label>
+        @Html.TextBoxFor(c=>c.Email)
+    </p>
+    <div><button type="submit">Store In Session</button></div>
+}

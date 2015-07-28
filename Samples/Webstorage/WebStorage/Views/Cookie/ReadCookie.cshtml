@@ -1,0 +1,16 @@
+﻿@model WebStorage.Models.Contact
+@{
+    ViewBag.Title = "ReadCookie";
+}
+
+<h2>ReadCookie</h2>
+
+<div>
+    @Html.DisplayFor(c=>c.Name)
+</div>
+
+<div>
+    @Html.DisplayFor(c =>c.Email)
+</div>
+
+@Html.ActionLink("Home","Index", "Home")

@@ -1,0 +1,21 @@
+﻿@model WebStorage.Models.Contact
+
+@{
+    ViewBag.Title = "ReadTempData";
+}
+
+<h2>Read TempData</h2>
+@if (TempData["SuccessMessage"] != null)
+{
+    <h2>@TempData["SuccessMessage"].ToString()</h2>
+}
+
+<div>
+    @Html.DisplayFor(c=>c.Name)
+</div>
+
+<div>
+    @Html.DisplayFor(c =>c.Email)
+</div>
+
+@Html.ActionLink("Home","Index", "Home")

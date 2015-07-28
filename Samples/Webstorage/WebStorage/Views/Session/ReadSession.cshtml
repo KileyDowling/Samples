@@ -1,0 +1,15 @@
+﻿@model WebStorage.Models.Contact
+@{
+    ViewBag.Title = "ReadSession";
+}
+
+<h2>Read Session</h2>
+<div>
+    @Html.DisplayFor(c=>c.Name)
+</div>
+
+<div>
+    @Html.DisplayFor(c =>c.Email)
+</div>
+
+@Html.ActionLink("Home","Index", "Home")
