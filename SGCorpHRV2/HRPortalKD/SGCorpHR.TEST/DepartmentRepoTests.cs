@@ -12,6 +12,14 @@ namespace SGCorpHR.TEST
     public class DepartmentRepoTests
     {
         [Test]
+        public void CheckIfDptExistsTest()
+        {
+            var repo = new DepartmentRepository();
+            var exists = repo.CheckIfDptExists("IT");
+            Assert.IsTrue(exists);
+        }
+
+        [Test]
         public void ListAllDptTest()
         {
             var repo = new DepartmentRepository();
@@ -23,7 +31,7 @@ namespace SGCorpHR.TEST
         public void GetSingleDptTest()
         {
             var repo = new DepartmentRepository();
-            var dpt = repo.GetSingleDpt(4);
+            var dpt = repo.GetSingleDptById(4);
             Assert.AreEqual("Sales", dpt.DepartmentName);
 
         }
