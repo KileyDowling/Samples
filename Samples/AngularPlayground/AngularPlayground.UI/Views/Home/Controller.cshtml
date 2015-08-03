@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Controller";
+}
+
+<h2>Controller</h2>
+
+<div class="row" ng-app="demoApp" ng-controller="SimpleController">
+    <div class="col-sm-4">
+        <ul>
+            <li ng-repeat="friend in friends">
+                {{friend.name}} - {{friend.age}}
+
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/app/controller.js"></script>
+}
+
+
