@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
+using System.Text;
 
 namespace TinyMceSpike.Models
 {
@@ -12,9 +14,6 @@ namespace TinyMceSpike.Models
         [AllowHtml]
         public string HtmlContent { get; set; }
 
-        public ExampleClass()
-        {
-
-        }
+    
     }
 }
